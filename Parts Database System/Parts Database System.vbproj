@@ -1,0 +1,1266 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{EA9979EB-2A3A-4BCB-9A38-33774024C192}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <StartupObject>Parts_database_system.My.MyApplication</StartupObject>
+    <RootNamespace>Parts_database_system</RootNamespace>
+    <AssemblyName>APL</AssemblyName>
+    <FileAlignment>512</FileAlignment>
+    <MyType>WindowsForms</MyType>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <TargetFrameworkProfile />
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DocumentationFile>APL.xml</DocumentationFile>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <DefineDebug>false</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DocumentationFile>APL.xml</DocumentationFile>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionExplicit>On</OptionExplicit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionCompare>Binary</OptionCompare>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionStrict>Off</OptionStrict>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionInfer>On</OptionInfer>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>new_atronix_icon_7Cq_icon.ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="MySql.Data, Version=6.10.5.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\MySQL\MySQL Connector Net 6.10.5\Assemblies\v4.5.2\MySql.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Windows.Forms.DataVisualization" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Net.Http" />
+  </ItemGroup>
+  <ItemGroup>
+    <Import Include="Microsoft.VisualBasic" />
+    <Import Include="System" />
+    <Import Include="System.Collections" />
+    <Import Include="System.Collections.Generic" />
+    <Import Include="System.Data" />
+    <Import Include="System.Drawing" />
+    <Import Include="System.Diagnostics" />
+    <Import Include="System.Windows.Forms" />
+    <Import Include="System.Linq" />
+    <Import Include="System.Xml.Linq" />
+    <Import Include="System.Threading.Tasks" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ADA_Alternatives.Designer.vb">
+      <DependentUpon>ADA_Alternatives.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ADA_Alternatives.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ADA_Set.vb" />
+    <Compile Include="ADA_Setup.Designer.vb">
+      <DependentUpon>ADA_Setup.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ADA_Setup.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="add_DEVICE.Designer.vb">
+      <DependentUpon>add_DEVICE.vb</DependentUpon>
+    </Compile>
+    <Compile Include="add_DEVICE.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="add_KIT.Designer.vb">
+      <DependentUpon>add_KIT.vb</DependentUpon>
+    </Compile>
+    <Compile Include="add_KIT.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Add_password.Designer.vb">
+      <DependentUpon>Add_password.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Add_password.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Add_return.Designer.vb">
+      <DependentUpon>Add_return.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Add_return.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Add_return_sel.Designer.vb">
+      <DependentUpon>Add_return_sel.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Add_return_sel.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Add_solutions.Designer.vb">
+      <DependentUpon>Add_solutions.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Add_solutions.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Allocation_parts.Designer.vb">
+      <DependentUpon>Allocation_parts.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Allocation_parts.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ApplicationEvents.vb" />
+    <Compile Include="ASM_Bom.Designer.vb">
+      <DependentUpon>ASM_Bom.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ASM_Bom.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ASM_overview.Designer.vb">
+      <DependentUpon>ASM_overview.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ASM_overview.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Assembly_comp.Designer.vb">
+      <DependentUpon>Assembly_comp.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Assembly_comp.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Assembly_report.Designer.vb">
+      <DependentUpon>Assembly_report.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Assembly_report.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Assign_box.Designer.vb">
+      <DependentUpon>Assign_box.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Assign_box.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Barc_Search.Designer.vb">
+      <DependentUpon>Barc_Search.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Barc_Search.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="BOM.Designer.vb">
+      <DependentUpon>BOM.vb</DependentUpon>
+    </Compile>
+    <Compile Include="BOM.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="BOM_init.Designer.vb">
+      <DependentUpon>BOM_init.vb</DependentUpon>
+    </Compile>
+    <Compile Include="BOM_init.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="BOM_subclass.Designer.vb">
+      <DependentUpon>BOM_subclass.vb</DependentUpon>
+    </Compile>
+    <Compile Include="BOM_subclass.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Bom_subclass2.Designer.vb">
+      <DependentUpon>Bom_subclass2.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Bom_subclass2.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="BOM_types.Designer.vb">
+      <DependentUpon>BOM_types.vb</DependentUpon>
+    </Compile>
+    <Compile Include="BOM_types.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Build_mfg.Designer.vb">
+      <DependentUpon>Build_mfg.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Build_mfg.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Cables_ADA.Designer.vb">
+      <DependentUpon>Cables_ADA.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Cables_ADA.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Cables_package.Designer.vb">
+      <DependentUpon>Cables_package.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Cables_package.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Connections_win.Designer.vb">
+      <DependentUpon>Connections_win.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Connections_win.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Description_panels.Designer.vb">
+      <DependentUpon>Description_panels.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Description_panels.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Drawing_Selector.Designer.vb">
+      <DependentUpon>Drawing_Selector.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Drawing_Selector.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Edit_BOM_Panels.Designer.vb">
+      <DependentUpon>Edit_BOM_Panels.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Edit_BOM_Panels.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="edit_DEVICE.Designer.vb">
+      <DependentUpon>edit_DEVICE.vb</DependentUpon>
+    </Compile>
+    <Compile Include="edit_DEVICE.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="edit_KIT.Designer.vb">
+      <DependentUpon>edit_KIT.vb</DependentUpon>
+    </Compile>
+    <Compile Include="edit_KIT.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="EnterPart.Designer.vb">
+      <DependentUpon>EnterPart.vb</DependentUpon>
+    </Compile>
+    <Compile Include="EnterPart.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="EnterPO.Designer.vb">
+      <DependentUpon>EnterPO.vb</DependentUpon>
+    </Compile>
+    <Compile Include="EnterPO.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Enter_Address.Designer.vb">
+      <DependentUpon>Enter_Address.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Enter_Address.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Enter_data.Designer.vb">
+      <DependentUpon>Enter_data.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Enter_data.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Enter_Panel_info.Designer.vb">
+      <DependentUpon>Enter_Panel_info.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Enter_Panel_info.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Extra_info.Designer.vb">
+      <DependentUpon>Extra_info.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Extra_info.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Fast_Inventory.Designer.vb">
+      <DependentUpon>Fast_Inventory.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Fast_Inventory.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Feature_manager.Designer.vb">
+      <DependentUpon>Feature_manager.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Feature_manager.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Feature_sel.Designer.vb">
+      <DependentUpon>Feature_sel.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Feature_sel.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Filter_parts.Designer.vb">
+      <DependentUpon>Filter_parts.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Filter_parts.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FMR_form.Designer.vb">
+      <DependentUpon>FMR_form.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FMR_form.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form1.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form1.Designer.vb">
+      <DependentUpon>Form1.vb</DependentUpon>
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form2.Designer.vb">
+      <DependentUpon>Form2.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form2.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form3.Designer.vb">
+      <DependentUpon>Form3.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form3.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form5.Designer.vb">
+      <DependentUpon>Form5.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form5.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form7.Designer.vb">
+      <DependentUpon>Form7.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form7.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Full_Panels.Designer.vb">
+      <DependentUpon>Full_Panels.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Full_Panels.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ImportCSV.Designer.vb">
+      <DependentUpon>ImportCSV.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ImportCSV.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Inventory_manage.Designer.vb">
+      <DependentUpon>Inventory_manage.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Inventory_manage.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="INV_init.Designer.vb">
+      <DependentUpon>INV_init.vb</DependentUpon>
+    </Compile>
+    <Compile Include="INV_init.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Inv_Material_r.Designer.vb">
+      <DependentUpon>Inv_Material_r.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Inv_Material_r.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Job_assign.Designer.vb">
+      <DependentUpon>Job_assign.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Job_assign.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Job_description.Designer.vb">
+      <DependentUpon>Job_description.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Job_description.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MailBox.Designer.vb">
+      <DependentUpon>MailBox.vb</DependentUpon>
+    </Compile>
+    <Compile Include="MailBox.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Manufacturing_Report.Designer.vb">
+      <DependentUpon>Manufacturing_Report.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Manufacturing_Report.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Material_order.Designer.vb">
+      <DependentUpon>Material_order.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Material_order.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Module1.vb" />
+    <Compile Include="Monitor_MR.Designer.vb">
+      <DependentUpon>Monitor_MR.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Monitor_MR.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MPL_eng.Designer.vb">
+      <DependentUpon>MPL_eng.vb</DependentUpon>
+    </Compile>
+    <Compile Include="MPL_eng.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MPL_inv.Designer.vb">
+      <DependentUpon>MPL_inv.vb</DependentUpon>
+    </Compile>
+    <Compile Include="MPL_inv.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MPL_mfg.Designer.vb">
+      <DependentUpon>MPL_mfg.vb</DependentUpon>
+    </Compile>
+    <Compile Include="MPL_mfg.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MPL_pc.Designer.vb">
+      <DependentUpon>MPL_pc.vb</DependentUpon>
+    </Compile>
+    <Compile Include="MPL_pc.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MR_init.Designer.vb">
+      <DependentUpon>MR_init.vb</DependentUpon>
+    </Compile>
+    <Compile Include="MR_init.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="My Project\AssemblyInfo.vb" />
+    <Compile Include="My Project\Application.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Application.myapp</DependentUpon>
+    </Compile>
+    <Compile Include="My Project\Resources.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="My Project\Settings.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="MyADAparts.Designer.vb">
+      <DependentUpon>MyADAparts.vb</DependentUpon>
+    </Compile>
+    <Compile Include="MyADAparts.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MyDash.Designer.vb">
+      <DependentUpon>MyDash.vb</DependentUpon>
+    </Compile>
+    <Compile Include="MyDash.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="myImages.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>myImages.resx</DependentUpon>
+    </Compile>
+    <Compile Include="myQuote.Designer.vb">
+      <DependentUpon>myQuote.vb</DependentUpon>
+    </Compile>
+    <Compile Include="myQuote.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="mySolutions.Designer.vb">
+      <DependentUpon>mySolutions.vb</DependentUpon>
+    </Compile>
+    <Compile Include="mySolutions.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MyVariables.Designer.vb">
+      <DependentUpon>MyVariables.vb</DependentUpon>
+    </Compile>
+    <Compile Include="MyVariables.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="My_Material_r.Designer.vb">
+      <DependentUpon>My_Material_r.vb</DependentUpon>
+    </Compile>
+    <Compile Include="My_Material_r.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="M_manager.Designer.vb">
+      <DependentUpon>M_manager.vb</DependentUpon>
+    </Compile>
+    <Compile Include="M_manager.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Need_by_date.Designer.vb">
+      <DependentUpon>Need_by_date.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Need_by_date.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Open_file.Designer.vb">
+      <DependentUpon>Open_file.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Open_file.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Open_package.Designer.vb">
+      <DependentUpon>Open_package.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Open_package.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Open_Revision.Designer.vb">
+      <DependentUpon>Open_Revision.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Open_Revision.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Package_BOM_tree.Designer.vb">
+      <DependentUpon>Package_BOM_tree.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Package_BOM_tree.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Panel_editor.Designer.vb">
+      <DependentUpon>Panel_editor.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Panel_editor.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PartCost_summary.Designer.vb">
+      <DependentUpon>PartCost_summary.vb</DependentUpon>
+    </Compile>
+    <Compile Include="PartCost_summary.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Parts_needed.Designer.vb">
+      <DependentUpon>Parts_needed.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Parts_needed.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Part_Picker.Designer.vb">
+      <DependentUpon>Part_Picker.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Part_Picker.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Part_selector.Designer.vb">
+      <DependentUpon>Part_selector.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Part_selector.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Procurement_Overview.Designer.vb">
+      <DependentUpon>Procurement_Overview.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Procurement_Overview.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Proc_Material_R.Designer.vb">
+      <DependentUpon>Proc_Material_R.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Proc_Material_R.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Projects_m.Designer.vb">
+      <DependentUpon>Projects_m.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Projects_m.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Project_dash.Designer.vb">
+      <DependentUpon>Project_dash.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Project_dash.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Project_status.Designer.vb">
+      <DependentUpon>Project_status.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Project_status.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Project_Tracking.Designer.vb">
+      <DependentUpon>Project_Tracking.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Project_Tracking.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Purchase_Request.Designer.vb">
+      <DependentUpon>Purchase_Request.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Purchase_Request.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Quick_inventory.Designer.vb">
+      <DependentUpon>Quick_inventory.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Quick_inventory.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Quote_form.Designer.vb">
+      <DependentUpon>Quote_form.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Quote_form.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Quote_manager.Designer.vb">
+      <DependentUpon>Quote_manager.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Quote_manager.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Quote_open.Designer.vb">
+      <DependentUpon>Quote_open.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Quote_open.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Reject_BOM.Designer.vb">
+      <DependentUpon>Reject_BOM.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Reject_BOM.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Reports.Designer.vb">
+      <DependentUpon>Reports.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Reports.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Reports_menu.Designer.vb">
+      <DependentUpon>Reports_menu.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Reports_menu.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Report_tracking_mn.Designer.vb">
+      <DependentUpon>Report_tracking_mn.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Report_tracking_mn.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Repor_track.Designer.vb">
+      <DependentUpon>Repor_track.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Repor_track.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="RIO_wiz.Designer.vb">
+      <DependentUpon>RIO_wiz.vb</DependentUpon>
+    </Compile>
+    <Compile Include="RIO_wiz.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Save_MR.Designer.vb">
+      <DependentUpon>Save_MR.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Save_MR.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SAVE_revision.Designer.vb">
+      <DependentUpon>SAVE_revision.vb</DependentUpon>
+    </Compile>
+    <Compile Include="SAVE_revision.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Search_grid.Designer.vb">
+      <DependentUpon>Search_grid.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Search_grid.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Search_order.Designer.vb">
+      <DependentUpon>Search_order.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Search_order.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Sent_mail.Designer.vb">
+      <DependentUpon>Sent_mail.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Sent_mail.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Setup_sheet.Designer.vb">
+      <DependentUpon>Setup_sheet.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Setup_sheet.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Setup_total.Designer.vb">
+      <DependentUpon>Setup_total.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Setup_total.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Set_wizard.Designer.vb">
+      <DependentUpon>Set_wizard.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Set_wizard.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Shipping_Edit.Designer.vb">
+      <DependentUpon>Shipping_Edit.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Shipping_Edit.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Shipping_map.Designer.vb">
+      <DependentUpon>Shipping_map.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Shipping_map.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="shipping_wiz.Designer.vb">
+      <DependentUpon>shipping_wiz.vb</DependentUpon>
+    </Compile>
+    <Compile Include="shipping_wiz.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Spec_inv.Designer.vb">
+      <DependentUpon>Spec_inv.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Spec_inv.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SSLAW_m.Designer.vb">
+      <DependentUpon>SSLAW_m.vb</DependentUpon>
+    </Compile>
+    <Compile Include="SSLAW_m.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SSLAW_parts.Designer.vb">
+      <DependentUpon>SSLAW_parts.vb</DependentUpon>
+    </Compile>
+    <Compile Include="SSLAW_parts.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Summary_devices.Designer.vb">
+      <DependentUpon>Summary_devices.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Summary_devices.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Total_Project_Cost.Designer.vb">
+      <DependentUpon>Total_Project_Cost.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Total_Project_Cost.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Tracking.Designer.vb">
+      <DependentUpon>Tracking.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Tracking.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Update_Min_Max.Designer.vb">
+      <DependentUpon>Update_Min_Max.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Update_Min_Max.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Update_vendors.Designer.vb">
+      <DependentUpon>Update_vendors.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Update_vendors.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="upload_file.Designer.vb">
+      <DependentUpon>upload_file.vb</DependentUpon>
+    </Compile>
+    <Compile Include="upload_file.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UR_inventory.Designer.vb">
+      <DependentUpon>UR_inventory.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UR_inventory.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UR_part.Designer.vb">
+      <DependentUpon>UR_part.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UR_part.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="User_form.Designer.vb">
+      <DependentUpon>User_form.vb</DependentUpon>
+    </Compile>
+    <Compile Include="User_form.vb">
+      <SubType>Form</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="ADA_Alternatives.resx">
+      <DependentUpon>ADA_Alternatives.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ADA_Setup.resx">
+      <DependentUpon>ADA_Setup.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="add_DEVICE.resx">
+      <DependentUpon>add_DEVICE.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="add_KIT.resx">
+      <DependentUpon>add_KIT.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Add_password.resx">
+      <DependentUpon>Add_password.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Add_return.resx">
+      <DependentUpon>Add_return.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Add_return_sel.resx">
+      <DependentUpon>Add_return_sel.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Add_solutions.resx">
+      <DependentUpon>Add_solutions.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Allocation_parts.resx">
+      <DependentUpon>Allocation_parts.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ASM_Bom.resx">
+      <DependentUpon>ASM_Bom.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ASM_overview.resx">
+      <DependentUpon>ASM_overview.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Assembly_comp.resx">
+      <DependentUpon>Assembly_comp.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Assembly_report.resx">
+      <DependentUpon>Assembly_report.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Assign_box.resx">
+      <DependentUpon>Assign_box.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Barc_Search.resx">
+      <DependentUpon>Barc_Search.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="BOM.resx">
+      <DependentUpon>BOM.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="BOM_init.resx">
+      <DependentUpon>BOM_init.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="BOM_subclass.resx">
+      <DependentUpon>BOM_subclass.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Bom_subclass2.resx">
+      <DependentUpon>Bom_subclass2.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="BOM_types.resx">
+      <DependentUpon>BOM_types.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Build_mfg.resx">
+      <DependentUpon>Build_mfg.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Cables_ADA.resx">
+      <DependentUpon>Cables_ADA.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Cables_package.resx">
+      <DependentUpon>Cables_package.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Connections_win.resx">
+      <DependentUpon>Connections_win.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Description_panels.resx">
+      <DependentUpon>Description_panels.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Drawing_Selector.resx">
+      <DependentUpon>Drawing_Selector.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Edit_BOM_Panels.resx">
+      <DependentUpon>Edit_BOM_Panels.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="edit_DEVICE.resx">
+      <DependentUpon>edit_DEVICE.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="edit_KIT.resx">
+      <DependentUpon>edit_KIT.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="EnterPart.resx">
+      <DependentUpon>EnterPart.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="EnterPO.resx">
+      <DependentUpon>EnterPO.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Enter_Address.resx">
+      <DependentUpon>Enter_Address.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Enter_data.resx">
+      <DependentUpon>Enter_data.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Enter_Panel_info.resx">
+      <DependentUpon>Enter_Panel_info.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Extra_info.resx">
+      <DependentUpon>Extra_info.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Fast_Inventory.resx">
+      <DependentUpon>Fast_Inventory.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Feature_manager.resx">
+      <DependentUpon>Feature_manager.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Feature_sel.resx">
+      <DependentUpon>Feature_sel.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Filter_parts.resx">
+      <DependentUpon>Filter_parts.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FMR_form.resx">
+      <DependentUpon>FMR_form.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form1.resx">
+      <DependentUpon>Form1.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form2.resx">
+      <DependentUpon>Form2.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form3.resx">
+      <DependentUpon>Form3.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form5.resx">
+      <DependentUpon>Form5.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form7.resx">
+      <DependentUpon>Form7.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Full_Panels.resx">
+      <DependentUpon>Full_Panels.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ImportCSV.resx">
+      <DependentUpon>ImportCSV.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Inventory_manage.resx">
+      <DependentUpon>Inventory_manage.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="INV_init.resx">
+      <DependentUpon>INV_init.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Inv_Material_r.resx">
+      <DependentUpon>Inv_Material_r.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Job_assign.resx">
+      <DependentUpon>Job_assign.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Job_description.resx">
+      <DependentUpon>Job_description.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MailBox.resx">
+      <DependentUpon>MailBox.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Manufacturing_Report.resx">
+      <DependentUpon>Manufacturing_Report.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Material_order.resx">
+      <DependentUpon>Material_order.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Monitor_MR.resx">
+      <DependentUpon>Monitor_MR.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MPL_eng.resx">
+      <DependentUpon>MPL_eng.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MPL_inv.resx">
+      <DependentUpon>MPL_inv.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MPL_mfg.resx">
+      <DependentUpon>MPL_mfg.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MPL_pc.resx">
+      <DependentUpon>MPL_pc.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MR_init.resx">
+      <DependentUpon>MR_init.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="My Project\Resources.resx">
+      <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.vb</LastGenOutput>
+      <CustomToolNamespace>My.Resources</CustomToolNamespace>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MyADAparts.resx">
+      <DependentUpon>MyADAparts.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MyDash.resx">
+      <DependentUpon>MyDash.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="myImages.resx">
+      <CustomToolNamespace>My.Resources</CustomToolNamespace>
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>myImages.Designer.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="myQuote.resx">
+      <DependentUpon>myQuote.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="mySolutions.resx">
+      <DependentUpon>mySolutions.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MyVariables.resx">
+      <DependentUpon>MyVariables.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="My_Material_r.resx">
+      <DependentUpon>My_Material_r.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="M_manager.resx">
+      <DependentUpon>M_manager.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Need_by_date.resx">
+      <DependentUpon>Need_by_date.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Open_file.resx">
+      <DependentUpon>Open_file.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Open_package.resx">
+      <DependentUpon>Open_package.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Open_Revision.resx">
+      <DependentUpon>Open_Revision.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Package_BOM_tree.resx">
+      <DependentUpon>Package_BOM_tree.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Panel_editor.resx">
+      <DependentUpon>Panel_editor.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PartCost_summary.resx">
+      <DependentUpon>PartCost_summary.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Parts_needed.resx">
+      <DependentUpon>Parts_needed.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Part_Picker.resx">
+      <DependentUpon>Part_Picker.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Part_selector.resx">
+      <DependentUpon>Part_selector.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Procurement_Overview.resx">
+      <DependentUpon>Procurement_Overview.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Proc_Material_R.resx">
+      <DependentUpon>Proc_Material_R.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Projects_m.resx">
+      <DependentUpon>Projects_m.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Project_dash.resx">
+      <DependentUpon>Project_dash.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Project_status.resx">
+      <DependentUpon>Project_status.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Project_Tracking.resx">
+      <DependentUpon>Project_Tracking.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Purchase_Request.resx">
+      <DependentUpon>Purchase_Request.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Quick_inventory.resx">
+      <DependentUpon>Quick_inventory.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Quote_form.resx">
+      <DependentUpon>Quote_form.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Quote_manager.resx">
+      <DependentUpon>Quote_manager.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Quote_open.resx">
+      <DependentUpon>Quote_open.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reject_BOM.resx">
+      <DependentUpon>Reject_BOM.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports.resx">
+      <DependentUpon>Reports.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports_menu.resx">
+      <DependentUpon>Reports_menu.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Report_tracking_mn.resx">
+      <DependentUpon>Report_tracking_mn.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Repor_track.resx">
+      <DependentUpon>Repor_track.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RIO_wiz.resx">
+      <DependentUpon>RIO_wiz.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Save_MR.resx">
+      <DependentUpon>Save_MR.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SAVE_revision.resx">
+      <DependentUpon>SAVE_revision.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Search_grid.resx">
+      <DependentUpon>Search_grid.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Search_order.resx">
+      <DependentUpon>Search_order.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Sent_mail.resx">
+      <DependentUpon>Sent_mail.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Setup_sheet.resx">
+      <DependentUpon>Setup_sheet.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Setup_total.resx">
+      <DependentUpon>Setup_total.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Set_wizard.resx">
+      <DependentUpon>Set_wizard.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Shipping_Edit.resx">
+      <DependentUpon>Shipping_Edit.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Shipping_map.resx">
+      <DependentUpon>Shipping_map.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="shipping_wiz.resx">
+      <DependentUpon>shipping_wiz.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Spec_inv.resx">
+      <DependentUpon>Spec_inv.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SSLAW_m.resx">
+      <DependentUpon>SSLAW_m.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SSLAW_parts.resx">
+      <DependentUpon>SSLAW_parts.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Summary_devices.resx">
+      <DependentUpon>Summary_devices.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Total_Project_Cost.resx">
+      <DependentUpon>Total_Project_Cost.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Tracking.resx">
+      <DependentUpon>Tracking.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Update_Min_Max.resx">
+      <DependentUpon>Update_Min_Max.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Update_vendors.resx">
+      <DependentUpon>Update_vendors.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="upload_file.resx">
+      <DependentUpon>upload_file.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UR_inventory.resx">
+      <DependentUpon>UR_inventory.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UR_part.resx">
+      <DependentUpon>UR_part.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="User_form.resx">
+      <DependentUpon>User_form.vb</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.manifest" />
+    <None Include="My Project\Application.myapp">
+      <Generator>MyApplicationCodeGenerator</Generator>
+      <LastGenOutput>Application.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="My Project\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <CustomToolNamespace>My</CustomToolNamespace>
+      <LastGenOutput>Settings.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="ada_JbS_icon.ico" />
+    <Content Include="ada_new_wzt_icon.ico" />
+    <Content Include="icon_a_ACl_icon.ico" />
+    <Content Include="new_atronix_icon_7Cq_icon.ico" />
+    <None Include="Resources\abom.jpg" />
+    <None Include="Resources\ada_package.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <COMReference Include="Microsoft.Office.Core">
+      <Guid>{2DF8D04C-5BFA-101B-BDE5-00AA0044DE52}</Guid>
+      <VersionMajor>2</VersionMajor>
+      <VersionMinor>8</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+    <COMReference Include="Microsoft.Office.Interop.Excel">
+      <Guid>{00020813-0000-0000-C000-000000000046}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>9</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+    <COMReference Include="VBIDE">
+      <Guid>{0002E157-0000-0000-C000-000000000046}</Guid>
+      <VersionMajor>5</VersionMajor>
+      <VersionMinor>3</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.5.2">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.5.2 %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
+</Project>
