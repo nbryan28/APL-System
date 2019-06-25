@@ -336,30 +336,30 @@ Public Class My_Material_r
 
     Private Sub My_Material_r_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
-
+        ComboBox3.Text = "All BOMs"
         real_mr = ""
 
         '--check comparison boxes
         mrbox1.Items.Clear()
         mrbox2.Items.Clear()
 
-        Dim check_cmd As New MySqlCommand
+        'Dim check_cmd As New MySqlCommand
 
-        check_cmd.CommandText = "select distinct mr_name from Material_Request.mr"
-        check_cmd.Connection = Login.Connection
-        check_cmd.ExecuteNonQuery()
+        'check_cmd.CommandText = "select distinct mr_name from Material_Request.mr"
+        'check_cmd.Connection = Login.Connection
+        'check_cmd.ExecuteNonQuery()
 
-        Dim reader As MySqlDataReader
-        reader = check_cmd.ExecuteReader
+        'Dim reader As MySqlDataReader
+        'reader = check_cmd.ExecuteReader
 
-        If reader.HasRows Then
-            While reader.Read
-                mrbox1.Items.Add(reader(0))
-                mrbox2.Items.Add(reader(0))
-            End While
-        End If
+        'If reader.HasRows Then
+        '    While reader.Read
+        '        mrbox1.Items.Add(reader(0))
+        '        mrbox2.Items.Add(reader(0))
+        '    End While
+        'End If
 
-        reader.Close()
+        'reader.Close()
         '----------------------------------
 
         PR_grid.Columns(15).Visible = False
@@ -455,6 +455,8 @@ Public Class My_Material_r
     End Sub
 
     Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
+
+        Cursor.Current = Cursors.WaitCursor
 
         'Create revision of released mr
         Inventory_manage.part_sel = ""
@@ -708,6 +710,7 @@ Public Class My_Material_r
             isitreleased = False
             rev_mode = False
             Call Inventory_manage.General_inv_cal()   'recalculate inventory values
+            Cursor.Current = Cursors.Default
 
         Catch ex As Exception
             MessageBox.Show(ex.ToString)
@@ -739,6 +742,29 @@ Public Class My_Material_r
             Next
         End If
 
+    End Sub
+
+    Sub recal_rev()
+
+        If String.Equals(ComboBox1.Text, "Delta") = True Then
+
+            For Each row As DataGridViewRow In rev_grid.Rows
+                If row.IsNewRow Then Continue For
+                If (IsNumeric(row.Cells(9).Value) = True And IsNumeric(row.Cells(7).Value)) Then
+                    row.Cells(8).Value = CType(row.Cells(7).Value, Double) + CType(row.Cells(9).Value, Double)
+                End If
+            Next
+
+        Else
+
+            For Each row As DataGridViewRow In rev_grid.Rows
+                If row.IsNewRow Then Continue For
+                If (IsNumeric(row.Cells(8).Value) = True And IsNumeric(row.Cells(7).Value)) Then
+                    row.Cells(9).Value = CType(row.Cells(8).Value, Double) - CType(row.Cells(7).Value, Double)
+                End If
+            Next
+
+        End If
     End Sub
 
     Private Sub ComboBox2_SelectedValueChanged(sender As Object, e As EventArgs) Handles ComboBox2.SelectedValueChanged
@@ -2719,5 +2745,69 @@ Public Class My_Material_r
         Catch ex As Exception
             MessageBox.Show(ex.ToString)
         End Try
+    End Sub
+
+    Private Sub ComboBox3_SelectedValueChanged(sender As Object, e As EventArgs) Handles ComboBox3.SelectedValueChanged
+
+        If String.Equals(open_job, "") = False Then
+
+            Try
+                Dim string_q As String : string_q = "select distinct mr_name, release_date from Material_Request.mr where  released = 'Y' and job = '" & open_job & "' "
+
+                ComboBox2.Items.Clear()
+
+
+                Dim check_cmd As New MySqlCommand
+                '  check_cmd.Parameters.AddWithValue("@job", job_label.Text)
+
+
+                If String.Equals(ComboBox3.Text, "All BOMs") = True Then
+
+                    string_q = string_q
+
+                ElseIf String.Equals(ComboBox3.Text, "Master BOM") = True Then
+
+                    string_q = string_q & " and BOM_type = 'MB' order by release_date"
+
+                ElseIf String.Equals(ComboBox3.Text, "Panel") = True Then
+
+                    string_q = string_q & " and BOM_type = 'Panel' order by release_date"
+
+                ElseIf String.Equals(ComboBox3.Text, "Field") = True Then
+
+                    string_q = string_q & " and BOM_type = 'Field' order by release_date"
+
+                ElseIf String.Equals(ComboBox3.Text, "Assembly") = True Then
+                    string_q = string_q & " and BOM_type = 'Assembly' order by release_date"
+
+                ElseIf String.Equals(ComboBox3.Text, "Spare") = True Then
+
+                    string_q = string_q & " and BOM_type = 'Spare' order by release_date"
+
+                End If
+
+                check_cmd.CommandText = string_q
+
+
+
+                check_cmd.Connection = Login.Connection
+                check_cmd.ExecuteNonQuery()
+
+                Dim reader As MySqlDataReader
+                reader = check_cmd.ExecuteReader
+
+                If reader.HasRows Then
+                    While reader.Read
+                        ComboBox2.Items.Add(reader(0))
+
+                    End While
+                End If
+
+                reader.Close()
+            Catch ex As Exception
+                MessageBox.Show(ex.ToString)
+            End Try
+
+        End If
     End Sub
 End Class

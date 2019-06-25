@@ -290,7 +290,7 @@ Public Class Part_Picker
                                 If String.Compare(my_grid.Rows(k).Cells(0).Value, part_s.Text.ToString) = 0 Then
                                     rowindex = row.Index
                                     my_grid.CurrentCell = my_grid.Rows(rowindex).Cells(0)
-                                    my_grid.Rows(rowindex).Cells(9).Value = CType(qty_box.Text, Double)
+                                    my_grid.Rows(rowindex).Cells(9).Value = CType(qty_box.Text, Double) + If(IsNumeric(my_grid.Rows(rowindex).Cells(9).Value) = True, my_grid.Rows(rowindex).Cells(9).Value, 0)
                                     my_grid.Rows(rowindex).DefaultCellStyle.BackColor = Color.LightBlue 'color new edited row
                                     found_po = True
                                     Exit For
@@ -318,9 +318,11 @@ Public Class Part_Picker
 
                             End If
 
-                            my_grid.Rows.Add({allParts.Rows(allParts.CurrentCell.RowIndex).Cells(0).Value, allParts.Rows(allParts.CurrentCell.RowIndex).Cells(1).Value, allParts.Rows(allParts.CurrentCell.RowIndex).Cells(4).Value, allParts.Rows(allParts.CurrentCell.RowIndex).Cells(2).Value, allParts.Rows(allParts.CurrentCell.RowIndex).Cells(5).Value, cost, allParts.Rows(allParts.CurrentCell.RowIndex).Cells(6).Value, 0, CType(qty_box.Text, Double), "", "", "", allParts.Rows(allParts.CurrentCell.RowIndex).Cells(7).Value, allParts.Rows(allParts.CurrentCell.RowIndex).Cells(3).Value})
+                            my_grid.Rows.Add({allParts.Rows(allParts.CurrentCell.RowIndex).Cells(0).Value, allParts.Rows(allParts.CurrentCell.RowIndex).Cells(1).Value, allParts.Rows(allParts.CurrentCell.RowIndex).Cells(4).Value, allParts.Rows(allParts.CurrentCell.RowIndex).Cells(2).Value, allParts.Rows(allParts.CurrentCell.RowIndex).Cells(5).Value, cost, allParts.Rows(allParts.CurrentCell.RowIndex).Cells(6).Value, 0, "", CType(qty_box.Text, Double), "", "", allParts.Rows(allParts.CurrentCell.RowIndex).Cells(7).Value, allParts.Rows(allParts.CurrentCell.RowIndex).Cells(3).Value})
                             my_grid.Rows(my_grid.Rows.Count - 2).DefaultCellStyle.BackColor = Color.LightBlue 'color new edited row
                         End If
+
+                        Call My_Material_r.recal_rev()
 
                     Catch ex As Exception
                         MsgBox(ex.ToString)

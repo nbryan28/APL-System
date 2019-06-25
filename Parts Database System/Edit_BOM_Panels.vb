@@ -786,7 +786,7 @@ Public Class Edit_BOM_Panels
             ' p_name4.Visible = True
             p_name3.Visible = True
             Call add_combo(p_name2, list_hp) 'Call add_combo(p_name2, listn)
-            Call add_combo(p_name3, list_type) 'Call add_combo(p_name3, listn)
+            Call add_combo(p_name3, listn) 'Call add_combo(p_name3, listn)
             ' hp_l.Visible = True
             options_v.Visible = True
 

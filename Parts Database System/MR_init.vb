@@ -226,6 +226,8 @@ Public Class MR_init
 
     Private Sub Label4_Click(sender As Object, e As EventArgs) Handles Label4.Click
 
+        Cursor.Current = Cursors.WaitCursor
+
         'MR list
         Label7.ForeColor = Color.WhiteSmoke
         Label4.ForeColor = Color.DarkSeaGreen
@@ -323,6 +325,7 @@ Public Class MR_init
 
 
             counter_i = 0
+            Cursor.Current = Cursors.Default
         Catch ex As Exception
             MessageBox.Show(ex.ToString)
         End Try
@@ -394,6 +397,8 @@ Public Class MR_init
     End Sub
 
     Private Sub Label7_Click(sender As Object, e As EventArgs) Handles Label7.Click
+
+        Cursor.Current = Cursors.WaitCursor
 
         'pending MRs
         Label3.ForeColor = Color.WhiteSmoke
@@ -567,6 +572,7 @@ Public Class MR_init
 
 
             counter_i = 0
+            Cursor.Current = Cursors.Default
 
         Catch ex As Exception
             MessageBox.Show(ex.ToString)
@@ -578,6 +584,7 @@ Public Class MR_init
 
         If open_grid.Rows.Count > 0 Then
 
+            Cursor.Current = Cursors.WaitCursor
             wait_la.Visible = True
             wait_la.Text = "Preparing Material Request ...."
             Application.DoEvents()
@@ -647,6 +654,7 @@ Public Class MR_init
 
             wait_la.Visible = False
             wait_la.Text = "Loading Data, Please wait ....."
+            Cursor.Current = Cursors.Default
 
         End If
     End Sub

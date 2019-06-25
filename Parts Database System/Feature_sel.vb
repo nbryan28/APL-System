@@ -482,7 +482,7 @@ Public Class Feature_sel
                                 If String.Compare(my_grid.Rows(k).Cells(0).Value, part_s) = 0 Then
                                     rowindex = row.Index
                                     my_grid.CurrentCell = my_grid.Rows(rowindex).Cells(0)
-                                    my_grid.Rows(rowindex).Cells(9).Value = CType(qty_box.Text, Double) * f_Qty
+                                    my_grid.Rows(rowindex).Cells(9).Value = (CType(qty_box.Text, Double) * f_Qty) + If(IsNumeric(my_grid.Rows(rowindex).Cells(9).Value), my_grid.Rows(rowindex).Cells(9).Value, 0)
                                     my_grid.Rows(rowindex).DefaultCellStyle.BackColor = Color.Bisque 'color new edited row
                                     found_po = True
                                     Exit For
@@ -503,9 +503,11 @@ Public Class Feature_sel
                             End If
 
 
-                            my_grid.Rows.Add({part_s, desc, "", mfg, vendor, cost, mfg_type, 0, qty_box.Text * f_Qty, 0, "", "", preff, part_Type})
+                            my_grid.Rows.Add({part_s, desc, "", mfg, vendor, cost, mfg_type, 0, "", qty_box.Text * f_Qty, "", "", preff, part_Type})
                             my_grid.Rows(my_grid.Rows.Count - 2).DefaultCellStyle.BackColor = Color.Bisque 'color new edited row
                         End If
+
+                        Call My_Material_r.recal_rev()
 
                     Catch ex As Exception
                         MsgBox(ex.ToString)

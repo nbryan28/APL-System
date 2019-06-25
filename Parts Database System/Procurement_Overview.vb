@@ -473,6 +473,7 @@ Public Class Procurement_Overview
                 xlWorkSheet.Range("D:E").ColumnWidth = 20
                 xlWorkSheet.Range("A:E").HorizontalAlignment = Excel.Constants.xlCenter
 
+                Cursor.Current = Cursors.WaitCursor
 
                 'copy data to excel
                 For i As Integer = 0 To total_grid.ColumnCount - 1
@@ -493,6 +494,9 @@ Public Class Procurement_Overview
 
 
                 Marshal.ReleaseComObject(xlApp)
+
+                Cursor.Current = Cursors.Default
+
                 MessageBox.Show("Projects Totals table exported successfully!")
 
             Catch ex As Exception
@@ -2866,6 +2870,7 @@ Public Class Procurement_Overview
     Private Sub Button9_Click(sender As Object, e As EventArgs) Handles Button9.Click
         'export  MPL to excel file
 
+
         Dim xlApp As Excel.Application = New Microsoft.Office.Interop.Excel.Application()
         xlApp.DisplayAlerts = False
 
@@ -2873,6 +2878,9 @@ Public Class Procurement_Overview
             MessageBox.Show("Excel is not properly installed!!")
         Else
             If (FolderBrowserDialog1.ShowDialog() = DialogResult.OK) Then
+
+
+                Cursor.Current = Cursors.WaitCursor
 
                 Dim xlWorkBook As Excel.Workbook
                 Dim xlWorkSheet As Excel.Worksheet
@@ -2906,6 +2914,7 @@ Public Class Procurement_Overview
 
                 Marshal.ReleaseComObject(xlApp)
 
+                Cursor.Current = Cursors.Default
                 MessageBox.Show("Master Packing List exported successfully!")
             End If
         End If
@@ -3611,6 +3620,9 @@ Public Class Procurement_Overview
 
     Private Sub Button12_Click(sender As Object, e As EventArgs) Handles Button12.Click
         '-- search in map ---
+        Cursor.Current = Cursors.WaitCursor
+
+
         Dim mr_t As New List(Of String)
         Dim p_names As New List(Of String)
 
@@ -3728,6 +3740,7 @@ Public Class Procurement_Overview
             reader501.Close()
         Next
 
+        Cursor.Current = Cursors.Default
         MessageBox.Show("The part can be found in the Black BOM's")
 
     End Sub

@@ -130,6 +130,8 @@ Public Class BOM_init
     Private Sub Label4_Click(sender As Object, e As EventArgs) Handles Label4.Click
         'released
 
+        Cursor.Current = Cursors.WaitCursor
+
         mr_mode_r = True
         Label7.ForeColor = Color.WhiteSmoke
         Label4.ForeColor = Color.CadetBlue
@@ -232,6 +234,9 @@ Public Class BOM_init
 
 
             counter_i = 0
+
+            Cursor.Current = Cursors.Default
+
         Catch ex As Exception
             MessageBox.Show(ex.ToString)
         End Try
