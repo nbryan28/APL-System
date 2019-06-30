@@ -50,7 +50,6 @@ Partial Class My_Material_r
         Me.CreateMRRevisionToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.OpenSavedRevisionToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.SaveRevisionToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripSeparator6 = New System.Windows.Forms.ToolStripSeparator()
         Me.ToolStripSeparator7 = New System.Windows.Forms.ToolStripSeparator()
         Me.ExportMaterialRequestToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ChangeShipppingAddressToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -99,6 +98,8 @@ Partial Class My_Material_r
         Me.Column21 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Column30 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.Label6 = New System.Windows.Forms.Label()
+        Me.ComboBox3 = New System.Windows.Forms.ComboBox()
         Me.last_m_l = New System.Windows.Forms.Label()
         Me.release_d_l = New System.Windows.Forms.Label()
         Me.release_by_l = New System.Windows.Forms.Label()
@@ -148,8 +149,7 @@ Partial Class My_Material_r
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Button1 = New System.Windows.Forms.Button()
         Me.Part_Picker1 = New Parts_database_system.Part_Picker()
-        Me.ComboBox3 = New System.Windows.Forms.ComboBox()
-        Me.Label6 = New System.Windows.Forms.Label()
+        Me.RevisionControlToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.MenuStrip1.SuspendLayout()
         CType(Me.PR_grid, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.menu_BOM.SuspendLayout()
@@ -191,7 +191,7 @@ Partial Class My_Material_r
         '
         'ToolsToolStripMenuItem
         '
-        Me.ToolsToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.BOMManagerToolStripMenuItem, Me.AddPanelsToolStripMenuItem, Me.ToolStripSeparator9, Me.CreateMRRevisionToolStripMenuItem, Me.OpenSavedRevisionToolStripMenuItem, Me.SaveRevisionToolStripMenuItem, Me.ToolStripSeparator6, Me.ToolStripSeparator7, Me.ExportMaterialRequestToolStripMenuItem, Me.ChangeShipppingAddressToolStripMenuItem, Me.ChangeNeedByDateToolStripMenuItem, Me.ChangePanelDescriptionToolStripMenuItem, Me.ToolStripSeparator1})
+        Me.ToolsToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.BOMManagerToolStripMenuItem, Me.AddPanelsToolStripMenuItem, Me.ToolStripSeparator9, Me.CreateMRRevisionToolStripMenuItem, Me.OpenSavedRevisionToolStripMenuItem, Me.SaveRevisionToolStripMenuItem, Me.ToolStripSeparator7, Me.ExportMaterialRequestToolStripMenuItem, Me.ChangeShipppingAddressToolStripMenuItem, Me.ChangeNeedByDateToolStripMenuItem, Me.ChangePanelDescriptionToolStripMenuItem, Me.ToolStripSeparator1, Me.RevisionControlToolStripMenuItem})
         Me.ToolsToolStripMenuItem.Name = "ToolsToolStripMenuItem"
         Me.ToolsToolStripMenuItem.Size = New System.Drawing.Size(67, 29)
         Me.ToolsToolStripMenuItem.Text = "Tools"
@@ -234,11 +234,6 @@ Partial Class My_Material_r
         Me.SaveRevisionToolStripMenuItem.Name = "SaveRevisionToolStripMenuItem"
         Me.SaveRevisionToolStripMenuItem.Size = New System.Drawing.Size(332, 30)
         Me.SaveRevisionToolStripMenuItem.Text = "Save Revision"
-        '
-        'ToolStripSeparator6
-        '
-        Me.ToolStripSeparator6.Name = "ToolStripSeparator6"
-        Me.ToolStripSeparator6.Size = New System.Drawing.Size(329, 6)
         '
         'ToolStripSeparator7
         '
@@ -713,6 +708,27 @@ Partial Class My_Material_r
         Me.GroupBox1.Size = New System.Drawing.Size(1709, 120)
         Me.GroupBox1.TabIndex = 22
         Me.GroupBox1.TabStop = False
+        '
+        'Label6
+        '
+        Me.Label6.Anchor = System.Windows.Forms.AnchorStyles.Top
+        Me.Label6.AutoSize = True
+        Me.Label6.Location = New System.Drawing.Point(348, 24)
+        Me.Label6.Name = "Label6"
+        Me.Label6.Size = New System.Drawing.Size(51, 25)
+        Me.Label6.TabIndex = 29
+        Me.Label6.Text = "Type"
+        '
+        'ComboBox3
+        '
+        Me.ComboBox3.Anchor = System.Windows.Forms.AnchorStyles.Top
+        Me.ComboBox3.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.ComboBox3.FormattingEnabled = True
+        Me.ComboBox3.Items.AddRange(New Object() {"All BOMs", "Master BOM", "Panel", "Field", "Assembly", "Spare"})
+        Me.ComboBox3.Location = New System.Drawing.Point(414, 24)
+        Me.ComboBox3.Name = "ComboBox3"
+        Me.ComboBox3.Size = New System.Drawing.Size(243, 33)
+        Me.ComboBox3.TabIndex = 28
         '
         'last_m_l
         '
@@ -1237,26 +1253,12 @@ Partial Class My_Material_r
         Me.Part_Picker1.Size = New System.Drawing.Size(1, 1)
         Me.Part_Picker1.TabIndex = 37
         '
-        'ComboBox3
+        'RevisionControlToolStripMenuItem
         '
-        Me.ComboBox3.Anchor = System.Windows.Forms.AnchorStyles.Top
-        Me.ComboBox3.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.ComboBox3.FormattingEnabled = True
-        Me.ComboBox3.Items.AddRange(New Object() {"All BOMs", "Master BOM", "Panel", "Field", "Assembly", "Spare"})
-        Me.ComboBox3.Location = New System.Drawing.Point(414, 24)
-        Me.ComboBox3.Name = "ComboBox3"
-        Me.ComboBox3.Size = New System.Drawing.Size(243, 33)
-        Me.ComboBox3.TabIndex = 28
-        '
-        'Label6
-        '
-        Me.Label6.Anchor = System.Windows.Forms.AnchorStyles.Top
-        Me.Label6.AutoSize = True
-        Me.Label6.Location = New System.Drawing.Point(348, 24)
-        Me.Label6.Name = "Label6"
-        Me.Label6.Size = New System.Drawing.Size(51, 25)
-        Me.Label6.TabIndex = 29
-        Me.Label6.Text = "Type"
+        Me.RevisionControlToolStripMenuItem.Image = CType(resources.GetObject("RevisionControlToolStripMenuItem.Image"), System.Drawing.Image)
+        Me.RevisionControlToolStripMenuItem.Name = "RevisionControlToolStripMenuItem"
+        Me.RevisionControlToolStripMenuItem.Size = New System.Drawing.Size(332, 30)
+        Me.RevisionControlToolStripMenuItem.Text = "Revision Control"
         '
         'My_Material_r
         '
@@ -1347,7 +1349,6 @@ Partial Class My_Material_r
     Friend WithEvents DataGridViewTextBoxColumn23 As DataGridViewTextBoxColumn
     Friend WithEvents DataGridViewTextBoxColumn29 As DataGridViewTextBoxColumn
     Friend WithEvents DataGridViewTextBoxColumn14 As DataGridViewTextBoxColumn
-    Friend WithEvents ToolStripSeparator6 As ToolStripSeparator
     Friend WithEvents AddPanelsToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ToolStripSeparator7 As ToolStripSeparator
     Friend WithEvents Column10 As DataGridViewTextBoxColumn
@@ -1410,4 +1411,5 @@ Partial Class My_Material_r
     Friend WithEvents ChangePanelDescriptionToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents Label6 As Label
     Friend WithEvents ComboBox3 As ComboBox
+    Friend WithEvents RevisionControlToolStripMenuItem As ToolStripMenuItem
 End Class
