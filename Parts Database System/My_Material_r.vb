@@ -335,7 +335,7 @@ Public Class My_Material_r
     End Sub
 
     Private Sub My_Material_r_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-
+        'hi
         ComboBox3.Text = "All BOMs"
         real_mr = ""
 
