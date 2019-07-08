@@ -28,6 +28,8 @@ Partial Class Procurement_Overview
         Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle9 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
@@ -62,8 +64,6 @@ Partial Class Procurement_Overview
         Dim DataGridViewCellStyle36 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle37 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle38 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.MenuStrip1 = New System.Windows.Forms.MenuStrip()
         Me.MenuToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.OpenJobToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -98,6 +98,24 @@ Partial Class Procurement_Overview
         Me.Button7 = New System.Windows.Forms.Button()
         Me.Button1 = New System.Windows.Forms.Button()
         Me.total_grid = New System.Windows.Forms.DataGridView()
+        Me.DataGridViewTextBoxColumn11 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DataGridViewTextBoxColumn3 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DataGridViewTextBoxColumn4 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DataGridViewTextBoxColumn8 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DataGridViewComboBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DataGridViewTextBoxColumn9 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DataGridViewTextBoxColumn10 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DataGridViewTextBoxColumn12 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Column4 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Column5 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Column7 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Column12 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DataGridViewTextBoxColumn6 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Column1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Column6 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Column11 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Column8 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Column2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.menu_BOM = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.ToolStripMenuItem2 = New System.Windows.Forms.ToolStripMenuItem()
         Me.MoveToPackiNgSlipToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -217,26 +235,10 @@ Partial Class Procurement_Overview
         Me.DataGridViewTextBoxColumn2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.DataGridViewTextBoxColumn5 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.ADA_number = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Column17 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Column18 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.DataGridViewTextBoxColumn7 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.DataGridViewTextBoxColumn13 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.DataGridViewTextBoxColumn11 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.DataGridViewTextBoxColumn3 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.DataGridViewTextBoxColumn4 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.DataGridViewTextBoxColumn8 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.DataGridViewComboBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.DataGridViewTextBoxColumn9 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.DataGridViewTextBoxColumn10 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.DataGridViewTextBoxColumn12 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column4 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column5 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column7 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column12 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.DataGridViewTextBoxColumn6 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column6 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column11 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column8 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.MenuStrip1.SuspendLayout()
         Me.TabControl1.SuspendLayout()
         Me.TabPage3.SuspendLayout()
@@ -610,6 +612,146 @@ Partial Class Procurement_Overview
         Me.total_grid.Size = New System.Drawing.Size(1800, 682)
         Me.total_grid.TabIndex = 16
         '
+        'DataGridViewTextBoxColumn11
+        '
+        Me.DataGridViewTextBoxColumn11.Frozen = True
+        Me.DataGridViewTextBoxColumn11.HeaderText = "Project Qty"
+        Me.DataGridViewTextBoxColumn11.Name = "DataGridViewTextBoxColumn11"
+        Me.DataGridViewTextBoxColumn11.ReadOnly = True
+        Me.DataGridViewTextBoxColumn11.Width = 170
+        '
+        'DataGridViewTextBoxColumn3
+        '
+        Me.DataGridViewTextBoxColumn3.Frozen = True
+        Me.DataGridViewTextBoxColumn3.HeaderText = "Part_No"
+        Me.DataGridViewTextBoxColumn3.Name = "DataGridViewTextBoxColumn3"
+        Me.DataGridViewTextBoxColumn3.ReadOnly = True
+        Me.DataGridViewTextBoxColumn3.Width = 380
+        '
+        'DataGridViewTextBoxColumn4
+        '
+        Me.DataGridViewTextBoxColumn4.HeaderText = "Description"
+        Me.DataGridViewTextBoxColumn4.Name = "DataGridViewTextBoxColumn4"
+        Me.DataGridViewTextBoxColumn4.ReadOnly = True
+        Me.DataGridViewTextBoxColumn4.Width = 330
+        '
+        'DataGridViewTextBoxColumn8
+        '
+        Me.DataGridViewTextBoxColumn8.HeaderText = "Manufacturer"
+        Me.DataGridViewTextBoxColumn8.Name = "DataGridViewTextBoxColumn8"
+        Me.DataGridViewTextBoxColumn8.ReadOnly = True
+        Me.DataGridViewTextBoxColumn8.Width = 200
+        '
+        'DataGridViewComboBoxColumn1
+        '
+        Me.DataGridViewComboBoxColumn1.HeaderText = "MFG Type"
+        Me.DataGridViewComboBoxColumn1.Name = "DataGridViewComboBoxColumn1"
+        Me.DataGridViewComboBoxColumn1.ReadOnly = True
+        Me.DataGridViewComboBoxColumn1.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.DataGridViewComboBoxColumn1.Width = 200
+        '
+        'DataGridViewTextBoxColumn9
+        '
+        Me.DataGridViewTextBoxColumn9.HeaderText = "Vendor"
+        Me.DataGridViewTextBoxColumn9.Name = "DataGridViewTextBoxColumn9"
+        Me.DataGridViewTextBoxColumn9.ReadOnly = True
+        Me.DataGridViewTextBoxColumn9.Width = 200
+        '
+        'DataGridViewTextBoxColumn10
+        '
+        Me.DataGridViewTextBoxColumn10.HeaderText = "Price"
+        Me.DataGridViewTextBoxColumn10.Name = "DataGridViewTextBoxColumn10"
+        Me.DataGridViewTextBoxColumn10.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        Me.DataGridViewTextBoxColumn10.Width = 150
+        '
+        'DataGridViewTextBoxColumn12
+        '
+        Me.DataGridViewTextBoxColumn12.HeaderText = "Subtotal"
+        Me.DataGridViewTextBoxColumn12.Name = "DataGridViewTextBoxColumn12"
+        Me.DataGridViewTextBoxColumn12.ReadOnly = True
+        Me.DataGridViewTextBoxColumn12.Width = 150
+        '
+        'Column4
+        '
+        Me.Column4.HeaderText = "Fullfilled Qty"
+        Me.Column4.Name = "Column4"
+        Me.Column4.ReadOnly = True
+        Me.Column4.Width = 200
+        '
+        'Column5
+        '
+        Me.Column5.HeaderText = "Qty Needed"
+        Me.Column5.Name = "Column5"
+        Me.Column5.ReadOnly = True
+        Me.Column5.Width = 200
+        '
+        'Column7
+        '
+        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle3.BackColor = System.Drawing.Color.CadetBlue
+        DataGridViewCellStyle3.ForeColor = System.Drawing.Color.WhiteSmoke
+        DataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.Gray
+        Me.Column7.DefaultCellStyle = DataGridViewCellStyle3
+        Me.Column7.HeaderText = "  On Hand  "
+        Me.Column7.Name = "Column7"
+        Me.Column7.ReadOnly = True
+        Me.Column7.Width = 200
+        '
+        'Column12
+        '
+        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle4.BackColor = System.Drawing.Color.White
+        DataGridViewCellStyle4.ForeColor = System.Drawing.Color.Black
+        Me.Column12.DefaultCellStyle = DataGridViewCellStyle4
+        Me.Column12.HeaderText = "(Take from/Put back into) Inventory"
+        Me.Column12.Name = "Column12"
+        Me.Column12.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        Me.Column12.Width = 220
+        '
+        'DataGridViewTextBoxColumn6
+        '
+        Me.DataGridViewTextBoxColumn6.HeaderText = "  in Transit  "
+        Me.DataGridViewTextBoxColumn6.Name = "DataGridViewTextBoxColumn6"
+        Me.DataGridViewTextBoxColumn6.ReadOnly = True
+        Me.DataGridViewTextBoxColumn6.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        Me.DataGridViewTextBoxColumn6.Width = 300
+        '
+        'Column1
+        '
+        Me.Column1.HeaderText = "Need by Date"
+        Me.Column1.Name = "Column1"
+        Me.Column1.ReadOnly = True
+        Me.Column1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        Me.Column1.Width = 400
+        '
+        'Column6
+        '
+        Me.Column6.HeaderText = "Inventory Min "
+        Me.Column6.Name = "Column6"
+        Me.Column6.ReadOnly = True
+        Me.Column6.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        '
+        'Column11
+        '
+        Me.Column11.HeaderText = "Inventory Max  "
+        Me.Column11.Name = "Column11"
+        Me.Column11.ReadOnly = True
+        Me.Column11.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        '
+        'Column8
+        '
+        Me.Column8.HeaderText = "Notes"
+        Me.Column8.Name = "Column8"
+        Me.Column8.ReadOnly = True
+        Me.Column8.Width = 700
+        '
+        'Column2
+        '
+        Me.Column2.HeaderText = "Assembly"
+        Me.Column2.Name = "Column2"
+        Me.Column2.ReadOnly = True
+        Me.Column2.Width = 400
+        '
         'menu_BOM
         '
         Me.menu_BOM.ImageScalingSize = New System.Drawing.Size(20, 20)
@@ -701,7 +843,7 @@ Partial Class Procurement_Overview
         Me.orders_grid.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle8
         Me.orders_grid.ColumnHeadersHeight = 40
         Me.orders_grid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing
-        Me.orders_grid.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DataGridViewTextBoxColumn1, Me.Column3, Me.DataGridViewTextBoxColumn2, Me.DataGridViewTextBoxColumn5, Me.ADA_number, Me.DataGridViewTextBoxColumn7, Me.DataGridViewTextBoxColumn13})
+        Me.orders_grid.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DataGridViewTextBoxColumn1, Me.Column3, Me.DataGridViewTextBoxColumn2, Me.DataGridViewTextBoxColumn5, Me.ADA_number, Me.Column17, Me.Column18, Me.DataGridViewTextBoxColumn7, Me.DataGridViewTextBoxColumn13})
         DataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
         DataGridViewCellStyle9.BackColor = System.Drawing.Color.Silver
         DataGridViewCellStyle9.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -2108,10 +2250,24 @@ Partial Class Procurement_Overview
         '
         'ADA_number
         '
-        Me.ADA_number.HeaderText = " Qty Purchased"
+        Me.ADA_number.HeaderText = " Qty Needed "
         Me.ADA_number.Name = "ADA_number"
+        Me.ADA_number.ReadOnly = True
         Me.ADA_number.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
         Me.ADA_number.Width = 200
+        '
+        'Column17
+        '
+        Me.Column17.HeaderText = "Qty Purchased"
+        Me.Column17.Name = "Column17"
+        Me.Column17.Width = 200
+        '
+        'Column18
+        '
+        Me.Column18.HeaderText = "Need to Buy"
+        Me.Column18.Name = "Column18"
+        Me.Column18.ReadOnly = True
+        Me.Column18.Width = 200
         '
         'DataGridViewTextBoxColumn7
         '
@@ -2124,146 +2280,6 @@ Partial Class Procurement_Overview
         Me.DataGridViewTextBoxColumn13.HeaderText = "Estimated date of arrival"
         Me.DataGridViewTextBoxColumn13.Name = "DataGridViewTextBoxColumn13"
         Me.DataGridViewTextBoxColumn13.Width = 500
-        '
-        'DataGridViewTextBoxColumn11
-        '
-        Me.DataGridViewTextBoxColumn11.Frozen = True
-        Me.DataGridViewTextBoxColumn11.HeaderText = "Project Qty"
-        Me.DataGridViewTextBoxColumn11.Name = "DataGridViewTextBoxColumn11"
-        Me.DataGridViewTextBoxColumn11.ReadOnly = True
-        Me.DataGridViewTextBoxColumn11.Width = 170
-        '
-        'DataGridViewTextBoxColumn3
-        '
-        Me.DataGridViewTextBoxColumn3.Frozen = True
-        Me.DataGridViewTextBoxColumn3.HeaderText = "Part_No"
-        Me.DataGridViewTextBoxColumn3.Name = "DataGridViewTextBoxColumn3"
-        Me.DataGridViewTextBoxColumn3.ReadOnly = True
-        Me.DataGridViewTextBoxColumn3.Width = 380
-        '
-        'DataGridViewTextBoxColumn4
-        '
-        Me.DataGridViewTextBoxColumn4.HeaderText = "Description"
-        Me.DataGridViewTextBoxColumn4.Name = "DataGridViewTextBoxColumn4"
-        Me.DataGridViewTextBoxColumn4.ReadOnly = True
-        Me.DataGridViewTextBoxColumn4.Width = 330
-        '
-        'DataGridViewTextBoxColumn8
-        '
-        Me.DataGridViewTextBoxColumn8.HeaderText = "Manufacturer"
-        Me.DataGridViewTextBoxColumn8.Name = "DataGridViewTextBoxColumn8"
-        Me.DataGridViewTextBoxColumn8.ReadOnly = True
-        Me.DataGridViewTextBoxColumn8.Width = 200
-        '
-        'DataGridViewComboBoxColumn1
-        '
-        Me.DataGridViewComboBoxColumn1.HeaderText = "MFG Type"
-        Me.DataGridViewComboBoxColumn1.Name = "DataGridViewComboBoxColumn1"
-        Me.DataGridViewComboBoxColumn1.ReadOnly = True
-        Me.DataGridViewComboBoxColumn1.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.DataGridViewComboBoxColumn1.Width = 200
-        '
-        'DataGridViewTextBoxColumn9
-        '
-        Me.DataGridViewTextBoxColumn9.HeaderText = "Vendor"
-        Me.DataGridViewTextBoxColumn9.Name = "DataGridViewTextBoxColumn9"
-        Me.DataGridViewTextBoxColumn9.ReadOnly = True
-        Me.DataGridViewTextBoxColumn9.Width = 200
-        '
-        'DataGridViewTextBoxColumn10
-        '
-        Me.DataGridViewTextBoxColumn10.HeaderText = "Price"
-        Me.DataGridViewTextBoxColumn10.Name = "DataGridViewTextBoxColumn10"
-        Me.DataGridViewTextBoxColumn10.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        Me.DataGridViewTextBoxColumn10.Width = 150
-        '
-        'DataGridViewTextBoxColumn12
-        '
-        Me.DataGridViewTextBoxColumn12.HeaderText = "Subtotal"
-        Me.DataGridViewTextBoxColumn12.Name = "DataGridViewTextBoxColumn12"
-        Me.DataGridViewTextBoxColumn12.ReadOnly = True
-        Me.DataGridViewTextBoxColumn12.Width = 150
-        '
-        'Column4
-        '
-        Me.Column4.HeaderText = "Fullfilled Qty"
-        Me.Column4.Name = "Column4"
-        Me.Column4.ReadOnly = True
-        Me.Column4.Width = 200
-        '
-        'Column5
-        '
-        Me.Column5.HeaderText = "Qty Needed"
-        Me.Column5.Name = "Column5"
-        Me.Column5.ReadOnly = True
-        Me.Column5.Width = 200
-        '
-        'Column7
-        '
-        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle3.BackColor = System.Drawing.Color.CadetBlue
-        DataGridViewCellStyle3.ForeColor = System.Drawing.Color.WhiteSmoke
-        DataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.Gray
-        Me.Column7.DefaultCellStyle = DataGridViewCellStyle3
-        Me.Column7.HeaderText = "  On Hand  "
-        Me.Column7.Name = "Column7"
-        Me.Column7.ReadOnly = True
-        Me.Column7.Width = 200
-        '
-        'Column12
-        '
-        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle4.BackColor = System.Drawing.Color.White
-        DataGridViewCellStyle4.ForeColor = System.Drawing.Color.Black
-        Me.Column12.DefaultCellStyle = DataGridViewCellStyle4
-        Me.Column12.HeaderText = "(Take from/Put back into) Inventory"
-        Me.Column12.Name = "Column12"
-        Me.Column12.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        Me.Column12.Width = 220
-        '
-        'DataGridViewTextBoxColumn6
-        '
-        Me.DataGridViewTextBoxColumn6.HeaderText = "  in Transit  "
-        Me.DataGridViewTextBoxColumn6.Name = "DataGridViewTextBoxColumn6"
-        Me.DataGridViewTextBoxColumn6.ReadOnly = True
-        Me.DataGridViewTextBoxColumn6.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        Me.DataGridViewTextBoxColumn6.Width = 300
-        '
-        'Column1
-        '
-        Me.Column1.HeaderText = "Need by Date"
-        Me.Column1.Name = "Column1"
-        Me.Column1.ReadOnly = True
-        Me.Column1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        Me.Column1.Width = 400
-        '
-        'Column6
-        '
-        Me.Column6.HeaderText = "Inventory Min "
-        Me.Column6.Name = "Column6"
-        Me.Column6.ReadOnly = True
-        Me.Column6.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        '
-        'Column11
-        '
-        Me.Column11.HeaderText = "Inventory Max  "
-        Me.Column11.Name = "Column11"
-        Me.Column11.ReadOnly = True
-        Me.Column11.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        '
-        'Column8
-        '
-        Me.Column8.HeaderText = "Notes"
-        Me.Column8.Name = "Column8"
-        Me.Column8.ReadOnly = True
-        Me.Column8.Width = 700
-        '
-        'Column2
-        '
-        Me.Column2.HeaderText = "Assembly"
-        Me.Column2.Name = "Column2"
-        Me.Column2.ReadOnly = True
-        Me.Column2.Width = 400
         '
         'Procurement_Overview
         '
@@ -2472,13 +2488,6 @@ Partial Class Procurement_Overview
     Friend WithEvents Label23 As Label
     Friend WithEvents TextBox2 As TextBox
     Friend WithEvents Button12 As Button
-    Friend WithEvents DataGridViewTextBoxColumn1 As DataGridViewTextBoxColumn
-    Friend WithEvents Column3 As DataGridViewTextBoxColumn
-    Friend WithEvents DataGridViewTextBoxColumn2 As DataGridViewTextBoxColumn
-    Friend WithEvents DataGridViewTextBoxColumn5 As DataGridViewTextBoxColumn
-    Friend WithEvents ADA_number As DataGridViewTextBoxColumn
-    Friend WithEvents DataGridViewTextBoxColumn7 As DataGridViewTextBoxColumn
-    Friend WithEvents DataGridViewTextBoxColumn13 As DataGridViewTextBoxColumn
     Friend WithEvents DataGridViewTextBoxColumn11 As DataGridViewTextBoxColumn
     Friend WithEvents DataGridViewTextBoxColumn3 As DataGridViewTextBoxColumn
     Friend WithEvents DataGridViewTextBoxColumn4 As DataGridViewTextBoxColumn
@@ -2497,4 +2506,13 @@ Partial Class Procurement_Overview
     Friend WithEvents Column11 As DataGridViewTextBoxColumn
     Friend WithEvents Column8 As DataGridViewTextBoxColumn
     Friend WithEvents Column2 As DataGridViewTextBoxColumn
+    Friend WithEvents DataGridViewTextBoxColumn1 As DataGridViewTextBoxColumn
+    Friend WithEvents Column3 As DataGridViewTextBoxColumn
+    Friend WithEvents DataGridViewTextBoxColumn2 As DataGridViewTextBoxColumn
+    Friend WithEvents DataGridViewTextBoxColumn5 As DataGridViewTextBoxColumn
+    Friend WithEvents ADA_number As DataGridViewTextBoxColumn
+    Friend WithEvents Column17 As DataGridViewTextBoxColumn
+    Friend WithEvents Column18 As DataGridViewTextBoxColumn
+    Friend WithEvents DataGridViewTextBoxColumn7 As DataGridViewTextBoxColumn
+    Friend WithEvents DataGridViewTextBoxColumn13 As DataGridViewTextBoxColumn
 End Class

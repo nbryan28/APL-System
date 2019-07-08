@@ -266,61 +266,94 @@ Public Class MR_init
             '-------------------------------
             For i = 0 To job_list.Count - 1
 
-                Dim bom_list = New List(Of String)()
+                'Dim bom_list = New List(Of String)()
 
-                '------- get BOM ------
-                '------ get all BOM of the job 
-                Dim n_bom As Double : n_bom = 0
-                Dim check_cmd As New MySqlCommand
-                check_cmd.Parameters.AddWithValue("@job", job_list.Item(i))
-                check_cmd.CommandText = "select count(distinct id_bom) from Material_Request.mr where job = @job"
+                ''------- get BOM ------
+                ''------ get all BOM of the job 
+                'Dim n_bom As Double : n_bom = 0
+                'Dim check_cmd As New MySqlCommand
+                'check_cmd.Parameters.AddWithValue("@job", job_list.Item(i))
+                'check_cmd.CommandText = "select count(distinct id_bom) from Material_Request.mr where job = @job"
 
-                check_cmd.Connection = Login.Connection
-                check_cmd.ExecuteNonQuery()
+                'check_cmd.Connection = Login.Connection
+                'check_cmd.ExecuteNonQuery()
 
-                Dim reader As MySqlDataReader
-                reader = check_cmd.ExecuteReader
+                'Dim reader As MySqlDataReader
+                'reader = check_cmd.ExecuteReader
 
-                If reader.HasRows Then
-                    While reader.Read
-                        n_bom = reader(0)
+                'If reader.HasRows Then
+                '    While reader.Read
+                '        n_bom = reader(0)
+                '    End While
+                'End If
+
+                'reader.Close()
+
+                'For j = 1 To n_bom
+
+                '    Dim check_cmd1 As New MySqlCommand
+                '    check_cmd1.Parameters.Clear()
+                '    check_cmd1.Parameters.AddWithValue("@job", job_list.Item(i))
+                '    check_cmd1.Parameters.AddWithValue("@id_bom", j)
+                '    check_cmd1.CommandText = "select mr_name, Date_Created, created_by, need_date , release_date, released_by, job from Material_Request.mr where job = @job and id_bom = @id_bom and (BOM_type = 'old_BOM' or BOM_Type = 'MB' or BOM_Type = 'ASM') order by release_date desc limit 1"
+
+                '    check_cmd1.Connection = Login.Connection
+                '    check_cmd1.ExecuteNonQuery()
+
+                '    Dim reader1 As MySqlDataReader
+                '    reader1 = check_cmd1.ExecuteReader
+
+                '    If reader1.HasRows Then
+
+                '        While reader1.Read
+                '            open_grid.Rows.Add(New String() {})
+                '            open_grid.Rows(counter_i).Cells(1).Value = reader1(0).ToString
+                '            open_grid.Rows(counter_i).Cells(2).Value = reader1(1).ToString
+                '            open_grid.Rows(counter_i).Cells(3).Value = reader1(2).ToString
+                '            open_grid.Rows(counter_i).Cells(4).Value = Convert.ToDateTime(reader1(3))  'need date delete to string
+                '            open_grid.Rows(counter_i).Cells(5).Value = reader1(4).ToString
+                '            open_grid.Rows(counter_i).Cells(6).Value = reader1(5).ToString
+                '            open_grid.Rows(counter_i).Cells(7).Value = reader1(6).ToString
+
+                '            counter_i = counter_i + 1
+                '        End While
+                '    End If
+
+                '    reader1.Close()
+                'Next
+
+                '////////////////////// new procedure /////////////////////
+                Dim check_cmd1 As New MySqlCommand
+
+                check_cmd1.Parameters.Clear()
+                check_cmd1.Parameters.AddWithValue("@job", job_list.Item(i))
+                check_cmd1.CommandText = "select mr_name, Date_Created, created_by, need_date , release_date, released_by, job from (select * from Material_Request.mr where BOM_type = 'old_BOM' or BOM_type = 'MB' or BOM_type = 'ASM') as d where job = @job order by release_date desc limit 1"
+
+                check_cmd1.Connection = Login.Connection
+                check_cmd1.ExecuteNonQuery()
+
+                Dim reader1 As MySqlDataReader
+                reader1 = check_cmd1.ExecuteReader
+
+                If reader1.HasRows Then
+
+                    While reader1.Read
+                        open_grid.Rows.Add(New String() {})
+                        open_grid.Rows(counter_i).Cells(1).Value = reader1(0).ToString
+                        open_grid.Rows(counter_i).Cells(2).Value = reader1(1).ToString
+                        open_grid.Rows(counter_i).Cells(3).Value = reader1(2).ToString
+                        open_grid.Rows(counter_i).Cells(4).Value = Convert.ToDateTime(reader1(3))  'need date delete to string
+                        open_grid.Rows(counter_i).Cells(5).Value = reader1(4).ToString
+                        open_grid.Rows(counter_i).Cells(6).Value = reader1(5).ToString
+                        open_grid.Rows(counter_i).Cells(7).Value = reader1(6).ToString
+
+                        counter_i = counter_i + 1
                     End While
                 End If
 
-                reader.Close()
+                reader1.Close()
 
-                For j = 1 To n_bom
-
-                    Dim check_cmd1 As New MySqlCommand
-                    check_cmd1.Parameters.Clear()
-                    check_cmd1.Parameters.AddWithValue("@job", job_list.Item(i))
-                    check_cmd1.Parameters.AddWithValue("@id_bom", j)
-                    check_cmd1.CommandText = "select mr_name, Date_Created, created_by, need_date , release_date, released_by, job from Material_Request.mr where job = @job and id_bom = @id_bom and (BOM_type = 'old_BOM' or BOM_Type = 'MB' or BOM_Type = 'ASM') order by release_date desc limit 1"
-
-                    check_cmd1.Connection = Login.Connection
-                    check_cmd1.ExecuteNonQuery()
-
-                    Dim reader1 As MySqlDataReader
-                    reader1 = check_cmd1.ExecuteReader
-
-                    If reader1.HasRows Then
-
-                        While reader1.Read
-                            open_grid.Rows.Add(New String() {})
-                            open_grid.Rows(counter_i).Cells(1).Value = reader1(0).ToString
-                            open_grid.Rows(counter_i).Cells(2).Value = reader1(1).ToString
-                            open_grid.Rows(counter_i).Cells(3).Value = reader1(2).ToString
-                            open_grid.Rows(counter_i).Cells(4).Value = Convert.ToDateTime(reader1(3))  'need date delete to string
-                            open_grid.Rows(counter_i).Cells(5).Value = reader1(4).ToString
-                            open_grid.Rows(counter_i).Cells(6).Value = reader1(5).ToString
-                            open_grid.Rows(counter_i).Cells(7).Value = reader1(6).ToString
-
-                            counter_i = counter_i + 1
-                        End While
-                    End If
-
-                    reader1.Close()
-                Next
+                '///////////////////////////////////////////////////////////
             Next
 
 
@@ -451,53 +484,77 @@ Public Class MR_init
             '-------------------------------
             For i = 0 To job_list.Count - 1
 
-                Dim bom_list = New List(Of String)()
+                'Dim bom_list = New List(Of String)()
 
-                '------- get BOM ------
-                '------ get all BOM of the job 
-                Dim n_bom As Double : n_bom = 0
-                Dim check_cmd As New MySqlCommand
-                check_cmd.Parameters.AddWithValue("@job", job_list.Item(i))
-                check_cmd.CommandText = "select count(distinct id_bom) from Material_Request.mr where job = @job"
+                ''------- get BOM ------
+                ''------ get all BOM of the job 
+                'Dim n_bom As Double : n_bom = 0
+                'Dim check_cmd As New MySqlCommand
+                'check_cmd.Parameters.AddWithValue("@job", job_list.Item(i))
+                'check_cmd.CommandText = "select count(distinct id_bom) from Material_Request.mr where job = @job"
 
-                check_cmd.Connection = Login.Connection
-                check_cmd.ExecuteNonQuery()
+                'check_cmd.Connection = Login.Connection
+                'check_cmd.ExecuteNonQuery()
 
-                Dim reader As MySqlDataReader
-                reader = check_cmd.ExecuteReader
+                'Dim reader As MySqlDataReader
+                'reader = check_cmd.ExecuteReader
 
-                If reader.HasRows Then
-                    While reader.Read
-                        n_bom = reader(0)
+                'If reader.HasRows Then
+                '    While reader.Read
+                '        n_bom = reader(0)
+                '    End While
+                'End If
+
+                'reader.Close()
+
+                'For j = 1 To n_bom
+
+                '    Dim check_cmd1 As New MySqlCommand
+                '    check_cmd1.Parameters.Clear()
+                '    check_cmd1.Parameters.AddWithValue("@job", job_list.Item(i))
+                '    check_cmd1.Parameters.AddWithValue("@id_bom", j)
+                '    check_cmd1.CommandText = "select mr_name, release_date, released_by, job , need_date from Material_Request.mr where job = @job and id_bom = @id_bom and (BOM_type = 'old_BOM' or BOM_Type = 'MB' or BOM_type = 'ASM') order by release_date desc limit 1"
+
+                '    check_cmd1.Connection = Login.Connection
+                '    check_cmd1.ExecuteNonQuery()
+
+                '    Dim reader1 As MySqlDataReader
+                '    reader1 = check_cmd1.ExecuteReader
+
+                '    If reader1.HasRows Then
+
+                '        While reader1.Read
+                '            dimen_table.Rows.Add(reader1(0).ToString, reader1(1).ToString, reader1(2).ToString, reader1(3).ToString, Convert.ToDateTime(reader1(4)))  'change need date
+                '            ' counter_i = counter_i + 1
+                '        End While
+                '    End If
+
+                '    reader1.Close()
+                'Next
+
+                '/////// new procedure =========================================
+                Dim check_cmd1 As New MySqlCommand
+
+                check_cmd1.Parameters.Clear()
+                check_cmd1.Parameters.AddWithValue("@job", job_list.Item(i))
+                check_cmd1.CommandText = "select mr_name, release_date, released_by, job , need_date from (select * from Material_Request.mr where BOM_type = 'old_BOM' or BOM_type = 'MB' or BOM_type = 'ASM') as d where job = @job order by release_date desc limit 1"
+
+                check_cmd1.Connection = Login.Connection
+                check_cmd1.ExecuteNonQuery()
+
+                Dim reader1 As MySqlDataReader
+                reader1 = check_cmd1.ExecuteReader
+
+                If reader1.HasRows Then
+
+                    While reader1.Read
+                        dimen_table.Rows.Add(reader1(0).ToString, reader1(1).ToString, reader1(2).ToString, reader1(3).ToString, Convert.ToDateTime(reader1(4)))  'change need date
                     End While
                 End If
 
-                reader.Close()
+                reader1.Close()
 
-                For j = 1 To n_bom
-
-                    Dim check_cmd1 As New MySqlCommand
-                    check_cmd1.Parameters.Clear()
-                    check_cmd1.Parameters.AddWithValue("@job", job_list.Item(i))
-                    check_cmd1.Parameters.AddWithValue("@id_bom", j)
-                    check_cmd1.CommandText = "select mr_name, release_date, released_by, job , need_date from Material_Request.mr where job = @job and id_bom = @id_bom and (BOM_type = 'old_BOM' or BOM_Type = 'MB' or BOM_type = 'ASM') order by release_date desc limit 1"
-
-                    check_cmd1.Connection = Login.Connection
-                    check_cmd1.ExecuteNonQuery()
-
-                    Dim reader1 As MySqlDataReader
-                    reader1 = check_cmd1.ExecuteReader
-
-                    If reader1.HasRows Then
-
-                        While reader1.Read
-                            dimen_table.Rows.Add(reader1(0).ToString, reader1(1).ToString, reader1(2).ToString, reader1(3).ToString, Convert.ToDateTime(reader1(4)))  'change need date
-                            ' counter_i = counter_i + 1
-                        End While
-                    End If
-
-                    reader1.Close()
-                Next
+                '================================
             Next
 
 

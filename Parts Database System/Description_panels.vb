@@ -97,7 +97,7 @@ Public Class Description_panels
                     Create_cmd3.Parameters.AddWithValue("@need_date", Panel_grid.Rows(i).Cells(2).Value)
                     Create_cmd3.Parameters.AddWithValue("@job", job_n)
 
-                    Create_cmd3.CommandText = "UPDATE Master_Packing_List.packing_l SET part_desc = @part_desc where part_name = @part_name and need_date = @need_date and job = @job and n_r = @n_r"
+                    Create_cmd3.CommandText = "UPDATE Master_Packing_List.packing_l SET part_desc = @part_desc, need_date = @need_date where part_name = @part_name and job = @job and n_r = @n_r"
                     Create_cmd3.Connection = Login.Connection
                     Create_cmd3.ExecuteNonQuery()
 
@@ -129,7 +129,7 @@ Public Class Description_panels
                     Create_cmd2.Parameters.AddWithValue("@need_date", Panel_grid.Rows(i).Cells(2).Value)
                     Create_cmd2.Parameters.AddWithValue("@job", job_n)
 
-                    Create_cmd2.CommandText = "UPDATE Build_request.build_r SET panel_desc = @Panel_desc where panel = @Panel_name and need_date = @need_date and job = @job and n_r = @n_r"
+                    Create_cmd2.CommandText = "UPDATE Build_request.build_r SET panel_desc = @Panel_desc, need_date = @need_date where panel = @Panel_name  and job = @job and n_r = @n_r"
                     Create_cmd2.Connection = Login.Connection
                     Create_cmd2.ExecuteNonQuery()
 

@@ -1235,7 +1235,7 @@ Public Class Projects_m
             '-----------/////////////// fill Project specific ////////////-------------------
             Dim cmd41 As New MySqlCommand
             cmd41.Parameters.AddWithValue("@job", job)
-            cmd41.CommandText = "SELECT Part_No, qty_needed, cost from Tracking_Reports.my_tracking_reports where job = @job"
+            cmd41.CommandText = "SELECT Part_No, qty_purchased, cost from Tracking_Reports.my_tracking_reports where job = @job"
             cmd41.Connection = Login.Connection
             Dim reader41 As MySqlDataReader
             reader41 = cmd41.ExecuteReader

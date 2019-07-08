@@ -5203,9 +5203,14 @@ Public Class myQuote
             'find number of MS panels in that set
 
             For i = 0 To Panel_grid.Rows.Count - 1
-                If String.Equals(Panel_grid.Rows(i).Cells(0).Value.ToString, "MS_Panel") = True Then
+                If String.Equals(Panel_grid.Rows(i).Cells(0).Value.ToString, "MS_Panel (24x15x10 Green)") = True Then
                     ms_panel = If(IsNumeric(Panel_grid.Rows(i).Cells(j).Value) = True, Panel_grid.Rows(i).Cells(j).Value, 0)
-                    Exit For
+                    'Exit For
+                End If
+
+                If String.Equals(Panel_grid.Rows(i).Cells(0).Value.ToString, "MS_Panel (24x16x10 Gray)") = True Then
+                    ms_panel = ms_panel + If(IsNumeric(Panel_grid.Rows(i).Cells(j).Value) = True, Panel_grid.Rows(i).Cells(j).Value, 0)
+                    ' Exit For
                 End If
             Next
 

@@ -1338,7 +1338,7 @@ Public Class Procurement_Overview
             Dim cmd4 As New MySqlCommand
             cmd4.Parameters.AddWithValue("@job", job)
             cmd4.Parameters.AddWithValue("@id_bom", id_bom)
-            cmd4.CommandText = "SELECT Part_No, qty_needed, PO, es_date_of_arrival, mfg, primary_vendor, cost from Tracking_Reports.my_tracking_reports where job = @job and id_bom = @id_bom"
+            cmd4.CommandText = "SELECT Part_No, mfg, primary_vendor, cost, qty_needed, qty_purchased, PO, es_date_of_arrival from Tracking_Reports.my_tracking_reports where job = @job and id_bom = @id_bom"
             cmd4.Connection = Login.Connection
             Dim reader4 As MySqlDataReader
             reader4 = cmd4.ExecuteReader
@@ -1348,12 +1348,13 @@ Public Class Procurement_Overview
                 While reader4.Read
                     orders_grid.Rows.Add(New String() {})
                     orders_grid.Rows(i).Cells(0).Value = reader4(0).ToString
-                    orders_grid.Rows(i).Cells(4).Value = reader4(1).ToString
-                    orders_grid.Rows(i).Cells(5).Value = reader4(2).ToString
-                    orders_grid.Rows(i).Cells(6).Value = reader4(3).ToString
-                    orders_grid.Rows(i).Cells(1).Value = reader4(4).ToString
-                    orders_grid.Rows(i).Cells(2).Value = reader4(5).ToString
-                    orders_grid.Rows(i).Cells(3).Value = reader4(6).ToString
+                    orders_grid.Rows(i).Cells(1).Value = reader4(1).ToString
+                    orders_grid.Rows(i).Cells(2).Value = reader4(2).ToString
+                    orders_grid.Rows(i).Cells(3).Value = reader4(3).ToString
+                    orders_grid.Rows(i).Cells(4).Value = 0 'reader4(4).ToString
+                    orders_grid.Rows(i).Cells(5).Value = reader4(5).ToString
+                    orders_grid.Rows(i).Cells(7).Value = reader4(6).ToString
+                    orders_grid.Rows(i).Cells(8).Value = reader4(7).ToString
                     i = i + 1
                 End While
 
@@ -1378,6 +1379,8 @@ Public Class Procurement_Overview
                 check_cmd.Connection = Login.Connection
                 check_cmd.ExecuteNonQuery()
 
+                Dim index_f As Integer : index_f = -1
+
                 Dim reader As MySqlDataReader
                 reader = check_cmd.ExecuteReader
 
@@ -1391,25 +1394,21 @@ Public Class Procurement_Overview
 
                     '------------ if it's an assembly not kept in inventory then
                     If my_assemblies.Contains(total_grid.Rows(i).Cells(1).Value) = True Then
+
                         Call Get_need_buy(total_grid.Rows(i).Cells(1).Value, total_grid.Rows(i).Cells(0).Value)
+
                     Else
+                        index_f = Isintable_report(total_grid.Rows(i).Cells(1).Value)
 
-                        If orders_grid.Rows.Count > 0 Then
+                        If index_f <> -1 Then
 
-                            Dim new_qty As Double = Isintable(total_grid.Rows(i).Cells(1).Value, total_grid.Rows(i).Cells(0).Value)
-
-                            If new_qty > 0 Then
-                                orders_grid.Rows.Add(New String() {total_grid.Rows(i).Cells(1).Value, total_grid.Rows(i).Cells(3).Value, total_grid.Rows(i).Cells(5).Value, total_grid.Rows(i).Cells(6).Value, new_qty})
-                            End If
+                            orders_grid.Rows(index_f).Cells(4).Value = If(IsNumeric(orders_grid.Rows(index_f).Cells(4).Value), CType(orders_grid.Rows(index_f).Cells(4).Value, Double), 0) + CType(total_grid.Rows(i).Cells(0).Value, Double)
 
                         Else
-                            orders_grid.Rows.Add(New String() {})
-                            orders_grid.Rows(orders_grid.Rows.Count - 1).Cells(0).Value = total_grid.Rows(i).Cells(1).Value 'part name
-                            orders_grid.Rows(orders_grid.Rows.Count - 1).Cells(1).Value = total_grid.Rows(i).Cells(3).Value 'manu
-                            orders_grid.Rows(orders_grid.Rows.Count - 1).Cells(2).Value = total_grid.Rows(i).Cells(5).Value  'vendor
-                            orders_grid.Rows(orders_grid.Rows.Count - 1).Cells(3).Value = total_grid.Rows(i).Cells(6).Value  'cost
-                            orders_grid.Rows(orders_grid.Rows.Count - 1).Cells(4).Value = total_grid.Rows(i).Cells(0).Value  'qty
+                            orders_grid.Rows.Add(New String() {total_grid.Rows(i).Cells(1).Value, total_grid.Rows(i).Cells(3).Value, total_grid.Rows(i).Cells(5).Value, total_grid.Rows(i).Cells(6).Value, total_grid.Rows(i).Cells(0).Value, 0})
+
                         End If
+
                     End If
                 End If
 
@@ -1419,7 +1418,24 @@ Public Class Procurement_Overview
 
         Next
 
+        Call recal_project_specific()
     End Sub
+
+    Function Isintable_report(part_name As String) As Integer
+
+        Isintable_report = -1
+
+        If orders_grid.Rows.Count > 0 Then
+            For i = 0 To orders_grid.Rows.Count - 1
+                If String.Equals(part_name, orders_grid.Rows(i).Cells(0).Value.ToString) = True Then
+                    Isintable_report = i
+                    Exit For
+                End If
+            Next
+        End If
+
+    End Function
+
 
     Function Isintable(part_name As String, qty As Double) As Double
 
@@ -1473,7 +1489,7 @@ Public Class Procurement_Overview
                     Dim exist_c As Boolean : exist_c = False
                     Dim check_cmd As New MySqlCommand
                     check_cmd.Parameters.AddWithValue("@part_name", datatable.Rows(i).Item(0))
-                    check_cmd.CommandText = "select * from inventory.inventory_qty where part_name = @part_name And min_qty > 0" 'And min_qty > 0
+                    check_cmd.CommandText = "select * from inventory.inventory_qty where part_name = @part_name " 'And min_qty > 0" 
                     check_cmd.Connection = Login.Connection
                     check_cmd.ExecuteNonQuery()
 
@@ -1481,19 +1497,22 @@ Public Class Procurement_Overview
                     reader = check_cmd.ExecuteReader
 
                     If reader.HasRows Then
-                        exist_c = True
+                        exist_c = False 'True
                     End If
 
                     reader.Close()
 
                     If exist_c = False Then
 
-                        orders_grid.Rows.Add(New String() {})
-                        orders_grid.Rows(orders_grid.Rows.Count - 1).Cells(0).Value = datatable.Rows(i).Item(0) 'part name
-                        orders_grid.Rows(orders_grid.Rows.Count - 1).Cells(1).Value = datatable.Rows(i).Item(1) 'manu
-                        orders_grid.Rows(orders_grid.Rows.Count - 1).Cells(2).Value = datatable.Rows(i).Item(2)  'vendor
-                        orders_grid.Rows(orders_grid.Rows.Count - 1).Cells(3).Value = datatable.Rows(i).Item(3)  'cost
-                        orders_grid.Rows(orders_grid.Rows.Count - 1).Cells(4).Value = datatable.Rows(i).Item(4)  'qty
+                        '///////////------------------
+                        Dim index_f As Integer : index_f = Isintable_report(datatable.Rows(i).Item(0))
+
+                        If index_f > -1 Then
+                            orders_grid.Rows(index_f).Cells(4).Value = If(IsNumeric(orders_grid.Rows(index_f).Cells(4).Value), CType(orders_grid.Rows(index_f).Cells(4).Value, Double), 0) + CType(datatable.Rows(i).Item(4), Double)
+
+                        Else
+                            orders_grid.Rows.Add(New String() {datatable.Rows(i).Item(0), datatable.Rows(i).Item(1), datatable.Rows(i).Item(2), datatable.Rows(i).Item(3), datatable.Rows(i).Item(4), 0, 0, "Check Inventory"})
+                        End If
 
                     End If
 
@@ -1553,15 +1572,16 @@ Public Class Procurement_Overview
                         Create_cmd6.Parameters.Clear()
                         Create_cmd6.Parameters.AddWithValue("@job", open_job)
                         Create_cmd6.Parameters.AddWithValue("@Part_No", orders_grid.Rows(i).Cells(0).Value.ToString)
-                        Create_cmd6.Parameters.AddWithValue("@primary_vendor", orders_grid.Rows(i).Cells(1).Value.ToString)
-                        Create_cmd6.Parameters.AddWithValue("@mfg", orders_grid.Rows(i).Cells(2).Value.ToString)
+                        Create_cmd6.Parameters.AddWithValue("@primary_vendor", orders_grid.Rows(i).Cells(2).Value.ToString)
+                        Create_cmd6.Parameters.AddWithValue("@mfg", orders_grid.Rows(i).Cells(1).Value.ToString)
                         Create_cmd6.Parameters.AddWithValue("@cost", orders_grid.Rows(i).Cells(3).Value.ToString)
                         Create_cmd6.Parameters.AddWithValue("@qty_needed", orders_grid.Rows(i).Cells(4).Value.ToString)
-                        Create_cmd6.Parameters.AddWithValue("@PO", If(orders_grid.Rows(i).Cells(5).Value Is Nothing, "", orders_grid.Rows(i).Cells(5).Value.ToString))
-                        Create_cmd6.Parameters.AddWithValue("@es_date_of_arrival", If(orders_grid.Rows(i).Cells(6).Value Is Nothing, "", orders_grid.Rows(i).Cells(6).Value.ToString))
+                        Create_cmd6.Parameters.AddWithValue("@PO", If(orders_grid.Rows(i).Cells(7).Value Is Nothing, "", orders_grid.Rows(i).Cells(7).Value.ToString))
+                        Create_cmd6.Parameters.AddWithValue("@es_date_of_arrival", If(orders_grid.Rows(i).Cells(8).Value Is Nothing, "", orders_grid.Rows(i).Cells(8).Value.ToString))
                         Create_cmd6.Parameters.AddWithValue("@id_bom", id_bom)
+                        Create_cmd6.Parameters.AddWithValue("@qty_p", orders_grid.Rows(i).Cells(5).Value.ToString)
 
-                        Create_cmd6.CommandText = "INSERT INTO Tracking_Reports.my_tracking_reports(job, Part_No, qty_needed, PO, es_date_of_arrival, primary_vendor, mfg, cost, id_bom) VALUES (@job, @Part_No, @qty_needed, @PO, @es_date_of_arrival, @primary_vendor, @mfg, @cost, @id_bom)"
+                        Create_cmd6.CommandText = "INSERT INTO Tracking_Reports.my_tracking_reports(job, Part_No, qty_needed, PO, es_date_of_arrival, primary_vendor, mfg, cost, id_bom, qty_purchased) VALUES (@job, @Part_No, @qty_needed, @PO, @es_date_of_arrival, @primary_vendor, @mfg, @cost, @id_bom, @qty_p)"
                         Create_cmd6.Connection = Login.Connection
                         Create_cmd6.ExecuteNonQuery()
 
@@ -1570,6 +1590,8 @@ Public Class Procurement_Overview
                 Next
 
                 MessageBox.Show("Report updated")
+
+                Call recal_project_specific()
 
             Catch ex As Exception
                 MessageBox.Show(ex.ToString)
@@ -2700,7 +2722,7 @@ Public Class Procurement_Overview
 
                 If IsNumeric(total_grid.Rows(i).Cells(11).Value) = True Then
 
-                    If total_grid.Rows(i).Cells(11).Value <= current_q Then
+                    If total_grid.Rows(i).Cells(11).Value <= current_q Or go_ahead = False Then
                         qty_f = qty_f + CType(total_grid.Rows(i).Cells(11).Value, Double)
                         update_v = True
                     End If
@@ -2708,6 +2730,7 @@ Public Class Procurement_Overview
                 End If
 
                 If update_v = True Then
+
 
                     Dim cmd5 As New MySqlCommand
                     cmd5.Parameters.Clear()
@@ -3499,15 +3522,17 @@ Public Class Procurement_Overview
                     cmd5.Parameters.AddWithValue("@asm", Label20.Text)
                     cmd5.Parameters.AddWithValue("@part_name", asm_grid.Rows(i).Cells(0).Value)
                     cmd5.Parameters.AddWithValue("@panel_name", mr_label.Text)
-                    cmd5.CommandText = "SELECT * from Material_Request.my_assem where asm = @asm and part_name = @part_name and panel_name = @panel_name"
+                    cmd5.Parameters.AddWithValue("@job", job_label.Text)
+                    cmd5.CommandText = "SELECT * from Material_Request.my_assem where asm = @asm and part_name = @part_name and panel_name = @panel_name and job = @job"
                     cmd5.Connection = Login.Connection
                     Dim reader5 As MySqlDataReader
                     reader5 = cmd5.ExecuteReader
 
                     If reader5.HasRows Then
-                        While reader5.Read
-                            exist_c = True
-                        End While
+                        '  While reader5.Read
+                        exist_c = True
+                        '  End While
+
                     End If
 
                     reader5.Close()
@@ -3767,6 +3792,31 @@ Public Class Procurement_Overview
             End If
         Next
 
+    End Sub
+
+
+    Sub recal_project_specific()
+
+
+        For i = 0 To orders_grid.Rows.Count - 1
+            If (IsNumeric(orders_grid.Rows(i).Cells(4).Value) = True And IsNumeric(orders_grid.Rows(i).Cells(5).Value)) Then
+                orders_grid.Rows(i).Cells(6).Value = CType(orders_grid.Rows(i).Cells(4).Value, Double) - CType(orders_grid.Rows(i).Cells(5).Value, Double)
+                If CType(orders_grid.Rows(i).Cells(6).Value, Double) <> 0 Then
+                    orders_grid.Rows(i).Cells(6).Style.BackColor = Color.Firebrick
+                Else
+                    orders_grid.Rows(i).Cells(6).Style.BackColor = Color.Gray
+                End If
+
+            Else
+                orders_grid.Rows(i).Cells(6).Value = If(IsNumeric(orders_grid.Rows(i).Cells(4).Value) = False, 0, orders_grid.Rows(i).Cells(4).Value)
+                If CType(orders_grid.Rows(i).Cells(6).Value, Double) <> 0 Then
+                    orders_grid.Rows(i).Cells(6).Style.BackColor = Color.Firebrick
+                Else
+                    orders_grid.Rows(i).Cells(6).Style.BackColor = Color.Gray
+                End If
+
+            End If
+        Next
     End Sub
 
     'Private Sub TestToolStripMenuItem_Click(sender As Object, e As EventArgs)

@@ -382,7 +382,7 @@ Public Class Login
 
             '----------  CHECK VERSION CONTROL ----------
             Try
-                version_c = "APL v0.99br"
+                version_c = "APL v0.99ca"
                 Dim cmd_ver As New MySqlCommand
                 cmd_ver.CommandText = "SELECT version from version_control"
 

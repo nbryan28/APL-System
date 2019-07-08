@@ -32,12 +32,35 @@ Public Class SAVE_revision
 
                 Try
 
+                    '-------- get MBOM ------------
+                    Dim MB As String : MB = ""
+
+                    Dim cmdm As New MySqlCommand
+                    cmdm.Parameters.AddWithValue("@job", My_Material_r.open_job)
+                    cmdm.Parameters.AddWithValue("@mr_name", My_Material_r.Text)
+                    cmdm.CommandText = "SELECT MBOM from Material_Request.mr where mr_name = @mr_name  and job = @job"
+                    cmdm.Connection = Login.Connection
+                    Dim readerm As MySqlDataReader
+                    readerm = cmdm.ExecuteReader
+
+                    If readerm.HasRows Then
+                        While readerm.Read
+                            MB = readerm(0).ToString
+                        End While
+                    End If
+
+                    readerm.Close()
+                    '----------------------------
+
+
+
                     '--- enter data to mr -------
                     Dim main_cmd As New MySqlCommand
                     main_cmd.Parameters.AddWithValue("@mr_name", My_Material_r.Text)
                     main_cmd.Parameters.AddWithValue("@rev_name", TextBox1.Text)
                     main_cmd.Parameters.AddWithValue("@created_by", current_user)
-                    main_cmd.CommandText = "INSERT INTO Revisions.mr_rev(mr_name, rev_name, created_date , created_by) VALUES (@mr_name, @rev_name, now(), @created_by)"
+                    main_cmd.Parameters.AddWithValue("@MB", MB)
+                    main_cmd.CommandText = "INSERT INTO Revisions.mr_rev(mr_name, rev_name, created_date , created_by, new_panel, MB) VALUES (@mr_name, @rev_name, now(), @created_by, '', @MB)"
                     main_cmd.Connection = Login.Connection
                     main_cmd.ExecuteNonQuery()
 

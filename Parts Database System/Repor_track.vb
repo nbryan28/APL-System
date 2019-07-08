@@ -122,7 +122,7 @@ Public Class Repor_track
             Dim cmd41 As New MySqlCommand
             cmd41.Parameters.AddWithValue("@id_bom", id_box)
             cmd41.Parameters.AddWithValue("@job", ComboBox1.Text)
-            cmd41.CommandText = "SELECT Part_No, qty_needed, PO, es_date_of_arrival, mfg, primary_vendor, cost from Tracking_Reports.my_tracking_reports where job = @job and id_bom = @id_bom"
+            cmd41.CommandText = "SELECT Part_No, qty_purchased, PO, es_date_of_arrival, mfg, primary_vendor, cost from Tracking_Reports.my_tracking_reports where job = @job and id_bom = @id_bom"
             cmd41.Connection = Login.Connection
             Dim reader41 As MySqlDataReader
             reader41 = cmd41.ExecuteReader

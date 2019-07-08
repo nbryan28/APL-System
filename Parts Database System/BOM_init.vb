@@ -129,6 +129,8 @@ Public Class BOM_init
 
     Private Sub Label4_Click(sender As Object, e As EventArgs) Handles Label4.Click
         'released
+        wait_la.Visible = True
+        Application.DoEvents()
 
         Cursor.Current = Cursors.WaitCursor
 
@@ -165,77 +167,120 @@ Public Class BOM_init
             '-------------------------------
             For i = 0 To job_list.Count - 1
 
-                Dim bom_list = New List(Of String)()
+                'Dim bom_list = New List(Of String)()
 
-                '------- get BOM ------
-                '------ get all BOM of the job 
-                Dim n_bom As Double : n_bom = 0
-                Dim check_cmd As New MySqlCommand
-                check_cmd.Parameters.AddWithValue("@job", job_list.Item(i))
-                check_cmd.CommandText = "select count(distinct id_bom) from Material_Request.mr where job = @job"
+                ''------- get BOM ------
+                ''------ get all BOM of the job 
+                'Dim n_bom As Double : n_bom = 0
+                'Dim check_cmd As New MySqlCommand
+                'check_cmd.Parameters.AddWithValue("@job", job_list.Item(i))
+                'check_cmd.CommandText = "select count(distinct id_bom) from Material_Request.mr where job = @job"
 
-                check_cmd.Connection = Login.Connection
-                check_cmd.ExecuteNonQuery()
+                'check_cmd.Connection = Login.Connection
+                'check_cmd.ExecuteNonQuery()
 
-                Dim reader As MySqlDataReader
-                reader = check_cmd.ExecuteReader
+                'Dim reader As MySqlDataReader
+                'reader = check_cmd.ExecuteReader
 
-                If reader.HasRows Then
-                    While reader.Read
-                        n_bom = reader(0)
+                'If reader.HasRows Then
+                '    While reader.Read
+                '        n_bom = reader(0)
+                '    End While
+                'End If
+
+                'reader.Close()
+
+                'For j = 1 To n_bom
+
+                '    Dim check_cmd1 As New MySqlCommand
+
+                '    Dim bmp1 As New System.Drawing.Bitmap(My.Resources.myImages.ada_package)
+                '    Dim bmp2 As New System.Drawing.Bitmap(My.Resources.abom)
+
+                '    check_cmd1.Parameters.Clear()
+                '    check_cmd1.Parameters.AddWithValue("@job", job_list.Item(i))
+                '    check_cmd1.Parameters.AddWithValue("@id_bom", j)
+                '    check_cmd1.CommandText = "select mr_name, Date_Created, created_by, last_modified , release_date, released_by, job, BOM_type from Material_Request.mr where job = @job and id_bom = @id_bom and (BOM_type = 'old_BOM' or BOM_Type = 'MB' or BOM_type = 'ASM') order by release_date desc limit 1"
+
+                '    check_cmd1.Connection = Login.Connection
+                '    check_cmd1.ExecuteNonQuery()
+
+                '    Dim reader1 As MySqlDataReader
+                '    reader1 = check_cmd1.ExecuteReader
+
+                '    If reader1.HasRows Then
+
+                '        While reader1.Read
+                '            open_grid.Rows.Add(New String() {})
+
+                '            If String.Equals(reader1(7).ToString, "MB") = True Then
+                '                open_grid.Rows(counter_i).Cells(0).Value = bmp1
+                '            ElseIf String.Equals(reader1(7).ToString, "ASM") = True Then
+                '                open_grid.Rows(counter_i).Cells(0).Value = bmp2
+                '            End If
+                '            open_grid.Rows(counter_i).Cells(1).Value = reader1(0).ToString
+                '            open_grid.Rows(counter_i).Cells(2).Value = reader1(1)
+                '            open_grid.Rows(counter_i).Cells(3).Value = reader1(2).ToString
+                '            open_grid.Rows(counter_i).Cells(4).Value = reader1(3).ToString
+                '            open_grid.Rows(counter_i).Cells(5).Value = reader1(4)
+                '            open_grid.Rows(counter_i).Cells(6).Value = reader1(5).ToString
+                '            open_grid.Rows(counter_i).Cells(7).Value = reader1(6).ToString
+
+                '            counter_i = counter_i + 1
+                '        End While
+                '    End If
+
+                '    reader1.Close()
+                'Next
+
+                '----- ////////////////////////new procedure //////////////////////////////----
+                Dim check_cmd1 As New MySqlCommand
+
+                Dim bmp1 As New System.Drawing.Bitmap(My.Resources.myImages.ada_package)
+                Dim bmp2 As New System.Drawing.Bitmap(My.Resources.abom)
+
+                check_cmd1.Parameters.Clear()
+                check_cmd1.Parameters.AddWithValue("@job", job_list.Item(i))
+                check_cmd1.CommandText = "select mr_name, Date_Created, created_by, last_modified , release_date, released_by, job, BOM_type from (select * from Material_Request.mr where BOM_type = 'old_BOM' or BOM_type = 'MB' or BOM_type = 'ASM') as d where job = @job order by release_date desc limit 1"
+
+                check_cmd1.Connection = Login.Connection
+                check_cmd1.ExecuteNonQuery()
+
+                Dim reader1 As MySqlDataReader
+                reader1 = check_cmd1.ExecuteReader
+
+                If reader1.HasRows Then
+
+                    While reader1.Read
+                        open_grid.Rows.Add(New String() {})
+
+                        If String.Equals(reader1(7).ToString, "MB") = True Then
+                            open_grid.Rows(counter_i).Cells(0).Value = bmp1
+                        ElseIf String.Equals(reader1(7).ToString, "ASM") = True Then
+                            open_grid.Rows(counter_i).Cells(0).Value = bmp2
+                        End If
+
+                        open_grid.Rows(counter_i).Cells(1).Value = reader1(0).ToString
+                        open_grid.Rows(counter_i).Cells(2).Value = reader1(1)
+                        open_grid.Rows(counter_i).Cells(3).Value = reader1(2).ToString
+                        open_grid.Rows(counter_i).Cells(4).Value = reader1(3).ToString
+                        open_grid.Rows(counter_i).Cells(5).Value = reader1(4)
+                        open_grid.Rows(counter_i).Cells(6).Value = reader1(5).ToString
+                        open_grid.Rows(counter_i).Cells(7).Value = reader1(6).ToString
+
+                        counter_i = counter_i + 1
                     End While
                 End If
 
-                reader.Close()
-
-                For j = 1 To n_bom
-
-                    Dim check_cmd1 As New MySqlCommand
-
-                    Dim bmp1 As New System.Drawing.Bitmap(My.Resources.myImages.ada_package)
-                    Dim bmp2 As New System.Drawing.Bitmap(My.Resources.abom)
-
-                    check_cmd1.Parameters.Clear()
-                    check_cmd1.Parameters.AddWithValue("@job", job_list.Item(i))
-                    check_cmd1.Parameters.AddWithValue("@id_bom", j)
-                    check_cmd1.CommandText = "select mr_name, Date_Created, created_by, last_modified , release_date, released_by, job, BOM_type from Material_Request.mr where job = @job and id_bom = @id_bom and (BOM_type = 'old_BOM' or BOM_Type = 'MB' or BOM_type = 'ASM') order by release_date desc limit 1"
-
-                    check_cmd1.Connection = Login.Connection
-                    check_cmd1.ExecuteNonQuery()
-
-                    Dim reader1 As MySqlDataReader
-                    reader1 = check_cmd1.ExecuteReader
-
-                    If reader1.HasRows Then
-
-                        While reader1.Read
-                            open_grid.Rows.Add(New String() {})
-
-                            If String.Equals(reader1(7).ToString, "MB") = True Then
-                                open_grid.Rows(counter_i).Cells(0).Value = bmp1
-                            ElseIf String.Equals(reader1(7).ToString, "ASM") = True Then
-                                open_grid.Rows(counter_i).Cells(0).Value = bmp2
-                            End If
-                            open_grid.Rows(counter_i).Cells(1).Value = reader1(0).ToString
-                            open_grid.Rows(counter_i).Cells(2).Value = reader1(1)
-                            open_grid.Rows(counter_i).Cells(3).Value = reader1(2).ToString
-                            open_grid.Rows(counter_i).Cells(4).Value = reader1(3).ToString
-                            open_grid.Rows(counter_i).Cells(5).Value = reader1(4)
-                            open_grid.Rows(counter_i).Cells(6).Value = reader1(5).ToString
-                            open_grid.Rows(counter_i).Cells(7).Value = reader1(6).ToString
-
-                            counter_i = counter_i + 1
-                        End While
-                    End If
-
-                    reader1.Close()
-                Next
+                reader1.Close()
+                '/////////////////////////////////////////////////////////////////////////////
             Next
 
 
             counter_i = 0
 
             Cursor.Current = Cursors.Default
+            wait_la.Visible = False
 
         Catch ex As Exception
             MessageBox.Show(ex.ToString)
@@ -528,7 +573,9 @@ Public Class BOM_init
                             End Try
 
                             For i = 0 To My_Material_r.PR_grid.Rows.Count - 1
+
                                 My_Material_r.PR_grid.Rows(i).ReadOnly = True
+
                             Next
 
                             My_Material_r.isitreleased = True

@@ -514,7 +514,7 @@ Public Class Build_mfg
             readerc.Close()
 
 
-
+            Call detect_empty()
 
         Catch ex As Exception
             MessageBox.Show(ex.ToString)
@@ -756,6 +756,11 @@ Public Class Build_mfg
                         Create_cmd.ExecuteNonQuery()
 
                     End If
+
+
+                    '---------- panel done check -------------
+
+
                 Next
 
                 '////////////////   send APL notification to procurement and inventory and mfg
@@ -866,5 +871,13 @@ Public Class Build_mfg
 
     Private Sub Label4_MouseLeave(sender As Object, e As EventArgs) Handles Label4.MouseLeave
         Label4.ForeColor = Color.DarkTurquoise
+    End Sub
+
+    Sub detect_empty()
+        For i = 0 To PR_grid.Rows.Count - 1
+            If String.Equals(PR_grid.Rows(i).Cells(2).Value, "0") = True Or String.IsNullOrEmpty(PR_grid.Rows(i).Cells(2).Value) = True Then
+                PR_grid.Rows(i).DefaultCellStyle.BackColor = Color.Firebrick
+            End If
+        Next
     End Sub
 End Class

@@ -31,14 +31,6 @@ Partial Class Project_Tracking
         Me.TabPage1 = New System.Windows.Forms.TabPage()
         Me.Panel3 = New System.Windows.Forms.Panel()
         Me.TabPage2 = New System.Windows.Forms.TabPage()
-        Me.Panel2 = New System.Windows.Forms.Panel()
-        Me.Label7 = New System.Windows.Forms.Label()
-        Me.Label2 = New System.Windows.Forms.Label()
-        Me.Label3 = New System.Windows.Forms.Label()
-        Me.Label4 = New System.Windows.Forms.Label()
-        Me.Label5 = New System.Windows.Forms.Label()
-        Me.Label6 = New System.Windows.Forms.Label()
-        Me.Label8 = New System.Windows.Forms.Label()
         Me.TabPage3 = New System.Windows.Forms.TabPage()
         Me.TabPage4 = New System.Windows.Forms.TabPage()
         Me.TabPage5 = New System.Windows.Forms.TabPage()
@@ -52,8 +44,16 @@ Partial Class Project_Tracking
         Me.TabPage13 = New System.Windows.Forms.TabPage()
         Me.TabPage14 = New System.Windows.Forms.TabPage()
         Me.TabPage15 = New System.Windows.Forms.TabPage()
-        Me.Label9 = New System.Windows.Forms.Label()
+        Me.Panel2 = New System.Windows.Forms.Panel()
         Me.Label10 = New System.Windows.Forms.Label()
+        Me.Label9 = New System.Windows.Forms.Label()
+        Me.Label8 = New System.Windows.Forms.Label()
+        Me.Label6 = New System.Windows.Forms.Label()
+        Me.Label5 = New System.Windows.Forms.Label()
+        Me.Label4 = New System.Windows.Forms.Label()
+        Me.Label3 = New System.Windows.Forms.Label()
+        Me.Label2 = New System.Windows.Forms.Label()
+        Me.Label7 = New System.Windows.Forms.Label()
         Me.Panel1.SuspendLayout()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
@@ -167,113 +167,6 @@ Partial Class Project_Tracking
         Me.TabPage2.Size = New System.Drawing.Size(1535, 849)
         Me.TabPage2.TabIndex = 1
         Me.TabPage2.Text = "  BOM  "
-        '
-        'Panel2
-        '
-        Me.Panel2.BackColor = System.Drawing.Color.FromArgb(CType(CType(52, Byte), Integer), CType(CType(52, Byte), Integer), CType(CType(52, Byte), Integer))
-        Me.Panel2.Controls.Add(Me.Label10)
-        Me.Panel2.Controls.Add(Me.Label9)
-        Me.Panel2.Controls.Add(Me.Label8)
-        Me.Panel2.Controls.Add(Me.Label6)
-        Me.Panel2.Controls.Add(Me.Label5)
-        Me.Panel2.Controls.Add(Me.Label4)
-        Me.Panel2.Controls.Add(Me.Label3)
-        Me.Panel2.Controls.Add(Me.Label2)
-        Me.Panel2.Controls.Add(Me.Label7)
-        Me.Panel2.Dock = System.Windows.Forms.DockStyle.Left
-        Me.Panel2.Location = New System.Drawing.Point(0, 0)
-        Me.Panel2.Name = "Panel2"
-        Me.Panel2.Size = New System.Drawing.Size(273, 980)
-        Me.Panel2.TabIndex = 1
-        '
-        'Label7
-        '
-        Me.Label7.AutoSize = True
-        Me.Label7.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label7.ForeColor = System.Drawing.Color.WhiteSmoke
-        Me.Label7.Location = New System.Drawing.Point(48, 33)
-        Me.Label7.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.Label7.Name = "Label7"
-        Me.Label7.Size = New System.Drawing.Size(158, 28)
-        Me.Label7.TabIndex = 18
-        Me.Label7.Text = "Project Selected"
-        '
-        'Label2
-        '
-        Me.Label2.AutoSize = True
-        Me.Label2.Font = New System.Drawing.Font("Segoe UI", 13.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label2.ForeColor = System.Drawing.Color.CadetBlue
-        Me.Label2.Location = New System.Drawing.Point(78, 81)
-        Me.Label2.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(99, 32)
-        Me.Label2.TabIndex = 19
-        Me.Label2.Text = "119235"
-        '
-        'Label3
-        '
-        Me.Label3.Anchor = System.Windows.Forms.AnchorStyles.Top
-        Me.Label3.AutoSize = True
-        Me.Label3.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label3.ForeColor = System.Drawing.Color.WhiteSmoke
-        Me.Label3.Location = New System.Drawing.Point(24, 203)
-        Me.Label3.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(217, 28)
-        Me.Label3.TabIndex = 20
-        Me.Label3.Text = "Internal Dependencies"
-        '
-        'Label4
-        '
-        Me.Label4.Anchor = System.Windows.Forms.AnchorStyles.Top
-        Me.Label4.AutoSize = True
-        Me.Label4.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label4.ForeColor = System.Drawing.Color.WhiteSmoke
-        Me.Label4.Location = New System.Drawing.Point(13, 275)
-        Me.Label4.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(235, 28)
-        Me.Label4.TabIndex = 21
-        Me.Label4.Text = "Customer Dependencies"
-        '
-        'Label5
-        '
-        Me.Label5.Anchor = System.Windows.Forms.AnchorStyles.Top
-        Me.Label5.AutoSize = True
-        Me.Label5.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label5.ForeColor = System.Drawing.Color.WhiteSmoke
-        Me.Label5.Location = New System.Drawing.Point(90, 512)
-        Me.Label5.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(66, 28)
-        Me.Label5.TabIndex = 22
-        Me.Label5.Text = "Notes"
-        '
-        'Label6
-        '
-        Me.Label6.Anchor = System.Windows.Forms.AnchorStyles.Top
-        Me.Label6.AutoSize = True
-        Me.Label6.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label6.ForeColor = System.Drawing.Color.WhiteSmoke
-        Me.Label6.Location = New System.Drawing.Point(66, 356)
-        Me.Label6.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.Label6.Name = "Label6"
-        Me.Label6.Size = New System.Drawing.Size(111, 28)
-        Me.Label6.TabIndex = 23
-        Me.Label6.Text = "Milestones"
-        '
-        'Label8
-        '
-        Me.Label8.Anchor = System.Windows.Forms.AnchorStyles.Top
-        Me.Label8.AutoSize = True
-        Me.Label8.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label8.ForeColor = System.Drawing.Color.WhiteSmoke
-        Me.Label8.Location = New System.Drawing.Point(66, 430)
-        Me.Label8.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.Label8.Name = "Label8"
-        Me.Label8.Size = New System.Drawing.Size(120, 28)
-        Me.Label8.TabIndex = 24
-        Me.Label8.Text = "PO Tracking"
         '
         'TabPage3
         '
@@ -392,18 +285,23 @@ Partial Class Project_Tracking
         Me.TabPage15.Text = "  Installation  "
         Me.TabPage15.UseVisualStyleBackColor = True
         '
-        'Label9
+        'Panel2
         '
-        Me.Label9.Anchor = System.Windows.Forms.AnchorStyles.Top
-        Me.Label9.AutoSize = True
-        Me.Label9.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label9.ForeColor = System.Drawing.Color.WhiteSmoke
-        Me.Label9.Location = New System.Drawing.Point(66, 576)
-        Me.Label9.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.Label9.Name = "Label9"
-        Me.Label9.Size = New System.Drawing.Size(132, 28)
-        Me.Label9.TabIndex = 25
-        Me.Label9.Text = "Project Dates"
+        Me.Panel2.BackColor = System.Drawing.Color.FromArgb(CType(CType(52, Byte), Integer), CType(CType(52, Byte), Integer), CType(CType(52, Byte), Integer))
+        Me.Panel2.Controls.Add(Me.Label10)
+        Me.Panel2.Controls.Add(Me.Label9)
+        Me.Panel2.Controls.Add(Me.Label8)
+        Me.Panel2.Controls.Add(Me.Label6)
+        Me.Panel2.Controls.Add(Me.Label5)
+        Me.Panel2.Controls.Add(Me.Label4)
+        Me.Panel2.Controls.Add(Me.Label3)
+        Me.Panel2.Controls.Add(Me.Label2)
+        Me.Panel2.Controls.Add(Me.Label7)
+        Me.Panel2.Dock = System.Windows.Forms.DockStyle.Left
+        Me.Panel2.Location = New System.Drawing.Point(0, 0)
+        Me.Panel2.Name = "Panel2"
+        Me.Panel2.Size = New System.Drawing.Size(273, 980)
+        Me.Panel2.TabIndex = 1
         '
         'Label10
         '
@@ -417,6 +315,108 @@ Partial Class Project_Tracking
         Me.Label10.Size = New System.Drawing.Size(118, 28)
         Me.Label10.TabIndex = 26
         Me.Label10.Text = "Project Info"
+        '
+        'Label9
+        '
+        Me.Label9.Anchor = System.Windows.Forms.AnchorStyles.Top
+        Me.Label9.AutoSize = True
+        Me.Label9.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label9.ForeColor = System.Drawing.Color.WhiteSmoke
+        Me.Label9.Location = New System.Drawing.Point(66, 576)
+        Me.Label9.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.Label9.Name = "Label9"
+        Me.Label9.Size = New System.Drawing.Size(132, 28)
+        Me.Label9.TabIndex = 25
+        Me.Label9.Text = "Project Dates"
+        '
+        'Label8
+        '
+        Me.Label8.Anchor = System.Windows.Forms.AnchorStyles.Top
+        Me.Label8.AutoSize = True
+        Me.Label8.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label8.ForeColor = System.Drawing.Color.WhiteSmoke
+        Me.Label8.Location = New System.Drawing.Point(66, 430)
+        Me.Label8.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.Label8.Name = "Label8"
+        Me.Label8.Size = New System.Drawing.Size(120, 28)
+        Me.Label8.TabIndex = 24
+        Me.Label8.Text = "PO Tracking"
+        '
+        'Label6
+        '
+        Me.Label6.Anchor = System.Windows.Forms.AnchorStyles.Top
+        Me.Label6.AutoSize = True
+        Me.Label6.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label6.ForeColor = System.Drawing.Color.WhiteSmoke
+        Me.Label6.Location = New System.Drawing.Point(66, 356)
+        Me.Label6.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.Label6.Name = "Label6"
+        Me.Label6.Size = New System.Drawing.Size(111, 28)
+        Me.Label6.TabIndex = 23
+        Me.Label6.Text = "Milestones"
+        '
+        'Label5
+        '
+        Me.Label5.Anchor = System.Windows.Forms.AnchorStyles.Top
+        Me.Label5.AutoSize = True
+        Me.Label5.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label5.ForeColor = System.Drawing.Color.WhiteSmoke
+        Me.Label5.Location = New System.Drawing.Point(90, 512)
+        Me.Label5.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.Label5.Name = "Label5"
+        Me.Label5.Size = New System.Drawing.Size(66, 28)
+        Me.Label5.TabIndex = 22
+        Me.Label5.Text = "Notes"
+        '
+        'Label4
+        '
+        Me.Label4.Anchor = System.Windows.Forms.AnchorStyles.Top
+        Me.Label4.AutoSize = True
+        Me.Label4.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label4.ForeColor = System.Drawing.Color.WhiteSmoke
+        Me.Label4.Location = New System.Drawing.Point(13, 275)
+        Me.Label4.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.Label4.Name = "Label4"
+        Me.Label4.Size = New System.Drawing.Size(235, 28)
+        Me.Label4.TabIndex = 21
+        Me.Label4.Text = "Customer Dependencies"
+        '
+        'Label3
+        '
+        Me.Label3.Anchor = System.Windows.Forms.AnchorStyles.Top
+        Me.Label3.AutoSize = True
+        Me.Label3.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label3.ForeColor = System.Drawing.Color.WhiteSmoke
+        Me.Label3.Location = New System.Drawing.Point(24, 203)
+        Me.Label3.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.Label3.Name = "Label3"
+        Me.Label3.Size = New System.Drawing.Size(217, 28)
+        Me.Label3.TabIndex = 20
+        Me.Label3.Text = "Internal Dependencies"
+        '
+        'Label2
+        '
+        Me.Label2.AutoSize = True
+        Me.Label2.Font = New System.Drawing.Font("Segoe UI", 13.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label2.ForeColor = System.Drawing.Color.CadetBlue
+        Me.Label2.Location = New System.Drawing.Point(78, 81)
+        Me.Label2.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.Label2.Name = "Label2"
+        Me.Label2.Size = New System.Drawing.Size(99, 32)
+        Me.Label2.TabIndex = 19
+        Me.Label2.Text = "119235"
+        '
+        'Label7
+        '
+        Me.Label7.AutoSize = True
+        Me.Label7.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label7.ForeColor = System.Drawing.Color.WhiteSmoke
+        Me.Label7.Location = New System.Drawing.Point(48, 33)
+        Me.Label7.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.Label7.Name = "Label7"
+        Me.Label7.Size = New System.Drawing.Size(158, 28)
+        Me.Label7.TabIndex = 18
+        Me.Label7.Text = "Project Selected"
         '
         'Project_Tracking
         '

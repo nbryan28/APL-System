@@ -15,6 +15,7 @@ Public Class My_Material_r
     Public rev_mode As Boolean
 
     Public real_mr As String
+    Public edit_date As Boolean
 
 
 
@@ -335,7 +336,8 @@ Public Class My_Material_r
     End Sub
 
     Private Sub My_Material_r_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        'hi
+
+        edit_date = False
         ComboBox3.Text = "All BOMs"
         real_mr = ""
 
@@ -456,269 +458,274 @@ Public Class My_Material_r
 
     Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
 
-        Cursor.Current = Cursors.WaitCursor
+        Dim result As DialogResult = MessageBox.Show("Are you sure, you want to Release this Revision? It is recommended to open Revisions Control window to check if there is another revision in progress you want to release", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation) 'confirmation message
 
-        'Create revision of released mr
-        Inventory_manage.part_sel = ""
-        Dim name_rev As String = "_rev"
-        Dim i As Integer : i = 0 'counter
-
-        Dim shipping As String : shipping = ""
-        Dim Date_Created As Date
-        Dim created_by As String : created_by = "unknown"
-        Dim id_bom As String : id_bom = ""
-
-        Dim need_date As String : need_date = ""
-        Dim Panel_name As String : Panel_name = ""
-        Dim Panel_qty As String : Panel_qty = 0
-        Dim Panel_desc As String : Panel_desc = ""
-        Dim BOM_type As String : BOM_type = ""
-        Dim MBOM As String : MBOM = ""
+        If (result = DialogResult.Yes) Then
 
 
-        Try
+            Cursor.Current = Cursors.WaitCursor
 
-            '---- get id_bom
+            'Create revision of released mr
+            Inventory_manage.part_sel = ""
+            Dim name_rev As String = "_rev"
+            Dim i As Integer : i = 0 'counter
 
-            Dim id_bom_r As String : id_bom_r = ""
-            Dim cmd411 As New MySqlCommand
-            cmd411.Parameters.AddWithValue("@mr_name", Me.Text)
-            cmd411.CommandText = "SELECT id_bom, job from Material_Request.mr where mr_name = @mr_name"
-            cmd411.Connection = Login.Connection
-            Dim reader411 As MySqlDataReader
-            reader411 = cmd411.ExecuteReader
+            Dim shipping As String : shipping = ""
+            Dim Date_Created As Date
+            Dim created_by As String : created_by = "unknown"
+            Dim id_bom As String : id_bom = ""
 
-            If reader411.HasRows Then
-                While reader411.Read
-                    id_bom_r = reader411(0).ToString
-                End While
-            End If
-
-            reader411.Close()
-
+            Dim need_date As String : need_date = ""
+            Dim Panel_name As String : Panel_name = ""
+            Dim Panel_qty As String : Panel_qty = 0
+            Dim Panel_desc As String : Panel_desc = ""
+            Dim BOM_type As String : BOM_type = ""
+            Dim MBOM As String : MBOM = ""
 
 
-            Dim cmd4 As New MySqlCommand
-            cmd4.Parameters.AddWithValue("@job", open_job)
-            cmd4.Parameters.AddWithValue("@id_bom", id_bom_r)
-            cmd4.CommandText = "Select shipping_ad, Date_Created, created_by, id_bom, need_date, Panel_name, Panel_qty, Panel_desc, BOM_type, MBOM  from Material_Request.mr where released = 'Y' and job = @job and id_bom = @id_bom order by release_date"
-            cmd4.Connection = Login.Connection
-            Dim reader4 As MySqlDataReader
-            reader4 = cmd4.ExecuteReader
+            Try
 
-            If reader4.HasRows Then
-                While reader4.Read
-                    shipping = If(reader4(0) Is Nothing, "", reader4(0).ToString)
-                    Date_Created = CType(reader4(1), Date)
-                    created_by = If(reader4(2) Is Nothing, "unknown", reader4(2).ToString)
-                    id_bom = If(reader4(3) Is Nothing, "", reader4(3).ToString)
+                '---- get id_bom
 
-                    need_date = If(reader4(4) Is Nothing, "", reader4(4).ToString)
-                    Panel_name = If(reader4(5) Is Nothing, "", reader4(5).ToString)
-                    Panel_qty = If(IsNumeric(reader4(6)) = False, 0, reader4(6).ToString)
-                    Panel_desc = If(reader4(7) Is Nothing, "", reader4(7).ToString)
-                    BOM_type = If(reader4(8) Is Nothing, "", reader4(8).ToString)
-                    MBOM = If(reader4(9) Is Nothing, "", reader4(9).ToString)
+                Dim id_bom_r As String : id_bom_r = ""
+                Dim cmd411 As New MySqlCommand
+                cmd411.Parameters.AddWithValue("@mr_name", Me.Text)
+                cmd411.CommandText = "SELECT id_bom, job from Material_Request.mr where mr_name = @mr_name"
+                cmd411.Connection = Login.Connection
+                Dim reader411 As MySqlDataReader
+                reader411 = cmd411.ExecuteReader
 
-                    i = i + 1
-                End While
-            End If
-
-            reader4.Close()
-
-            name_rev = name_rev & i  'last part of name of file ex: filename_revx
-            Dim indexof_s = Me.Text.IndexOf("_rev")
-
-            If indexof_s < 0 Then
-                indexof_s = Me.Text.Count
-            End If
-
-            '---------- put fulfilled_qty in revision mr -------
-
-            Dim dimen_table = New DataTable
-            dimen_table.Columns.Add("Part_No", GetType(String))
-            dimen_table.Columns.Add("qty_fulfilled", GetType(String))
-
-            Dim cmd41 As New MySqlCommand
-            cmd41.Parameters.AddWithValue("@mr_name", Me.Text)
-            cmd41.CommandText = "Select Part_No, qty_fullfilled from Material_Request.mr_data where mr_name = @mr_name"
-            cmd41.Connection = Login.Connection
-            Dim reader41 As MySqlDataReader
-            reader41 = cmd41.ExecuteReader
-
-            If reader41.HasRows Then
-                While reader41.Read
-                    dimen_table.Rows.Add(reader41(0).ToString, If(reader41(1) Is DBNull.Value, 0, reader41(1)))
-                End While
-            End If
-
-            reader41.Close()
-
-
-            '/////// start inserting revision to table /////////////
-
-            Dim main_cmd As New MySqlCommand
-            main_cmd.Parameters.AddWithValue("@mr_name", Me.Text.Remove(indexof_s, Me.Text.Count - indexof_s) & name_rev)
-            main_cmd.Parameters.AddWithValue("@released_by", current_user)
-            main_cmd.Parameters.AddWithValue("@job", open_job)
-            main_cmd.Parameters.AddWithValue("@shipping", shipping)
-            main_cmd.Parameters.AddWithValue("@Date_Created", Date_Created)
-            main_cmd.Parameters.AddWithValue("@created_by", created_by)
-            main_cmd.Parameters.AddWithValue("@id_bom", id_bom)
-
-            main_cmd.Parameters.AddWithValue("@need_date", need_date)
-            main_cmd.Parameters.AddWithValue("@Panel_name", Panel_name)
-            main_cmd.Parameters.AddWithValue("@Panel_qty", Panel_qty)
-            main_cmd.Parameters.AddWithValue("@Panel_desc", Panel_desc)
-            main_cmd.Parameters.AddWithValue("@BOM_type", BOM_type)
-            main_cmd.Parameters.AddWithValue("@MBOM", MBOM)
-
-
-            main_cmd.CommandText = "INSERT INTO Material_Request.mr(mr_name, released, released_by, release_date, job, shipping_ad, Date_Created, created_by, id_bom, need_date, Panel_name, Panel_qty, Panel_desc, BOM_Type, MBOM) VALUES (@mr_name,'Y', @released_by, now(), @job, @shipping, @Date_Created, @created_by, @id_bom, @need_date, @Panel_name, @Panel_qty, @Panel_desc, @BOM_Type, @MBOM)"
-            main_cmd.Connection = Login.Connection
-            main_cmd.ExecuteNonQuery()
-
-
-
-            '-------- enter data to mr_data
-            For i = 0 To rev_grid.Rows.Count - 1
-
-                If IsNumeric(rev_grid.Rows(i).Cells(8).Value) = True Then
-
-                    Dim Create_cmd6 As New MySqlCommand
-                    Create_cmd6.Parameters.Clear()
-                    Create_cmd6.Parameters.AddWithValue("@mr_name", Me.Text.Remove(indexof_s, Me.Text.Count - indexof_s) & name_rev)
-                    Create_cmd6.Parameters.AddWithValue("@Part_No", If(rev_grid.Rows(i).Cells(0).Value Is Nothing, "", rev_grid.Rows(i).Cells(0).Value.ToString))
-                    Create_cmd6.Parameters.AddWithValue("@Description", If(rev_grid.Rows(i).Cells(1).Value Is Nothing, "", rev_grid.Rows(i).Cells(1).Value.ToString))
-                    Create_cmd6.Parameters.AddWithValue("@ADA_Number", If(rev_grid.Rows(i).Cells(2).Value Is Nothing, "", rev_grid.Rows(i).Cells(2).Value.ToString))
-                    Create_cmd6.Parameters.AddWithValue("@Manufacturer", If(rev_grid.Rows(i).Cells(3).Value Is Nothing, "", rev_grid.Rows(i).Cells(3).Value.ToString))
-                    Create_cmd6.Parameters.AddWithValue("@Vendor", If(rev_grid.Rows(i).Cells(4).Value Is Nothing, "", rev_grid.Rows(i).Cells(4).Value.ToString))
-                    Create_cmd6.Parameters.AddWithValue("@Price", If(rev_grid.Rows(i).Cells(5).Value Is Nothing, "", rev_grid.Rows(i).Cells(5).Value.ToString.Replace("$", "")))
-                    Create_cmd6.Parameters.AddWithValue("@Qty", If(rev_grid.Rows(i).Cells(8).Value Is Nothing, "", rev_grid.Rows(i).Cells(8).Value.ToString))
-                    Create_cmd6.Parameters.AddWithValue("@subtotal", If(IsNumeric(rev_grid.Rows(i).Cells(5).Value) = True, CType(rev_grid.Rows(i).Cells(5).Value, Double), 0) * If(IsNumeric(rev_grid.Rows(i).Cells(8).Value) = True, CType(rev_grid.Rows(i).Cells(8).Value, Double), 0))
-                    Create_cmd6.Parameters.AddWithValue("@mfg_type", If(rev_grid.Rows(i).Cells(6).Value Is Nothing, "", rev_grid.Rows(i).Cells(6).Value.ToString))
-                    Create_cmd6.Parameters.AddWithValue("@Assembly_name", If(rev_grid.Rows(i).Cells(10).Value Is Nothing, "", rev_grid.Rows(i).Cells(10).Value.ToString))
-                    Create_cmd6.Parameters.AddWithValue("@Notes", If(rev_grid.Rows(i).Cells(11).Value Is Nothing, "", rev_grid.Rows(i).Cells(11).Value.ToString))
-                    Create_cmd6.Parameters.AddWithValue("@Part_status", If(rev_grid.Rows(i).Cells(12).Value Is Nothing, "", rev_grid.Rows(i).Cells(12).Value.ToString))
-                    Create_cmd6.Parameters.AddWithValue("@Part_type", If(rev_grid.Rows(i).Cells(13).Value Is Nothing, "", rev_grid.Rows(i).Cells(13).Value.ToString))
-                    Create_cmd6.Parameters.AddWithValue("@full_panel", If(rev_grid.Rows(i).Cells(14).Value Is Nothing, "", rev_grid.Rows(i).Cells(14).Value.ToString))
-                    Create_cmd6.Parameters.AddWithValue("@need_by_date", If(rev_grid.Rows(i).Cells(15).Value Is Nothing, "", rev_grid.Rows(i).Cells(15).Value.ToString))
-
-                    For j = 0 To dimen_table.Rows.Count - 1
-                        If String.Equals(dimen_table.Rows(j).Item(0), rev_grid.Rows(i).Cells(0).Value) = True Then
-                            Create_cmd6.Parameters.AddWithValue("@qty_fulfilled", dimen_table.Rows(j).Item(1))
-                            Exit For
-                        End If
-                    Next
-
-                    If String.Equals(BOM_type, "old_BOM") = True Then
-                        Create_cmd6.CommandText = "INSERT INTO Material_Request.mr_data(mr_name, Part_No, Description,ADA_Number, Manufacturer, Vendor,  Price, Qty, subtotal, mfg_type, qty_fullfilled, Assembly_name, Notes, Part_status, Part_Type, full_panel, need_by_date, released, latest_r ) VALUES (@mr_name, @Part_No, @Description, @ADA_Number, @Manufacturer, @Vendor, @Price, @Qty, @subtotal, @mfg_type, @qty_fulfilled, @Assembly_name, @Notes, @Part_status, @Part_Type, @full_panel, @need_by_date, 'Y', 'x' )"
-                        Call clean_old(open_job, Me.Text.Remove(indexof_s, Me.Text.Count - indexof_s) & name_rev)
-                    Else
-                        Create_cmd6.CommandText = "INSERT INTO Material_Request.mr_data(mr_name, Part_No, Description,ADA_Number, Manufacturer, Vendor,  Price, Qty, subtotal, mfg_type, qty_fullfilled, Assembly_name, Notes, Part_status, Part_Type, full_panel, need_by_date, released ) VALUES (@mr_name, @Part_No, @Description, @ADA_Number, @Manufacturer, @Vendor, @Price, @Qty, @subtotal, @mfg_type, @qty_fulfilled, @Assembly_name, @Notes, @Part_status, @Part_Type, @full_panel, @need_by_date, 'Y' )"
-                    End If
-
-                    '   Create_cmd6.CommandText = "INSERT INTO Material_Request.mr_data(mr_name, Part_No, Description,ADA_Number, Manufacturer, Vendor,  Price, Qty, subtotal, mfg_type, qty_fullfilled, Assembly_name, Notes, Part_status, Part_Type, full_panel, need_by_date, released ) VALUES (@mr_name, @Part_No, @Description, @ADA_Number, @Manufacturer, @Vendor, @Price, @Qty, @subtotal, @mfg_type, @qty_fulfilled, @Assembly_name, @Notes, @Part_status, @Part_Type, @full_panel, @need_by_date, 'Y' )"
-                    Create_cmd6.Connection = Login.Connection
-                    Create_cmd6.ExecuteNonQuery()
+                If reader411.HasRows Then
+                    While reader411.Read
+                        id_bom_r = reader411(0).ToString
+                    End While
                 End If
 
-            Next
-
-            ' If String.Equals(BOM_type, "Panel") = True Or String.Equals(BOM_type, "Assembly") = True Then
-            Call BOM_types.Create_build_request(open_job)    '-- create build_request revision
-            Call BOM_types.Create_MPL(open_job)   '--- create MPL
-            '  End If
+                reader411.Close()
 
 
-            If isit_member_of_BOM_p(Me.Text) = True Then
-                Call Merge_and_release_MB(Me.Text)
-            End If
+
+                Dim cmd4 As New MySqlCommand
+                cmd4.Parameters.AddWithValue("@job", open_job)
+                cmd4.Parameters.AddWithValue("@id_bom", id_bom_r)
+                cmd4.CommandText = "Select shipping_ad, Date_Created, created_by, id_bom, need_date, Panel_name, Panel_qty, Panel_desc, BOM_type, MBOM  from Material_Request.mr where released = 'Y' and job = @job and id_bom = @id_bom order by release_date"
+                cmd4.Connection = Login.Connection
+                Dim reader4 As MySqlDataReader
+                reader4 = cmd4.ExecuteReader
+
+                If reader4.HasRows Then
+                    While reader4.Read
+                        shipping = If(reader4(0) Is Nothing, "", reader4(0).ToString)
+                        Date_Created = CType(reader4(1), Date)
+                        created_by = If(reader4(2) Is Nothing, "unknown", reader4(2).ToString)
+                        id_bom = If(reader4(3) Is Nothing, "", reader4(3).ToString)
+
+                        need_date = If(reader4(4) Is Nothing, "", reader4(4).ToString)
+                        Panel_name = If(reader4(5) Is Nothing, "", reader4(5).ToString)
+                        Panel_qty = If(IsNumeric(reader4(6)) = False, 0, reader4(6).ToString)
+                        Panel_desc = If(reader4(7) Is Nothing, "", reader4(7).ToString)
+                        BOM_type = If(reader4(8) Is Nothing, "", reader4(8).ToString)
+                        MBOM = If(reader4(9) Is Nothing, "", reader4(9).ToString)
+
+                        i = i + 1
+                    End While
+                End If
+
+                reader4.Close()
+
+                name_rev = name_rev & i  'last part of name of file ex: filename_revx
+                Dim indexof_s = Me.Text.IndexOf("_rev")
+
+                If indexof_s < 0 Then
+                    indexof_s = Me.Text.Count
+                End If
+
+                '---------- put fulfilled_qty in revision mr -------
+
+                Dim dimen_table = New DataTable
+                dimen_table.Columns.Add("Part_No", GetType(String))
+                dimen_table.Columns.Add("qty_fulfilled", GetType(String))
+
+                Dim cmd41 As New MySqlCommand
+                cmd41.Parameters.AddWithValue("@mr_name", Me.Text)
+                cmd41.CommandText = "Select Part_No, qty_fullfilled from Material_Request.mr_data where mr_name = @mr_name"
+                cmd41.Connection = Login.Connection
+                Dim reader41 As MySqlDataReader
+                reader41 = cmd41.ExecuteReader
+
+                If reader41.HasRows Then
+                    While reader41.Read
+                        dimen_table.Rows.Add(reader41(0).ToString, If(reader41(1) Is DBNull.Value, 0, reader41(1)))
+                    End While
+                End If
+
+                reader41.Close()
 
 
-            '////////////////////// ---------------------  notify -----------------------
-            If enable_mess = True Then
+                '/////// start inserting revision to table /////////////
 
-                Dim mail_n As String : mail_n = "Material Request Revision for Project " & job_label.Text & "  has been released" & vbCrLf & vbCrLf _
+                Dim main_cmd As New MySqlCommand
+                main_cmd.Parameters.AddWithValue("@mr_name", Me.Text.Remove(indexof_s, Me.Text.Count - indexof_s) & name_rev)
+                main_cmd.Parameters.AddWithValue("@released_by", current_user)
+                main_cmd.Parameters.AddWithValue("@job", open_job)
+                main_cmd.Parameters.AddWithValue("@shipping", shipping)
+                main_cmd.Parameters.AddWithValue("@Date_Created", Date_Created)
+                main_cmd.Parameters.AddWithValue("@created_by", created_by)
+                main_cmd.Parameters.AddWithValue("@id_bom", id_bom)
+
+                main_cmd.Parameters.AddWithValue("@need_date", need_date)
+                main_cmd.Parameters.AddWithValue("@Panel_name", Panel_name)
+                main_cmd.Parameters.AddWithValue("@Panel_qty", Panel_qty)
+                main_cmd.Parameters.AddWithValue("@Panel_desc", Panel_desc)
+                main_cmd.Parameters.AddWithValue("@BOM_type", BOM_type)
+                main_cmd.Parameters.AddWithValue("@MBOM", MBOM)
+
+
+                main_cmd.CommandText = "INSERT INTO Material_Request.mr(mr_name, released, released_by, release_date, job, shipping_ad, Date_Created, created_by, id_bom, need_date, Panel_name, Panel_qty, Panel_desc, BOM_Type, MBOM) VALUES (@mr_name,'Y', @released_by, now(), @job, @shipping, @Date_Created, @created_by, @id_bom, @need_date, @Panel_name, @Panel_qty, @Panel_desc, @BOM_Type, @MBOM)"
+                main_cmd.Connection = Login.Connection
+                main_cmd.ExecuteNonQuery()
+
+
+
+                '-------- enter data to mr_data
+                For i = 0 To rev_grid.Rows.Count - 1
+
+                    If IsNumeric(rev_grid.Rows(i).Cells(8).Value) = True Then
+
+                        Dim Create_cmd6 As New MySqlCommand
+                        Create_cmd6.Parameters.Clear()
+                        Create_cmd6.Parameters.AddWithValue("@mr_name", Me.Text.Remove(indexof_s, Me.Text.Count - indexof_s) & name_rev)
+                        Create_cmd6.Parameters.AddWithValue("@Part_No", If(rev_grid.Rows(i).Cells(0).Value Is Nothing, "", rev_grid.Rows(i).Cells(0).Value.ToString))
+                        Create_cmd6.Parameters.AddWithValue("@Description", If(rev_grid.Rows(i).Cells(1).Value Is Nothing, "", rev_grid.Rows(i).Cells(1).Value.ToString))
+                        Create_cmd6.Parameters.AddWithValue("@ADA_Number", If(rev_grid.Rows(i).Cells(2).Value Is Nothing, "", rev_grid.Rows(i).Cells(2).Value.ToString))
+                        Create_cmd6.Parameters.AddWithValue("@Manufacturer", If(rev_grid.Rows(i).Cells(3).Value Is Nothing, "", rev_grid.Rows(i).Cells(3).Value.ToString))
+                        Create_cmd6.Parameters.AddWithValue("@Vendor", If(rev_grid.Rows(i).Cells(4).Value Is Nothing, "", rev_grid.Rows(i).Cells(4).Value.ToString))
+                        Create_cmd6.Parameters.AddWithValue("@Price", If(rev_grid.Rows(i).Cells(5).Value Is Nothing, "", rev_grid.Rows(i).Cells(5).Value.ToString.Replace("$", "")))
+                        Create_cmd6.Parameters.AddWithValue("@Qty", If(rev_grid.Rows(i).Cells(8).Value Is Nothing, "", rev_grid.Rows(i).Cells(8).Value.ToString))
+                        Create_cmd6.Parameters.AddWithValue("@subtotal", If(IsNumeric(rev_grid.Rows(i).Cells(5).Value) = True, CType(rev_grid.Rows(i).Cells(5).Value, Double), 0) * If(IsNumeric(rev_grid.Rows(i).Cells(8).Value) = True, CType(rev_grid.Rows(i).Cells(8).Value, Double), 0))
+                        Create_cmd6.Parameters.AddWithValue("@mfg_type", If(rev_grid.Rows(i).Cells(6).Value Is Nothing, "", rev_grid.Rows(i).Cells(6).Value.ToString))
+                        Create_cmd6.Parameters.AddWithValue("@Assembly_name", If(rev_grid.Rows(i).Cells(10).Value Is Nothing, "", rev_grid.Rows(i).Cells(10).Value.ToString))
+                        Create_cmd6.Parameters.AddWithValue("@Notes", If(rev_grid.Rows(i).Cells(11).Value Is Nothing, "", rev_grid.Rows(i).Cells(11).Value.ToString))
+                        Create_cmd6.Parameters.AddWithValue("@Part_status", If(rev_grid.Rows(i).Cells(12).Value Is Nothing, "", rev_grid.Rows(i).Cells(12).Value.ToString))
+                        Create_cmd6.Parameters.AddWithValue("@Part_type", If(rev_grid.Rows(i).Cells(13).Value Is Nothing, "", rev_grid.Rows(i).Cells(13).Value.ToString))
+                        Create_cmd6.Parameters.AddWithValue("@full_panel", If(rev_grid.Rows(i).Cells(14).Value Is Nothing, "", rev_grid.Rows(i).Cells(14).Value.ToString))
+                        Create_cmd6.Parameters.AddWithValue("@need_by_date", If(rev_grid.Rows(i).Cells(15).Value Is Nothing, "", rev_grid.Rows(i).Cells(15).Value.ToString))
+
+                        For j = 0 To dimen_table.Rows.Count - 1
+                            If String.Equals(dimen_table.Rows(j).Item(0), rev_grid.Rows(i).Cells(0).Value) = True Then
+                                Create_cmd6.Parameters.AddWithValue("@qty_fulfilled", dimen_table.Rows(j).Item(1))
+                                Exit For
+                            End If
+                        Next
+
+                        If String.Equals(BOM_type, "old_BOM") = True Then
+                            Create_cmd6.CommandText = "INSERT INTO Material_Request.mr_data(mr_name, Part_No, Description,ADA_Number, Manufacturer, Vendor,  Price, Qty, subtotal, mfg_type, qty_fullfilled, Assembly_name, Notes, Part_status, Part_Type, full_panel, need_by_date, released, latest_r ) VALUES (@mr_name, @Part_No, @Description, @ADA_Number, @Manufacturer, @Vendor, @Price, @Qty, @subtotal, @mfg_type, @qty_fulfilled, @Assembly_name, @Notes, @Part_status, @Part_Type, @full_panel, @need_by_date, 'Y', 'x' )"
+                            Call clean_old(open_job, Me.Text.Remove(indexof_s, Me.Text.Count - indexof_s) & name_rev)
+                        Else
+                            Create_cmd6.CommandText = "INSERT INTO Material_Request.mr_data(mr_name, Part_No, Description,ADA_Number, Manufacturer, Vendor,  Price, Qty, subtotal, mfg_type, qty_fullfilled, Assembly_name, Notes, Part_status, Part_Type, full_panel, need_by_date, released ) VALUES (@mr_name, @Part_No, @Description, @ADA_Number, @Manufacturer, @Vendor, @Price, @Qty, @subtotal, @mfg_type, @qty_fulfilled, @Assembly_name, @Notes, @Part_status, @Part_Type, @full_panel, @need_by_date, 'Y' )"
+                        End If
+
+                        '   Create_cmd6.CommandText = "INSERT INTO Material_Request.mr_data(mr_name, Part_No, Description,ADA_Number, Manufacturer, Vendor,  Price, Qty, subtotal, mfg_type, qty_fullfilled, Assembly_name, Notes, Part_status, Part_Type, full_panel, need_by_date, released ) VALUES (@mr_name, @Part_No, @Description, @ADA_Number, @Manufacturer, @Vendor, @Price, @Qty, @subtotal, @mfg_type, @qty_fulfilled, @Assembly_name, @Notes, @Part_status, @Part_Type, @full_panel, @need_by_date, 'Y' )"
+                        Create_cmd6.Connection = Login.Connection
+                        Create_cmd6.ExecuteNonQuery()
+                    End If
+
+                Next
+
+                ' If String.Equals(BOM_type, "Panel") = True Or String.Equals(BOM_type, "Assembly") = True Then
+                Call BOM_types.Create_build_request(open_job)    '-- create build_request revision
+                Call BOM_types.Create_MPL(open_job)   '--- create MPL
+                '  End If
+
+
+                If isit_member_of_BOM_p(Me.Text) = True Then
+                    Call Merge_and_release_MB(Me.Text)
+                End If
+
+
+                '////////////////////// ---------------------  notify -----------------------
+                If enable_mess = True Then
+
+                    Dim mail_n As String : mail_n = "Material Request Revision for Project " & job_label.Text & "  has been released" & vbCrLf & vbCrLf _
              & "Material Request Revised: " & Me.Text.Remove(indexof_s, Me.Text.Count - indexof_s) & name_rev & vbCrLf _
              & "Material Request Revised: " & real_mr & vbCrLf _
              & "Revised by: " & current_user
 
 
 
-                Call Sent_mail.Sent_multiple_emails("Procurement", "Material Request Revision has been Released for Project " & job_label.Text, mail_n)
-                Call Sent_mail.Sent_multiple_emails("Procurement Management", "Material Request Revision has been Released for Project " & job_label.Text, mail_n)
-                Call Sent_mail.Sent_multiple_emails("Inventory", "Material Request Revision has been Released for Project " & job_label.Text, mail_n)
-                Call Sent_mail.Sent_multiple_emails("General Management", "Material Request Revision has been Released for Project " & job_label.Text, mail_n)
+                    Call Sent_mail.Sent_multiple_emails("Procurement", "Material Request Revision has been Released for Project " & job_label.Text, mail_n)
+                    Call Sent_mail.Sent_multiple_emails("Procurement Management", "Material Request Revision has been Released for Project " & job_label.Text, mail_n)
+                    Call Sent_mail.Sent_multiple_emails("Inventory", "Material Request Revision has been Released for Project " & job_label.Text, mail_n)
+                    Call Sent_mail.Sent_multiple_emails("General Management", "Material Request Revision has been Released for Project " & job_label.Text, mail_n)
 
 
-                '--- sent email-------
-                'add email addresses
-                Dim emails_addr As New List(Of String)()
+                    '--- sent email-------
+                    'add email addresses
+                    Dim emails_addr As New List(Of String)()
 
-                'procurement
-                emails_addr.Add("ecoy@atronixengineering.com")
-                emails_addr.Add("fvargas@atronixengineering.com")
-                emails_addr.Add("mmorris@atronixengineering.com")
-                emails_addr.Add("sowens@atronixengineering.com")
+                    'procurement
+                    emails_addr.Add("ecoy@atronixengineering.com")
+                    emails_addr.Add("fvargas@atronixengineering.com")
+                    emails_addr.Add("mmorris@atronixengineering.com")
+                    emails_addr.Add("sowens@atronixengineering.com")
 
-                ''mfg
-                emails_addr.Add("shenley@atronixengineering.com")
-                emails_addr.Add("mowens@atronixengineering.com")
+                    ''mfg
+                    emails_addr.Add("shenley@atronixengineering.com")
+                    emails_addr.Add("mowens@atronixengineering.com")
 
-                ''inventory
-                emails_addr.Add("dnix@atronixengineering.com")
-                emails_addr.Add("dmoore@atronixengineering.com")
-
-
+                    ''inventory
+                    emails_addr.Add("dnix@atronixengineering.com")
+                    emails_addr.Add("dmoore@atronixengineering.com")
 
 
-                '  For i = 0 To emails_addr.Count - 1
-
-                Try
-                    Dim e_mail As New MailMessage()
-                    e_mail = New MailMessage()
-                    e_mail.From = New MailAddress("inventory.atronix.system@gmail.com")
-
-                    For j = 0 To emails_addr.Count - 1
-                        e_mail.To.Add(emails_addr.Item(j))
-                    Next
-
-                    e_mail.Subject = "Material Request Revision for Project " & job_label.Text & "  has been Released"
-                    e_mail.IsBodyHtml = False
-                    e_mail.Body = mail_n & vbCrLf & "APL (Atronix Pricing and Logistics System)  | Warehouse and Distribution" & vbCrLf & "3100 Medlock Bridge Rd  |  Ste 110  |  Peachtree Corners, GA 30071" & vbCrLf & "ATRONIX"
-                    Smtp_Server.Send(e_mail)
-
-                Catch error_t As Exception
-                    MsgBox(error_t.ToString)
-                End Try
-                '   Next
 
 
-                '-------- confirmation message -------------'
-                Call send_confirmation_r(current_user, Me.Text, indexof_s, name_rev)
-                '------------------------------------------
+                    '  For i = 0 To emails_addr.Count - 1
 
-            End If
-            '---------------------
+                    Try
+                        Dim e_mail As New MailMessage()
+                        e_mail = New MailMessage()
+                        e_mail.From = New MailAddress("inventory.atronix.system@gmail.com")
 
-            MessageBox.Show("Revision created succesfully!")
+                        For j = 0 To emails_addr.Count - 1
+                            e_mail.To.Add(emails_addr.Item(j))
+                        Next
 
-            job_label.Text = "Open Project:"
-            PR_grid.Rows.Clear()
-            Me.Text = "My Material Requests"
-            isitreleased = False
-            rev_mode = False
-            Call Inventory_manage.General_inv_cal()   'recalculate inventory values
-            Cursor.Current = Cursors.Default
+                        e_mail.Subject = "Material Request Revision for Project " & job_label.Text & "  has been Released"
+                        e_mail.IsBodyHtml = False
+                        e_mail.Body = mail_n & vbCrLf & "APL (Atronix Pricing and Logistics System)  | Warehouse and Distribution" & vbCrLf & "3100 Medlock Bridge Rd  |  Ste 110  |  Peachtree Corners, GA 30071" & vbCrLf & "ATRONIX"
+                        Smtp_Server.Send(e_mail)
 
-        Catch ex As Exception
-            MessageBox.Show(ex.ToString)
-        End Try
-
-        TabControl1.TabPages.Remove(TabPage2)
+                    Catch error_t As Exception
+                        MsgBox(error_t.ToString)
+                    End Try
+                    '   Next
 
 
+                    '-------- confirmation message -------------'
+                    Call send_confirmation_r(current_user, Me.Text, indexof_s, name_rev)
+                    '------------------------------------------
+
+                End If
+                '---------------------
+
+                MessageBox.Show("Revision created succesfully!")
+
+                job_label.Text = "Open Project:"
+                PR_grid.Rows.Clear()
+                Me.Text = "My Material Requests"
+                isitreleased = False
+                rev_mode = False
+                Call Inventory_manage.General_inv_cal()   'recalculate inventory values
+                Cursor.Current = Cursors.Default
+
+            Catch ex As Exception
+                MessageBox.Show(ex.ToString)
+            End Try
+
+            TabControl1.TabPages.Remove(TabPage2)
+
+        End If
     End Sub
 
     Private Sub rev_grid_CellValueChanged(sender As Object, e As DataGridViewCellEventArgs) Handles rev_grid.CellValueChanged
@@ -2808,6 +2815,99 @@ Public Class My_Material_r
                 MessageBox.Show(ex.ToString)
             End Try
 
+        End If
+    End Sub
+
+    Private Sub RevisionControlToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles RevisionControlToolStripMenuItem.Click
+
+        '---------- open revision control window --------
+
+        If isitreleased = True Then
+            If rev_mode = True Then
+                Revision_Control.ShowDialog()
+            Else
+                MessageBox.Show("Open Revision Mode first")
+            End If
+
+        Else
+            MessageBox.Show("Not a Released BOM!")
+        End If
+
+    End Sub
+
+    Private Sub EditIndividualDatesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles EditIndividualDatesToolStripMenuItem.Click
+
+        For i = 0 To PR_grid.Rows.Count - 1
+            PR_grid.Rows(i).ReadOnly = False
+        Next
+
+
+
+    End Sub
+
+    Private Sub ApplyDateChangesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ApplyDateChangesToolStripMenuItem.Click
+
+        Dim result As DialogResult = MessageBox.Show("Are you sure, you want to update the dates?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation) 'confirmation message
+
+        If (result = DialogResult.Yes) Then
+
+            For i = 0 To PR_grid.Rows.Count - 1
+
+                If String.IsNullOrEmpty(PR_grid.Rows(i).Cells(0).Value) = False Then
+
+                    '---- update in mr ----------
+                    Dim Create_cmd As New MySqlCommand
+                    Create_cmd.Parameters.AddWithValue("@mr_name", Me.Text)
+                    Create_cmd.Parameters.AddWithValue("@job", open_job)
+                    Create_cmd.Parameters.AddWithValue("@Part_No", PR_grid.Rows(i).Cells(0).Value)
+                    Create_cmd.Parameters.AddWithValue("@need_by_date", PR_grid.Rows(i).Cells(14).Value)
+
+
+                    Create_cmd.CommandText = "UPDATE Material_Request.mr_data SET need_by_date = @need_by_date where mr_name = @mr_name  and Part_No = @Part_No"
+                    Create_cmd.Connection = Login.Connection
+                    Create_cmd.ExecuteNonQuery()
+
+                    '-----  update in packing list --
+
+                    Dim n_bom2 As Double : n_bom2 = 0
+                    Dim check_cmd3 As New MySqlCommand
+                    check_cmd3.Parameters.AddWithValue("@job", open_job)
+                    check_cmd3.CommandText = "select count(distinct n_r) from Master_Packing_List.packing_l where job = @job"
+
+                    check_cmd3.Connection = Login.Connection
+                    check_cmd3.ExecuteNonQuery()
+
+                    Dim reader3 As MySqlDataReader
+                    reader3 = check_cmd3.ExecuteReader
+
+                    If reader3.HasRows Then
+                        While reader3.Read
+                            n_bom2 = reader3(0) - 1
+                        End While
+                    End If
+
+                    reader3.Close()
+
+                    Dim Create_cmd3 As New MySqlCommand
+                    Create_cmd3.Parameters.AddWithValue("@n_r", n_bom2)
+                    Create_cmd3.Parameters.AddWithValue("@part_name", PR_grid.Rows(i).Cells(0).Value)
+                    Create_cmd3.Parameters.AddWithValue("@part_desc", PR_grid.Rows(i).Cells(1).Value)
+                    Create_cmd3.Parameters.AddWithValue("@need_date", PR_grid.Rows(i).Cells(14).Value)
+                    Create_cmd3.Parameters.AddWithValue("@job", open_job)
+
+                    Create_cmd3.CommandText = "UPDATE Master_Packing_List.packing_l SET  need_date = @need_date where part_name = @part_name and part_desc = @part_desc and job = @job and n_r = @n_r"
+                    Create_cmd3.Connection = Login.Connection
+                    Create_cmd3.ExecuteNonQuery()
+
+
+                End If
+            Next
+
+
+            For i = 0 To PR_grid.Rows.Count - 1
+                PR_grid.Rows(i).ReadOnly = True
+            Next
+            MessageBox.Show("Dates updated successfully!")
         End If
     End Sub
 End Class

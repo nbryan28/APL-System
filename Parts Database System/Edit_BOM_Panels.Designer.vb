@@ -30,6 +30,10 @@ Partial Class Edit_BOM_Panels
         Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle9 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle10 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle11 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle12 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Edit_BOM_Panels))
         Me.Panel_grid = New System.Windows.Forms.DataGridView()
         Me.Column10 = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -47,6 +51,7 @@ Partial Class Edit_BOM_Panels
         Me.TabControl1 = New System.Windows.Forms.TabControl()
         Me.TabPage1 = New System.Windows.Forms.TabPage()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
+        Me.p_opened = New System.Windows.Forms.Label()
         Me.Button8 = New System.Windows.Forms.Button()
         Me.ComboBox1 = New System.Windows.Forms.ComboBox()
         Me.Label4 = New System.Windows.Forms.Label()
@@ -65,10 +70,14 @@ Partial Class Edit_BOM_Panels
         Me.Button3 = New System.Windows.Forms.Button()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.TabPage2 = New System.Windows.Forms.TabPage()
-        Me.Button7 = New System.Windows.Forms.Button()
-        Me.Button1 = New System.Windows.Forms.Button()
         Me.Button2 = New System.Windows.Forms.Button()
-        Me.assem_grid = New System.Windows.Forms.DataGridView()
+        Me.open_grid = New System.Windows.Forms.DataGridView()
+        Me.Column4 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DataGridViewTextBoxColumn10 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DataGridViewTextBoxColumn11 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DataGridViewTextBoxColumn12 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Button1 = New System.Windows.Forms.Button()
+        Me.progress_grid = New System.Windows.Forms.DataGridView()
         Me.DataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.DataGridViewTextBoxColumn2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.DataGridViewTextBoxColumn3 = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -76,15 +85,16 @@ Partial Class Edit_BOM_Panels
         Me.DataGridViewTextBoxColumn5 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.DataGridViewTextBoxColumn6 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.DataGridViewTextBoxColumn7 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.DataGridViewComboBoxColumn1 = New System.Windows.Forms.DataGridViewComboBoxColumn()
-        Me.DataGridViewComboBoxColumn2 = New System.Windows.Forms.DataGridViewComboBoxColumn()
-        Me.DataGridViewComboBoxColumn3 = New System.Windows.Forms.DataGridViewComboBoxColumn()
+        Me.DataGridViewComboBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DataGridViewComboBoxColumn2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DataGridViewComboBoxColumn3 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.DataGridViewTextBoxColumn8 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.DataGridViewTextBoxColumn9 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.MenuStrip1 = New System.Windows.Forms.MenuStrip()
         Me.ToolsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ImportBOMToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ExportToExcelToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.SeeRevisionsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.FolderBrowserDialog1 = New System.Windows.Forms.FolderBrowserDialog()
         Me.OpenFileDialog1 = New System.Windows.Forms.OpenFileDialog()
         Me.Part_Picker1 = New Parts_database_system.Part_Picker()
@@ -94,7 +104,8 @@ Partial Class Edit_BOM_Panels
         Me.GroupBox2.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
         Me.TabPage2.SuspendLayout()
-        CType(Me.assem_grid, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.open_grid, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.progress_grid, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.MenuStrip1.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -261,6 +272,7 @@ Partial Class Edit_BOM_Panels
         '
         'GroupBox2
         '
+        Me.GroupBox2.Controls.Add(Me.p_opened)
         Me.GroupBox2.Controls.Add(Me.Button8)
         Me.GroupBox2.Controls.Add(Me.ComboBox1)
         Me.GroupBox2.Controls.Add(Me.Label4)
@@ -270,6 +282,18 @@ Partial Class Edit_BOM_Panels
         Me.GroupBox2.Size = New System.Drawing.Size(560, 231)
         Me.GroupBox2.TabIndex = 54
         Me.GroupBox2.TabStop = False
+        '
+        'p_opened
+        '
+        Me.p_opened.AutoSize = True
+        Me.p_opened.Font = New System.Drawing.Font("Segoe UI", 10.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.p_opened.ForeColor = System.Drawing.Color.WhiteSmoke
+        Me.p_opened.Location = New System.Drawing.Point(20, 94)
+        Me.p_opened.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.p_opened.Name = "p_opened"
+        Me.p_opened.Size = New System.Drawing.Size(144, 25)
+        Me.p_opened.TabIndex = 54
+        Me.p_opened.Text = "Panel Opened:  "
         '
         'Button8
         '
@@ -490,102 +514,68 @@ Partial Class Edit_BOM_Panels
         'TabPage2
         '
         Me.TabPage2.BackColor = System.Drawing.Color.DimGray
-        Me.TabPage2.Controls.Add(Me.Button7)
-        Me.TabPage2.Controls.Add(Me.Button1)
         Me.TabPage2.Controls.Add(Me.Button2)
-        Me.TabPage2.Controls.Add(Me.assem_grid)
+        Me.TabPage2.Controls.Add(Me.open_grid)
+        Me.TabPage2.Controls.Add(Me.Button1)
+        Me.TabPage2.Controls.Add(Me.progress_grid)
         Me.TabPage2.Location = New System.Drawing.Point(4, 32)
         Me.TabPage2.Name = "TabPage2"
         Me.TabPage2.Padding = New System.Windows.Forms.Padding(3)
         Me.TabPage2.Size = New System.Drawing.Size(1811, 904)
         Me.TabPage2.TabIndex = 1
-        Me.TabPage2.Text = "  Assemblies  "
-        '
-        'Button7
-        '
-        Me.Button7.AutoSize = True
-        Me.Button7.BackColor = System.Drawing.Color.DarkGray
-        Me.Button7.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.Button7.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button7.ForeColor = System.Drawing.Color.Black
-        Me.Button7.Location = New System.Drawing.Point(1592, 8)
-        Me.Button7.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
-        Me.Button7.Name = "Button7"
-        Me.Button7.Size = New System.Drawing.Size(135, 61)
-        Me.Button7.TabIndex = 61
-        Me.Button7.Text = "Remove Row"
-        Me.Button7.UseVisualStyleBackColor = False
-        '
-        'Button1
-        '
-        Me.Button1.AutoSize = True
-        Me.Button1.BackColor = System.Drawing.Color.DarkGoldenrod
-        Me.Button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.Button1.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button1.ForeColor = System.Drawing.Color.Black
-        Me.Button1.Location = New System.Drawing.Point(1260, 8)
-        Me.Button1.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(141, 61)
-        Me.Button1.TabIndex = 41
-        Me.Button1.Text = "Add Assemblies"
-        Me.Button1.UseVisualStyleBackColor = False
+        Me.TabPage2.Text = "   Revisions    "
         '
         'Button2
         '
+        Me.Button2.Anchor = System.Windows.Forms.AnchorStyles.Top
         Me.Button2.AutoSize = True
         Me.Button2.BackColor = System.Drawing.Color.CadetBlue
         Me.Button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.Button2.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Button2.ForeColor = System.Drawing.Color.Black
-        Me.Button2.Location = New System.Drawing.Point(1428, 8)
+        Me.Button2.Location = New System.Drawing.Point(1593, 18)
         Me.Button2.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.Button2.Name = "Button2"
-        Me.Button2.Size = New System.Drawing.Size(132, 61)
-        Me.Button2.TabIndex = 40
-        Me.Button2.Text = "Part Selector"
+        Me.Button2.Size = New System.Drawing.Size(199, 56)
+        Me.Button2.TabIndex = 55
+        Me.Button2.Text = "Open Panel in Progress"
         Me.Button2.UseVisualStyleBackColor = False
         '
-        'assem_grid
+        'open_grid
         '
-        Me.assem_grid.AllowUserToDeleteRows = False
-        Me.assem_grid.AllowUserToOrderColumns = True
+        Me.open_grid.AllowUserToAddRows = False
+        Me.open_grid.AllowUserToDeleteRows = False
+        Me.open_grid.AllowUserToResizeRows = False
         DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle5.BackColor = System.Drawing.Color.LightGray
-        DataGridViewCellStyle5.Font = New System.Drawing.Font("Segoe UI", 10.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.ControlDarkDark
-        Me.assem_grid.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle5
-        Me.assem_grid.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.assem_grid.BackgroundColor = System.Drawing.Color.Gray
-        Me.assem_grid.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleVertical
-        Me.assem_grid.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None
+        Me.open_grid.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle5
+        Me.open_grid.BackgroundColor = System.Drawing.Color.FromArgb(CType(CType(61, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(88, Byte), Integer))
+        Me.open_grid.BorderStyle = System.Windows.Forms.BorderStyle.None
+        Me.open_grid.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal
+        Me.open_grid.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None
         DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle6.BackColor = System.Drawing.Color.FromArgb(CType(CType(70, Byte), Integer), CType(CType(135, Byte), Integer), CType(CType(127, Byte), Integer))
+        DataGridViewCellStyle6.BackColor = System.Drawing.Color.FromArgb(CType(CType(61, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(88, Byte), Integer))
         DataGridViewCellStyle6.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle6.ForeColor = System.Drawing.Color.White
+        DataGridViewCellStyle6.ForeColor = System.Drawing.Color.WhiteSmoke
         DataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.ControlDarkDark
         DataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText
         DataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.assem_grid.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle6
-        Me.assem_grid.ColumnHeadersHeight = 48
-        Me.assem_grid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing
-        Me.assem_grid.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DataGridViewTextBoxColumn1, Me.DataGridViewTextBoxColumn2, Me.DataGridViewTextBoxColumn3, Me.DataGridViewTextBoxColumn4, Me.DataGridViewTextBoxColumn5, Me.DataGridViewTextBoxColumn6, Me.DataGridViewTextBoxColumn7, Me.DataGridViewComboBoxColumn1, Me.DataGridViewComboBoxColumn2, Me.DataGridViewComboBoxColumn3, Me.DataGridViewTextBoxColumn8, Me.DataGridViewTextBoxColumn9})
+        Me.open_grid.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle6
+        Me.open_grid.ColumnHeadersHeight = 48
+        Me.open_grid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing
+        Me.open_grid.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Column4, Me.DataGridViewTextBoxColumn10, Me.DataGridViewTextBoxColumn11, Me.DataGridViewTextBoxColumn12})
         DataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle7.BackColor = System.Drawing.Color.WhiteSmoke
+        DataGridViewCellStyle7.BackColor = System.Drawing.Color.FromArgb(CType(CType(61, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(88, Byte), Integer))
         DataGridViewCellStyle7.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle7.ForeColor = System.Drawing.Color.Black
-        DataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.ControlDarkDark
+        DataGridViewCellStyle7.ForeColor = System.Drawing.Color.WhiteSmoke
+        DataGridViewCellStyle7.SelectionBackColor = System.Drawing.Color.Teal
         DataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText
         DataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.assem_grid.DefaultCellStyle = DataGridViewCellStyle7
-        Me.assem_grid.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter
-        Me.assem_grid.EnableHeadersVisualStyles = False
-        Me.assem_grid.Location = New System.Drawing.Point(7, 79)
-        Me.assem_grid.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
-        Me.assem_grid.Name = "assem_grid"
-        Me.assem_grid.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None
+        Me.open_grid.DefaultCellStyle = DataGridViewCellStyle7
+        Me.open_grid.EnableHeadersVisualStyles = False
+        Me.open_grid.Location = New System.Drawing.Point(7, 18)
+        Me.open_grid.MultiSelect = False
+        Me.open_grid.Name = "open_grid"
+        Me.open_grid.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None
         DataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
         DataGridViewCellStyle8.BackColor = System.Drawing.Color.Gainsboro
         DataGridViewCellStyle8.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -593,92 +583,201 @@ Partial Class Edit_BOM_Panels
         DataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.ControlDarkDark
         DataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText
         DataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.assem_grid.RowHeadersDefaultCellStyle = DataGridViewCellStyle8
-        Me.assem_grid.RowHeadersWidth = 16
-        Me.assem_grid.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing
-        Me.assem_grid.RowTemplate.Height = 54
-        Me.assem_grid.Size = New System.Drawing.Size(1797, 817)
-        Me.assem_grid.TabIndex = 17
+        Me.open_grid.RowHeadersDefaultCellStyle = DataGridViewCellStyle8
+        Me.open_grid.RowHeadersVisible = False
+        Me.open_grid.RowHeadersWidth = 16
+        Me.open_grid.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing
+        Me.open_grid.RowTemplate.Height = 64
+        Me.open_grid.Size = New System.Drawing.Size(1558, 224)
+        Me.open_grid.TabIndex = 54
+        '
+        'Column4
+        '
+        Me.Column4.HeaderText = "Revision in Progress"
+        Me.Column4.Name = "Column4"
+        Me.Column4.ReadOnly = True
+        Me.Column4.Width = 500
+        '
+        'DataGridViewTextBoxColumn10
+        '
+        Me.DataGridViewTextBoxColumn10.HeaderText = "Description"
+        Me.DataGridViewTextBoxColumn10.Name = "DataGridViewTextBoxColumn10"
+        Me.DataGridViewTextBoxColumn10.ReadOnly = True
+        Me.DataGridViewTextBoxColumn10.Width = 460
+        '
+        'DataGridViewTextBoxColumn11
+        '
+        Me.DataGridViewTextBoxColumn11.HeaderText = "Date Created  "
+        Me.DataGridViewTextBoxColumn11.Name = "DataGridViewTextBoxColumn11"
+        Me.DataGridViewTextBoxColumn11.ReadOnly = True
+        Me.DataGridViewTextBoxColumn11.Width = 200
+        '
+        'DataGridViewTextBoxColumn12
+        '
+        Me.DataGridViewTextBoxColumn12.HeaderText = "Created By "
+        Me.DataGridViewTextBoxColumn12.Name = "DataGridViewTextBoxColumn12"
+        Me.DataGridViewTextBoxColumn12.ReadOnly = True
+        Me.DataGridViewTextBoxColumn12.Width = 200
+        '
+        'Button1
+        '
+        Me.Button1.Anchor = System.Windows.Forms.AnchorStyles.Top
+        Me.Button1.AutoSize = True
+        Me.Button1.BackColor = System.Drawing.Color.Peru
+        Me.Button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.Button1.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Button1.ForeColor = System.Drawing.Color.Black
+        Me.Button1.Location = New System.Drawing.Point(1593, 122)
+        Me.Button1.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.Button1.Name = "Button1"
+        Me.Button1.Size = New System.Drawing.Size(199, 51)
+        Me.Button1.TabIndex = 53
+        Me.Button1.Text = "Close Revision tab"
+        Me.Button1.UseVisualStyleBackColor = False
+        '
+        'progress_grid
+        '
+        Me.progress_grid.AllowUserToAddRows = False
+        Me.progress_grid.AllowUserToDeleteRows = False
+        Me.progress_grid.AllowUserToOrderColumns = True
+        DataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle9.BackColor = System.Drawing.Color.LightGray
+        DataGridViewCellStyle9.Font = New System.Drawing.Font("Segoe UI", 10.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle9.SelectionBackColor = System.Drawing.SystemColors.ControlDarkDark
+        Me.progress_grid.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle9
+        Me.progress_grid.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.progress_grid.BackgroundColor = System.Drawing.Color.Gray
+        Me.progress_grid.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleVertical
+        Me.progress_grid.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None
+        DataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle10.BackColor = System.Drawing.Color.FromArgb(CType(CType(70, Byte), Integer), CType(CType(135, Byte), Integer), CType(CType(127, Byte), Integer))
+        DataGridViewCellStyle10.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle10.ForeColor = System.Drawing.Color.White
+        DataGridViewCellStyle10.SelectionBackColor = System.Drawing.SystemColors.ControlDarkDark
+        DataGridViewCellStyle10.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle10.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.progress_grid.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle10
+        Me.progress_grid.ColumnHeadersHeight = 48
+        Me.progress_grid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing
+        Me.progress_grid.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DataGridViewTextBoxColumn1, Me.DataGridViewTextBoxColumn2, Me.DataGridViewTextBoxColumn3, Me.DataGridViewTextBoxColumn4, Me.DataGridViewTextBoxColumn5, Me.DataGridViewTextBoxColumn6, Me.DataGridViewTextBoxColumn7, Me.DataGridViewComboBoxColumn1, Me.DataGridViewComboBoxColumn2, Me.DataGridViewComboBoxColumn3, Me.DataGridViewTextBoxColumn8, Me.DataGridViewTextBoxColumn9})
+        DataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle11.BackColor = System.Drawing.Color.WhiteSmoke
+        DataGridViewCellStyle11.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle11.ForeColor = System.Drawing.Color.Black
+        DataGridViewCellStyle11.SelectionBackColor = System.Drawing.SystemColors.ControlDarkDark
+        DataGridViewCellStyle11.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle11.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.progress_grid.DefaultCellStyle = DataGridViewCellStyle11
+        Me.progress_grid.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter
+        Me.progress_grid.EnableHeadersVisualStyles = False
+        Me.progress_grid.Location = New System.Drawing.Point(7, 250)
+        Me.progress_grid.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.progress_grid.Name = "progress_grid"
+        Me.progress_grid.ReadOnly = True
+        Me.progress_grid.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None
+        DataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle12.BackColor = System.Drawing.Color.Gainsboro
+        DataGridViewCellStyle12.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle12.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle12.SelectionBackColor = System.Drawing.SystemColors.ControlDarkDark
+        DataGridViewCellStyle12.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle12.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.progress_grid.RowHeadersDefaultCellStyle = DataGridViewCellStyle12
+        Me.progress_grid.RowHeadersWidth = 16
+        Me.progress_grid.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing
+        Me.progress_grid.RowTemplate.Height = 54
+        Me.progress_grid.Size = New System.Drawing.Size(1797, 646)
+        Me.progress_grid.TabIndex = 17
         '
         'DataGridViewTextBoxColumn1
         '
         Me.DataGridViewTextBoxColumn1.Frozen = True
         Me.DataGridViewTextBoxColumn1.HeaderText = "Part_No"
         Me.DataGridViewTextBoxColumn1.Name = "DataGridViewTextBoxColumn1"
+        Me.DataGridViewTextBoxColumn1.ReadOnly = True
         Me.DataGridViewTextBoxColumn1.Width = 380
         '
         'DataGridViewTextBoxColumn2
         '
         Me.DataGridViewTextBoxColumn2.HeaderText = "Description"
         Me.DataGridViewTextBoxColumn2.Name = "DataGridViewTextBoxColumn2"
+        Me.DataGridViewTextBoxColumn2.ReadOnly = True
         Me.DataGridViewTextBoxColumn2.Width = 330
         '
         'DataGridViewTextBoxColumn3
         '
         Me.DataGridViewTextBoxColumn3.HeaderText = "Manufacturer"
         Me.DataGridViewTextBoxColumn3.Name = "DataGridViewTextBoxColumn3"
+        Me.DataGridViewTextBoxColumn3.ReadOnly = True
         Me.DataGridViewTextBoxColumn3.Width = 200
         '
         'DataGridViewTextBoxColumn4
         '
         Me.DataGridViewTextBoxColumn4.HeaderText = "Vendor"
         Me.DataGridViewTextBoxColumn4.Name = "DataGridViewTextBoxColumn4"
+        Me.DataGridViewTextBoxColumn4.ReadOnly = True
         Me.DataGridViewTextBoxColumn4.Width = 200
         '
         'DataGridViewTextBoxColumn5
         '
         Me.DataGridViewTextBoxColumn5.HeaderText = "Price"
         Me.DataGridViewTextBoxColumn5.Name = "DataGridViewTextBoxColumn5"
+        Me.DataGridViewTextBoxColumn5.ReadOnly = True
         Me.DataGridViewTextBoxColumn5.Width = 150
         '
         'DataGridViewTextBoxColumn6
         '
         Me.DataGridViewTextBoxColumn6.HeaderText = "Qty"
         Me.DataGridViewTextBoxColumn6.Name = "DataGridViewTextBoxColumn6"
+        Me.DataGridViewTextBoxColumn6.ReadOnly = True
         Me.DataGridViewTextBoxColumn6.Width = 150
         '
         'DataGridViewTextBoxColumn7
         '
         Me.DataGridViewTextBoxColumn7.HeaderText = "Subtotal"
         Me.DataGridViewTextBoxColumn7.Name = "DataGridViewTextBoxColumn7"
+        Me.DataGridViewTextBoxColumn7.ReadOnly = True
         Me.DataGridViewTextBoxColumn7.Width = 150
         '
         'DataGridViewComboBoxColumn1
         '
         Me.DataGridViewComboBoxColumn1.HeaderText = "MFG Type"
-        Me.DataGridViewComboBoxColumn1.Items.AddRange(New Object() {"", "Panel", "Field", "Assembly", "Bulk"})
         Me.DataGridViewComboBoxColumn1.Name = "DataGridViewComboBoxColumn1"
+        Me.DataGridViewComboBoxColumn1.ReadOnly = True
         Me.DataGridViewComboBoxColumn1.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.DataGridViewComboBoxColumn1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
         Me.DataGridViewComboBoxColumn1.Width = 200
         '
         'DataGridViewComboBoxColumn2
         '
         Me.DataGridViewComboBoxColumn2.HeaderText = "(Special Order/Preferred)"
-        Me.DataGridViewComboBoxColumn2.Items.AddRange(New Object() {"", "Preferred", "Special Order"})
         Me.DataGridViewComboBoxColumn2.Name = "DataGridViewComboBoxColumn2"
+        Me.DataGridViewComboBoxColumn2.ReadOnly = True
         Me.DataGridViewComboBoxColumn2.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.DataGridViewComboBoxColumn2.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
         Me.DataGridViewComboBoxColumn2.Width = 160
         '
         'DataGridViewComboBoxColumn3
         '
         Me.DataGridViewComboBoxColumn3.HeaderText = "Part Type"
-        Me.DataGridViewComboBoxColumn3.Items.AddRange(New Object() {"", "Adapters- Eaton SWD", "Adapters- M12", "Adapters- MINIFast", "Assembly", "Cable Glands", "Cable- Bulk", "Cables- M12 4W Gry", "Cables- M12 4W Power Cables", "Cables- M12 5W GRN for SWD", "Cables- M12 5W Gry for Devices", "Cables- M12 5W Shielded for Encoders", "Cables- M12 5W Yel for Estop Bus", "Cables- M12 8W GRN for SWD", "Cables- M12 8W Shielded for Encoders", "Cables- M12 Shielded Ethernet", "Cables- M12 Unshielded Ethernet", "Cables- M12 w/ Flying Leads", "Cables- MINIFast", "Camera & Vision Parts", "Circuit Breakers", "Circuit Breakers- Accessories", "Circuit Breakers- Class-2", "Circuit Breakers- Miniature", "Circuit Breakers- Molded Case", "Connectors", "Connectors- M12", "Connectors- Solenoid", "Control Stations", "Control Stations- Boxes", "Control Stations- Pushbuttons & Lights", "Control Stations- Switches", "Drives", "Drives- Basic VFDs", "Drives- Premium VFDs", "Drives- Soft Starts", "E-Stop- Hardware", "E-Stop- Pull Cords", "E-Stop- Pushbuttons", "Enclosures", "Encoders", "Fuse Holders", "Fuses", "Hardware- General", "Hardware- Mounting", "Hole Plugs", "Indicators", "Indicators- Horns", "Indicators- Panel Buttons", "Indicators- Panel Lights", "Indicators- StackLights & Horns", "KIT", "Labels", "Line Reactors", "Motor Starters", "Motor Starters- Accessories", "Motor Starters- Contactors", "Motor Starters- Protectors", "Motor Starters- Reversing", "Motor Starters- Standard", "Mounting- Panel Brackets", "Mounting- Panel Stands", "Mounting- Universal Plates", "Network Switches", "Other", "PLC- COMM CARDs", "PLC- CPUs", "PLC- IO CARDs", "PLC- Power Supplies", "PLC- Racks", "PLCs", "Power Supplies", "Relays", "RIO Junction Boxes- M12", "RIO Module-IP20", "RIO Module-IP20- Eaton SWD", "RIO Module-IP20- Turck", "RIO Module-IP67", "RIO Module-IP67- Eaton SWD", "Sensors", "Sensors- Inductive", "Sensors- Limit Switches", "Sensors- Photo Eyes", "Sensors- Pressure", "Sensors- Proximity", "Sensors- Temperature", "Sensors- Ultrasonic", "Switches", "Switches- Motor Disconnects", "Switches- Panel", "Terminal Blocks", "Terminal Blocks- Din Rail Anchors", "Terminal Blocks- End Barriers", "Terminal Blocks- Jumpers", "Terminal Blocks- Markers", "Terminal Blocks- Push in Type", "Terminal Blocks- Screw Type", "Terminal Blocks- Spring Cage Type", "Transformers", "Wire", "Wire- Accessories"})
         Me.DataGridViewComboBoxColumn3.Name = "DataGridViewComboBoxColumn3"
+        Me.DataGridViewComboBoxColumn3.ReadOnly = True
         Me.DataGridViewComboBoxColumn3.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.DataGridViewComboBoxColumn3.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
         Me.DataGridViewComboBoxColumn3.Width = 200
         '
         'DataGridViewTextBoxColumn8
         '
         Me.DataGridViewTextBoxColumn8.HeaderText = "Notes"
         Me.DataGridViewTextBoxColumn8.Name = "DataGridViewTextBoxColumn8"
+        Me.DataGridViewTextBoxColumn8.ReadOnly = True
         Me.DataGridViewTextBoxColumn8.Width = 700
         '
         'DataGridViewTextBoxColumn9
         '
         Me.DataGridViewTextBoxColumn9.HeaderText = "Need by Date"
         Me.DataGridViewTextBoxColumn9.Name = "DataGridViewTextBoxColumn9"
+        Me.DataGridViewTextBoxColumn9.ReadOnly = True
         Me.DataGridViewTextBoxColumn9.Width = 400
         '
         'MenuStrip1
@@ -693,7 +792,7 @@ Partial Class Edit_BOM_Panels
         '
         'ToolsToolStripMenuItem
         '
-        Me.ToolsToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ImportBOMToolStripMenuItem, Me.ExportToExcelToolStripMenuItem})
+        Me.ToolsToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ImportBOMToolStripMenuItem, Me.ExportToExcelToolStripMenuItem, Me.SeeRevisionsToolStripMenuItem})
         Me.ToolsToolStripMenuItem.Name = "ToolsToolStripMenuItem"
         Me.ToolsToolStripMenuItem.Size = New System.Drawing.Size(56, 24)
         Me.ToolsToolStripMenuItem.Text = "Tools"
@@ -709,6 +808,12 @@ Partial Class Edit_BOM_Panels
         Me.ExportToExcelToolStripMenuItem.Name = "ExportToExcelToolStripMenuItem"
         Me.ExportToExcelToolStripMenuItem.Size = New System.Drawing.Size(183, 26)
         Me.ExportToExcelToolStripMenuItem.Text = "Export to Excel"
+        '
+        'SeeRevisionsToolStripMenuItem
+        '
+        Me.SeeRevisionsToolStripMenuItem.Name = "SeeRevisionsToolStripMenuItem"
+        Me.SeeRevisionsToolStripMenuItem.Size = New System.Drawing.Size(183, 26)
+        Me.SeeRevisionsToolStripMenuItem.Text = "See Revisions"
         '
         'OpenFileDialog1
         '
@@ -740,7 +845,7 @@ Partial Class Edit_BOM_Panels
         Me.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.Name = "Edit_BOM_Panels"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "BOM Panels and Assemblies"
+        Me.Text = "BOM Panels"
         CType(Me.Panel_grid, System.ComponentModel.ISupportInitialize).EndInit()
         Me.TabControl1.ResumeLayout(False)
         Me.TabPage1.ResumeLayout(False)
@@ -750,7 +855,8 @@ Partial Class Edit_BOM_Panels
         Me.GroupBox1.PerformLayout()
         Me.TabPage2.ResumeLayout(False)
         Me.TabPage2.PerformLayout()
-        CType(Me.assem_grid, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.open_grid, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.progress_grid, System.ComponentModel.ISupportInitialize).EndInit()
         Me.MenuStrip1.ResumeLayout(False)
         Me.MenuStrip1.PerformLayout()
         Me.ResumeLayout(False)
@@ -774,25 +880,11 @@ Partial Class Edit_BOM_Panels
     Friend WithEvents TabControl1 As TabControl
     Friend WithEvents TabPage1 As TabPage
     Friend WithEvents TabPage2 As TabPage
-    Friend WithEvents assem_grid As DataGridView
-    Friend WithEvents DataGridViewTextBoxColumn1 As DataGridViewTextBoxColumn
-    Friend WithEvents DataGridViewTextBoxColumn2 As DataGridViewTextBoxColumn
-    Friend WithEvents DataGridViewTextBoxColumn3 As DataGridViewTextBoxColumn
-    Friend WithEvents DataGridViewTextBoxColumn4 As DataGridViewTextBoxColumn
-    Friend WithEvents DataGridViewTextBoxColumn5 As DataGridViewTextBoxColumn
-    Friend WithEvents DataGridViewTextBoxColumn6 As DataGridViewTextBoxColumn
-    Friend WithEvents DataGridViewTextBoxColumn7 As DataGridViewTextBoxColumn
-    Friend WithEvents DataGridViewComboBoxColumn1 As DataGridViewComboBoxColumn
-    Friend WithEvents DataGridViewComboBoxColumn2 As DataGridViewComboBoxColumn
-    Friend WithEvents DataGridViewComboBoxColumn3 As DataGridViewComboBoxColumn
-    Friend WithEvents DataGridViewTextBoxColumn8 As DataGridViewTextBoxColumn
-    Friend WithEvents DataGridViewTextBoxColumn9 As DataGridViewTextBoxColumn
+    Friend WithEvents progress_grid As DataGridView
     Friend WithEvents Label4 As Label
     Friend WithEvents ComboBox1 As ComboBox
-    Friend WithEvents Button2 As Button
     Friend WithEvents Button3 As Button
     Friend WithEvents Button4 As Button
-    Friend WithEvents Button1 As Button
     Friend WithEvents GroupBox1 As GroupBox
     Friend WithEvents panel_desc As TextBox
     Friend WithEvents Button5 As Button
@@ -804,7 +896,6 @@ Partial Class Edit_BOM_Panels
     Friend WithEvents p_name1 As ComboBox
     Friend WithEvents Label1 As Label
     Friend WithEvents Button6 As Button
-    Friend WithEvents Button7 As Button
     Friend WithEvents qty_b As TextBox
     Friend WithEvents Label2 As Label
     Friend WithEvents MenuStrip1 As MenuStrip
@@ -815,4 +906,25 @@ Partial Class Edit_BOM_Panels
     Friend WithEvents OpenFileDialog1 As OpenFileDialog
     Friend WithEvents Button8 As Button
     Friend WithEvents options_v As CheckedListBox
+    Friend WithEvents DataGridViewTextBoxColumn1 As DataGridViewTextBoxColumn
+    Friend WithEvents DataGridViewTextBoxColumn2 As DataGridViewTextBoxColumn
+    Friend WithEvents DataGridViewTextBoxColumn3 As DataGridViewTextBoxColumn
+    Friend WithEvents DataGridViewTextBoxColumn4 As DataGridViewTextBoxColumn
+    Friend WithEvents DataGridViewTextBoxColumn5 As DataGridViewTextBoxColumn
+    Friend WithEvents DataGridViewTextBoxColumn6 As DataGridViewTextBoxColumn
+    Friend WithEvents DataGridViewTextBoxColumn7 As DataGridViewTextBoxColumn
+    Friend WithEvents DataGridViewComboBoxColumn1 As DataGridViewTextBoxColumn
+    Friend WithEvents DataGridViewComboBoxColumn2 As DataGridViewTextBoxColumn
+    Friend WithEvents DataGridViewComboBoxColumn3 As DataGridViewTextBoxColumn
+    Friend WithEvents DataGridViewTextBoxColumn8 As DataGridViewTextBoxColumn
+    Friend WithEvents DataGridViewTextBoxColumn9 As DataGridViewTextBoxColumn
+    Friend WithEvents SeeRevisionsToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents Button1 As Button
+    Friend WithEvents open_grid As DataGridView
+    Friend WithEvents Column4 As DataGridViewTextBoxColumn
+    Friend WithEvents DataGridViewTextBoxColumn10 As DataGridViewTextBoxColumn
+    Friend WithEvents DataGridViewTextBoxColumn11 As DataGridViewTextBoxColumn
+    Friend WithEvents DataGridViewTextBoxColumn12 As DataGridViewTextBoxColumn
+    Friend WithEvents Button2 As Button
+    Friend WithEvents p_opened As Label
 End Class

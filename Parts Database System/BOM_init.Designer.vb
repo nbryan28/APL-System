@@ -44,7 +44,9 @@ Partial Class BOM_init
         Me.Column8 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.job_box = New System.Windows.Forms.ComboBox()
+        Me.wait_la = New System.Windows.Forms.Label()
         Me.Panel1.SuspendLayout()
+        Me.Panel2.SuspendLayout()
         CType(Me.open_grid, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -99,6 +101,7 @@ Partial Class BOM_init
         'Panel2
         '
         Me.Panel2.AutoScroll = True
+        Me.Panel2.Controls.Add(Me.wait_la)
         Me.Panel2.Dock = System.Windows.Forms.DockStyle.Top
         Me.Panel2.Location = New System.Drawing.Point(200, 0)
         Me.Panel2.Name = "Panel2"
@@ -257,6 +260,20 @@ Partial Class BOM_init
         Me.job_box.TabIndex = 16
         Me.job_box.Visible = False
         '
+        'wait_la
+        '
+        Me.wait_la.Anchor = System.Windows.Forms.AnchorStyles.Top
+        Me.wait_la.AutoSize = True
+        Me.wait_la.BackColor = System.Drawing.Color.Transparent
+        Me.wait_la.Font = New System.Drawing.Font("Segoe UI", 24.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.wait_la.ForeColor = System.Drawing.Color.WhiteSmoke
+        Me.wait_la.Location = New System.Drawing.Point(559, 29)
+        Me.wait_la.Name = "wait_la"
+        Me.wait_la.Size = New System.Drawing.Size(530, 54)
+        Me.wait_la.TabIndex = 26
+        Me.wait_la.Text = "Loading Data, Please wait ....."
+        Me.wait_la.Visible = False
+        '
         'BOM_init
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(10.0!, 25.0!)
@@ -276,6 +293,8 @@ Partial Class BOM_init
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Bill Of Materials"
         Me.Panel1.ResumeLayout(False)
+        Me.Panel2.ResumeLayout(False)
+        Me.Panel2.PerformLayout()
         CType(Me.open_grid, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
@@ -299,4 +318,5 @@ Partial Class BOM_init
     Friend WithEvents Column5 As DataGridViewTextBoxColumn
     Friend WithEvents Column6 As DataGridViewTextBoxColumn
     Friend WithEvents Column8 As DataGridViewTextBoxColumn
+    Friend WithEvents wait_la As Label
 End Class

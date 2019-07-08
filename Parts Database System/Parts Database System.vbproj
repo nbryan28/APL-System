@@ -688,6 +688,12 @@
     <Compile Include="Repor_track.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Revision_Control.Designer.vb">
+      <DependentUpon>Revision_Control.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Revision_Control.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="RIO_wiz.Designer.vb">
       <DependentUpon>RIO_wiz.vb</DependentUpon>
     </Compile>
@@ -704,6 +710,12 @@
       <DependentUpon>SAVE_revision.vb</DependentUpon>
     </Compile>
     <Compile Include="SAVE_revision.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SAVE_revision_az.Designer.vb">
+      <DependentUpon>SAVE_revision_az.vb</DependentUpon>
+    </Compile>
+    <Compile Include="SAVE_revision_az.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Search_grid.Designer.vb">
@@ -1127,6 +1139,9 @@
     <EmbeddedResource Include="Repor_track.resx">
       <DependentUpon>Repor_track.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Revision_Control.resx">
+      <DependentUpon>Revision_Control.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="RIO_wiz.resx">
       <DependentUpon>RIO_wiz.vb</DependentUpon>
     </EmbeddedResource>
@@ -1135,6 +1150,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="SAVE_revision.resx">
       <DependentUpon>SAVE_revision.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SAVE_revision_az.resx">
+      <DependentUpon>SAVE_revision_az.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Search_grid.resx">
       <DependentUpon>Search_grid.vb</DependentUpon>
