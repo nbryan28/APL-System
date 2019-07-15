@@ -277,6 +277,10 @@ Public Class myQuote
             Quote_grid.Rows(i).Cells(7).ReadOnly = True
         Next
 
+        '--project management %
+        Quote_grid.Rows(55).Cells(0).ReadOnly = False
+        Quote_grid.Rows(55).Cells(0).Value = 10
+
         Quote_grid.Rows.Add(New String() {""})
         Quote_grid.Rows(57).DefaultCellStyle.BackColor = Color.Silver
         Quote_grid.Rows(57).Cells(6).Style.BackColor = Color.DarkSalmon
@@ -2251,6 +2255,7 @@ Public Class myQuote
                 'calculations from 0 to 93 row
 
                 If i = 78 Or i = 85 Then Continue For
+
                 If (IsNumeric(Quote_grid.Rows(i).Cells(2).Value()) = True Or IsNumeric(Quote_grid.Rows(i).Cells(3).Value())) Then
                     Quote_grid.Rows(i).Cells(2).Value() = If(String.IsNullOrEmpty(Quote_grid.Rows(i).Cells(2).Value()) = True Or IsNumeric(Quote_grid.Rows(i).Cells(2).Value()) = False, 0, Quote_grid.Rows(i).Cells(2).Value())
                     Quote_grid.Rows(i).Cells(3).Value() = If(String.IsNullOrEmpty(Quote_grid.Rows(i).Cells(3).Value()) = True Or IsNumeric(Quote_grid.Rows(i).Cells(3).Value()) = False, 0, Quote_grid.Rows(i).Cells(3).Value())
@@ -2291,6 +2296,14 @@ Public Class myQuote
 
             Next
 
+            '--- project management cost which is 10%
+            Dim pm_cost As Double : pm_cost = 0
+
+            For i = 46 To 54
+                pm_cost = pm_cost + If(IsNumeric(Quote_grid.Rows(i).Cells(2).Value()), Quote_grid.Rows(i).Cells(2).Value(), 0)
+            Next
+
+            Quote_grid.Rows(55).Cells(2).Value() = Math.Round(pm_cost * (If(IsNumeric(Quote_grid.Rows(55).Cells(0).Value()), Quote_grid.Rows(55).Cells(0).Value(), 100) / 100))
 
 
         End If
@@ -2351,14 +2364,14 @@ Public Class myQuote
         Next
 
         '--- put the data in the quote form
-        Quote_grid.Rows(1).Cells(5).Value = "$" & total_material_panel
-        Quote_grid.Rows(2).Cells(5).Value = "$" & total_material_a_panel 'now control panel also
-        Quote_grid.Rows(3).Cells(5).Value = "$" & total_material_plc
-        Quote_grid.Rows(19).Cells(5).Value = "$" & total_material_field
-        Quote_grid.Rows(21).Cells(5).Value = "$" & total_material_m12
-        Quote_grid.Rows(22).Cells(5).Value = "$" & total_material_m12e
-        Quote_grid.Rows(4).Cells(5).Value = "$" & labor_t  'labor cost
-        Quote_grid.Rows(5).Cells(5).Value = "$" & bulk_t  'bulk cost
+        Quote_grid.Rows(1).Cells(5).Value = "$" & Decimal.Round(total_material_panel, 2, MidpointRounding.AwayFromZero)
+        Quote_grid.Rows(2).Cells(5).Value = "$" & Decimal.Round(total_material_a_panel, 2, MidpointRounding.AwayFromZero) 'now control panel also
+        Quote_grid.Rows(3).Cells(5).Value = "$" & Decimal.Round(total_material_plc, 2, MidpointRounding.AwayFromZero)
+        Quote_grid.Rows(19).Cells(5).Value = "$" & Decimal.Round(total_material_field, 2, MidpointRounding.AwayFromZero)
+        Quote_grid.Rows(21).Cells(5).Value = "$" & Decimal.Round(total_material_m12, 2, MidpointRounding.AwayFromZero)
+        Quote_grid.Rows(22).Cells(5).Value = "$" & Decimal.Round(total_material_m12e, 2, MidpointRounding.AwayFromZero)
+        Quote_grid.Rows(4).Cells(5).Value = "$" & Decimal.Round(labor_t, 2, MidpointRounding.AwayFromZero) 'labor cost
+        Quote_grid.Rows(5).Cells(5).Value = "$" & Decimal.Round(bulk_t, 2, MidpointRounding.AwayFromZero) 'bulk cost
 
     End Sub
 
@@ -4364,6 +4377,10 @@ Public Class myQuote
         For i = 46 To 56
             Quote_grid.Rows(i).Cells(7).ReadOnly = True
         Next
+
+        '--project management %
+        Quote_grid.Rows(55).Cells(0).ReadOnly = False
+        Quote_grid.Rows(55).Cells(0).Value = 10
 
         Quote_grid.Rows.Add(New String() {""})
         Quote_grid.Rows(57).DefaultCellStyle.BackColor = Color.Silver

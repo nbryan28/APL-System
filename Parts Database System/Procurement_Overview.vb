@@ -2884,6 +2884,47 @@ Public Class Procurement_Overview
             readerc.Close()
 
 
+            '----/////////// fill ready to ship /////////-----
+
+            '---- get latest build_request of job specified
+
+            Dim cmd44 As New MySqlCommand
+            Dim n_r2 As Integer : n_r2 = 0
+            cmd44.Parameters.AddWithValue("@job", job)
+            cmd44.CommandText = "SELECT distinct n_r from Build_request.build_r where job = @job order by n_r desc limit 1"
+            cmd44.Connection = Login.Connection
+            Dim reader44 As MySqlDataReader
+            reader44 = cmd44.ExecuteReader
+
+            If reader44.HasRows Then
+                While reader44.Read
+                    n_r2 = reader44(0).ToString
+                End While
+            End If
+
+            reader44.Close()
+
+            For i = 0 To mpl_grid.Rows.Count - 1
+
+                Dim cmdx As New MySqlCommand
+                cmdx.Parameters.AddWithValue("@job", job)
+                cmdx.Parameters.AddWithValue("@n_r", n_r2)
+                cmdx.Parameters.AddWithValue("@panel", mpl_grid.Rows(i).Cells(1).Value)
+                cmdx.CommandText = "SELECT * from Build_request.build_r where job = @job and n_r = @n_r and panel = @panel and done_e = 'Y'"
+                cmdx.Connection = Login.Connection
+                Dim readerx As MySqlDataReader
+                readerx = cmdx.ExecuteReader
+
+                If readerx.HasRows Then
+                    mpl_grid.Rows(i).Cells(4).Value = True
+                End If
+
+                readerx.Close()
+            Next
+            '-/////////////////////---------------------
+
+
+
         Catch ex As Exception
             MessageBox.Show(ex.ToString)
         End Try

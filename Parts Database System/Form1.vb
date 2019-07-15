@@ -33,6 +33,7 @@ Public Class Form1
         enable_mess = True
         Call EnableDoubleBuffered(fc_grid)
         Call EnableDoubleBuffered(DataGridView1)
+        Call EnableDoubleBuffered(Device_Table)
 
     End Sub
 
@@ -1373,8 +1374,9 @@ Public Class Form1
 
         If ok_press = True Then
 
+            Cursor.Current = Cursors.WaitCursor
             Dim table_dev As New DataTable
-            Dim adapter_dev As New MySqlDataAdapter("SELECT  Legacy_ADA_Number as ADA_Number, Description, Bulk_Cost, Labor_Cost from devices", Login.Connection) '(Material_Cost + Labor_Cost) as Cost
+            Dim adapter_dev As New MySqlDataAdapter("SELECT  Legacy_ADA_Number as ADA_Number, Description, Bulk_Cost, Labor_Cost, material_cost, total_cost from devices", Login.Connection) '(Material_Cost + Labor_Cost) as Cost
 
             adapter_dev.Fill(table_dev)     'DataViewGrid1 fill
             Device_Table.DataSource = table_dev
@@ -1383,9 +1385,18 @@ Public Class Form1
             'Setting Columns size for Parts Datagrid
             For i = 0 To Device_Table.ColumnCount - 1
                 With Device_Table.Columns(i)
-                    .Width = 530
+                    .Width = 330
                 End With
             Next i
+
+
+            Device_Table.Columns(4).Visible = True
+            Device_Table.Columns(5).Visible = True
+
+            Call complete_costs()
+            CheckBox2.Checked = True
+            Cursor.Current = Cursors.Default
+
         End If
 
     End Sub
@@ -2705,5 +2716,81 @@ Public Class Form1
         update_total_fc()
     End Sub
 
+    Private Sub CheckBox2_CheckedChanged(sender As Object, e As EventArgs) Handles CheckBox2.CheckedChanged
 
+        If CheckBox2.Checked = True Then
+
+            Cursor.Current = Cursors.WaitCursor
+            Device_Table.Columns(4).Visible = True
+            Device_Table.Columns(5).Visible = True
+
+            Call complete_costs()
+            Cursor.Current = Cursors.Default
+
+        Else
+            If Device_Table.Columns.Count > 4 Then
+                Device_Table.Columns(4).Visible = False
+                Device_Table.Columns(5).Visible = False
+            End If
+        End If
+    End Sub
+
+    Sub complete_costs()
+
+        '----------- fill material and total costs -------------
+
+        For i = 0 To Device_Table.Rows.Count - 1
+
+            Device_Table.Rows(i).Cells(4).Value = Convert.ToDecimal(CType(Cost_of_Assem(Device_Table.Rows(i).Cells(0).Value), Double).ToString("N"))
+            Device_Table.Rows(i).Cells(5).Value = Convert.ToDecimal(CType((Device_Table.Rows(i).Cells(2).Value + Device_Table.Rows(i).Cells(3).Value + Device_Table.Rows(i).Cells(4).Value), Double).ToString("N"))
+        Next
+
+
+
+    End Sub
+
+    Function Cost_of_Assem(assembly As String) As Double
+
+        Cost_of_Assem = 0
+
+        Dim datatable = New DataTable
+        datatable.Columns.Add("part_name", GetType(String))
+        datatable.Columns.Add("qty", GetType(Double))
+        datatable.Columns.Add("primary_vendor", GetType(String))
+        datatable.Columns.Add("total_cost", GetType(Double))
+
+
+        Dim mat_c As Double : mat_c = 0
+
+
+        Try
+            Dim cmd3 As New MySqlCommand
+            cmd3.Parameters.AddWithValue("@ADA", assembly)
+            cmd3.CommandText = "SELECT p1.Part_Name, adv.Qty, p1.Primary_Vendor from parts_table as p1 INNER JOIN adv ON p1.Part_Name = adv.Part_Name where adv.Legacy_ADA  = @ADA"
+            cmd3.Connection = Login.Connection
+            Dim reader3 As MySqlDataReader
+            reader3 = cmd3.ExecuteReader
+
+            If reader3.HasRows Then
+                While reader3.Read
+                    datatable.Rows.Add(reader3(0).ToString, reader3(1).ToString, reader3(2).ToString, 0)
+                End While
+            End If
+
+            reader3.Close()
+
+            For i = 0 To datatable.Rows.Count - 1
+                datatable.Rows(i).Item(3) = Get_Latest_Cost(Login.Connection, datatable.Rows(i).Item(0), datatable.Rows(i).Item(2)) * datatable.Rows(i).Item(1)
+                mat_c = mat_c + datatable.Rows(i).Item(3)
+            Next
+
+
+
+        Catch ex As Exception
+            MessageBox.Show(ex.ToString)
+        End Try
+
+        Cost_of_Assem = mat_c
+
+    End Function
 End Class

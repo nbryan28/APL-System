@@ -25,13 +25,13 @@ Partial Class Reports_menu
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Reports_menu))
         Me.wait_la = New System.Windows.Forms.Label()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.Label1 = New System.Windows.Forms.Label()
         Me.Button5 = New System.Windows.Forms.Button()
         Me.Button4 = New System.Windows.Forms.Button()
         Me.Button3 = New System.Windows.Forms.Button()
         Me.Button1 = New System.Windows.Forms.Button()
         Me.Button2 = New System.Windows.Forms.Button()
         Me.Label2 = New System.Windows.Forms.Label()
-        Me.Label1 = New System.Windows.Forms.Label()
         Me.GroupBox1.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -62,6 +62,20 @@ Partial Class Reports_menu
         Me.GroupBox1.Size = New System.Drawing.Size(1186, 500)
         Me.GroupBox1.TabIndex = 36
         Me.GroupBox1.TabStop = False
+        '
+        'Label1
+        '
+        Me.Label1.Anchor = System.Windows.Forms.AnchorStyles.Top
+        Me.Label1.AutoSize = True
+        Me.Label1.BackColor = System.Drawing.Color.Transparent
+        Me.Label1.Font = New System.Drawing.Font("Segoe UI", 24.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label1.ForeColor = System.Drawing.Color.WhiteSmoke
+        Me.Label1.Location = New System.Drawing.Point(328, 30)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(530, 54)
+        Me.Label1.TabIndex = 26
+        Me.Label1.Text = "Loading Data, Please wait ....."
+        Me.Label1.Visible = False
         '
         'Button5
         '
@@ -116,7 +130,7 @@ Partial Class Reports_menu
         Me.Button1.Name = "Button1"
         Me.Button1.Size = New System.Drawing.Size(419, 60)
         Me.Button1.TabIndex = 13
-        Me.Button1.Text = "Procurement Report"
+        Me.Button1.Text = "Part Report"
         Me.Button1.UseVisualStyleBackColor = False
         '
         'Button2
@@ -143,20 +157,6 @@ Partial Class Reports_menu
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(45, 39)
         Me.Label2.TabIndex = 45
-        '
-        'Label1
-        '
-        Me.Label1.Anchor = System.Windows.Forms.AnchorStyles.Top
-        Me.Label1.AutoSize = True
-        Me.Label1.BackColor = System.Drawing.Color.Transparent
-        Me.Label1.Font = New System.Drawing.Font("Segoe UI", 24.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label1.ForeColor = System.Drawing.Color.WhiteSmoke
-        Me.Label1.Location = New System.Drawing.Point(328, 30)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(530, 54)
-        Me.Label1.TabIndex = 26
-        Me.Label1.Text = "Loading Data, Please wait ....."
-        Me.Label1.Visible = False
         '
         'Reports_menu
         '

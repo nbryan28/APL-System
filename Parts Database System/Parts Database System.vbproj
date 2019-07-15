@@ -598,6 +598,12 @@
     <Compile Include="Procurement_Overview.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Procurement_report.Designer.vb">
+      <DependentUpon>Procurement_report.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Procurement_report.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Proc_Material_R.Designer.vb">
       <DependentUpon>Proc_Material_R.vb</DependentUpon>
     </Compile>
@@ -824,6 +830,12 @@
       <DependentUpon>upload_file.vb</DependentUpon>
     </Compile>
     <Compile Include="upload_file.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Upload_inv.Designer.vb">
+      <DependentUpon>Upload_inv.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Upload_inv.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="UR_inventory.Designer.vb">
@@ -1094,6 +1106,9 @@
     <EmbeddedResource Include="Procurement_Overview.resx">
       <DependentUpon>Procurement_Overview.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Procurement_report.resx">
+      <DependentUpon>Procurement_report.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Proc_Material_R.resx">
       <DependentUpon>Proc_Material_R.vb</DependentUpon>
     </EmbeddedResource>
@@ -1207,6 +1222,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="upload_file.resx">
       <DependentUpon>upload_file.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Upload_inv.resx">
+      <DependentUpon>Upload_inv.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UR_inventory.resx">
       <DependentUpon>UR_inventory.vb</DependentUpon>

@@ -6,16 +6,12 @@ Imports System.Net.Mail
 
 Public Class Manufacturing_Report
 
-    Public previous_f As Integer  '
+    Public previous_f As Integer
     Public counter_i As Integer
     Public my_assemblies As List(Of String)
 
 
-
-
     Private Sub Manufacturing_Report_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-
-
 
         Call EnableDoubleBuffered(MO_grid)
         Call EnableDoubleBuffered(open_grid)

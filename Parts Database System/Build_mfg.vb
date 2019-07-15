@@ -452,7 +452,7 @@ Public Class Build_mfg
             Dim cmd4 As New MySqlCommand
             cmd4.Parameters.AddWithValue("@job", ComboBox1.SelectedItem.ToString)
             cmd4.Parameters.AddWithValue("@n_r", n_r)
-            cmd4.CommandText = "SELECT panel, panel_desc, panel_qty, need_date, br_name, ready_t from Build_request.build_r where job = @job and n_r = @n_r"
+            cmd4.CommandText = "SELECT panel, panel_desc, panel_qty, need_date, br_name, ready_t, done_e from Build_request.build_r where job = @job and n_r = @n_r"
             cmd4.Connection = Login.Connection
             Dim reader4 As MySqlDataReader
             reader4 = cmd4.ExecuteReader
@@ -466,6 +466,7 @@ Public Class Build_mfg
                     PR_grid.Rows(i).Cells(2).Value = reader4(2).ToString
                     PR_grid.Rows(i).Cells(3).Value = reader4(3).ToString
                     PR_grid.Rows(i).Cells(4).Value = If(String.Equals(reader4(5).ToString, "Y") = True, True, False)
+                    PR_grid.Rows(i).Cells(5).Value = If(String.Equals(reader4(6).ToString, "Y") = True, True, False)
                     br_name = reader4(4).ToString
 
                     i = i + 1
@@ -758,10 +759,33 @@ Public Class Build_mfg
                     End If
 
 
-                    '---------- panel done check -------------
-
-
                 Next
+
+                '--------- update panel check done boxes -------
+                For i = 0 To PR_grid.Rows.Count - 1
+                    If Convert.ToBoolean(PR_grid.Rows(i).Cells(5).Value) = True Then
+
+                        Dim Create_cmd As New MySqlCommand
+                        Create_cmd.Parameters.AddWithValue("@job", job_label.Text)
+                        Create_cmd.Parameters.AddWithValue("@panel", PR_grid.Rows(i).Cells(0).Value)
+
+                        Create_cmd.CommandText = "UPDATE Build_request.build_r  SET done_e = 'Y' where job = @job and panel = @panel"
+                        Create_cmd.Connection = Login.Connection
+                        Create_cmd.ExecuteNonQuery()
+
+                    Else
+
+                        Dim Create_cmd As New MySqlCommand
+                        Create_cmd.Parameters.AddWithValue("@job", job_label.Text)
+                        Create_cmd.Parameters.AddWithValue("@panel", PR_grid.Rows(i).Cells(0).Value)
+
+                        Create_cmd.CommandText = "UPDATE Build_request.build_r  SET done_e = ''  where job = @job and panel = @panel"
+                        Create_cmd.Connection = Login.Connection
+                        Create_cmd.ExecuteNonQuery()
+
+                    End If
+                Next
+
 
                 '////////////////   send APL notification to procurement and inventory and mfg
                 If enable_mess = True And String.Equals(job_label.Text, "Open Project: ") = False Then
@@ -780,21 +804,34 @@ Public Class Build_mfg
                         End If
                     Next
 
+                    mail_n = mail_n & vbCrLf & " -----  THE FOLLOWING PANELS ARE READY TO BE SHIPPED  -----" & vbCrLf & vbCrLf
+
+                    For i = 0 To PR_grid.Rows.Count - 1
+                        If PR_grid.Rows(i).Cells(5).Value = True Then
+                            If my_assemblies.Contains(PR_grid.Rows(i).Cells(0).Value) = False Then
+                                mail_n = mail_n & vbCrLf & " Panel Name:  " & PR_grid.Rows(i).Cells(0).Value & "  Description: " & PR_grid.Rows(i).Cells(1).Value & vbCrLf
+                            End If
+                        End If
+                    Next
+
+
                     'add email addresses
                     Dim emails_addr As New List(Of String)()
 
-                    emails_addr.Add("TBullard@atronixengineering.com")
+                    'emails_addr.Add("TBullard@atronixengineering.com")
                     ' emails_addr.Add("dshipman@atronixengineering.com")
 
                     ''procurement
-                    emails_addr.Add("ecoy@atronixengineering.com")
-                    emails_addr.Add("fvargas@atronixengineering.com")
+                    ' emails_addr.Add("ecoy@atronixengineering.com")
+                    ' emails_addr.Add("fvargas@atronixengineering.com")
                     ' emails_addr.Add("mmorris@atronixengineering.com")
                     '  emails_addr.Add("sowens@atronixengineering.com")
 
                     ''mfg
-                    emails_addr.Add("shenley@atronixengineering.com")
-                    emails_addr.Add("mowens@atronixengineering.com")
+                    ' emails_addr.Add("shenley@atronixengineering.com")
+                    ' emails_addr.Add("mowens@atronixengineering.com")
+
+
 
 
 

@@ -806,4 +806,8 @@ Public Class Inventory_manage
         Update_Min_Max.ShowDialog()
 
     End Sub
+
+    Private Sub ImportExcelFileToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ImportExcelFileToolStripMenuItem.Click
+        Upload_inv.ShowDialog()
+    End Sub
 End Class

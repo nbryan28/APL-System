@@ -2053,6 +2053,7 @@ Public Class BOM_types
         unmerge_table.Columns.Add("qty", GetType(String))
         unmerge_table.Columns.Add("need_date", GetType(String))
         unmerge_table.Columns.Add("ready", GetType(String))
+        unmerge_table.Columns.Add("ready_s", GetType(String))
 
         Try
             '---------- get date ------
@@ -2229,7 +2230,7 @@ Public Class BOM_types
                 cmd416.Parameters.AddWithValue("@panel", unmerge_table.Rows(i).Item(0))
                 cmd416.Parameters.AddWithValue("@n_r", n_r - 1)
                 cmd416.Parameters.AddWithValue("@job", job)
-                cmd416.CommandText = "SELECT ready_t from Build_request.build_r where job = @job and n_r = @n_r and panel = @panel"
+                cmd416.CommandText = "SELECT ready_t, done_e from Build_request.build_r where job = @job and n_r = @n_r and panel = @panel"
                 cmd416.Connection = Login.Connection
                 Dim reader416 As MySqlDataReader
                 reader416 = cmd416.ExecuteReader
@@ -2237,6 +2238,7 @@ Public Class BOM_types
                 If reader416.HasRows Then
                     While reader416.Read
                         unmerge_table.Rows(i).Item(4) = If(reader416.IsDBNull(0) = True, "", reader416(0).ToString)
+                        unmerge_table.Rows(i).Item(5) = If(reader416.IsDBNull(1) = True, "", reader416(1).ToString)
                     End While
                 End If
 
@@ -2255,11 +2257,12 @@ Public Class BOM_types
                 main_cmd.Parameters.AddWithValue("@panel_desc", unmerge_table.Rows(i).Item(1).ToString)
                 main_cmd.Parameters.AddWithValue("@panel_qty", unmerge_table.Rows(i).Item(2).ToString)
                 main_cmd.Parameters.AddWithValue("@ready_t", unmerge_table.Rows(i).Item(4).ToString)
+                main_cmd.Parameters.AddWithValue("@done_e", unmerge_table.Rows(i).Item(5).ToString)
                 main_cmd.Parameters.AddWithValue("@need_date", need_date)
                 main_cmd.Parameters.AddWithValue("@n_r", n_r)
 
 
-                main_cmd.CommandText = "INSERT INTO Build_request.build_r(job, br_name, panel, panel_desc, panel_qty, need_date, n_r, ready_t) VALUES (@job, @br_name, @panel, @panel_desc, @panel_qty, @need_date, @n_r, @ready_t)"
+                main_cmd.CommandText = "INSERT INTO Build_request.build_r(job, br_name, panel, panel_desc, panel_qty, need_date, n_r, ready_t, done_e) VALUES (@job, @br_name, @panel, @panel_desc, @panel_qty, @need_date, @n_r, @ready_t, @done_e)"
                 main_cmd.Connection = Login.Connection
                 main_cmd.ExecuteNonQuery()
 
@@ -2343,8 +2346,49 @@ Public Class BOM_types
             '--------------- enter field, spare ----------------------
             Dim all_list = New List(Of String)()
 
-            all_list.Add(job & "_Field")
-            all_list.Add(job & "_Spare_Parts")
+            '--- get latest field and spare parts bom -------
+
+            Dim cmd41f As New MySqlCommand
+            cmd41f.Parameters.Clear()
+            cmd41f.Parameters.AddWithValue("@BOM_Type", "Field")
+            cmd41f.Parameters.AddWithValue("@job", job)
+            cmd41f.CommandText = "SELECT mr_name from Material_Request.mr where job = @job and BOM_type = @BOM_Type order by release_date desc limit 1"
+            cmd41f.Connection = Login.Connection
+            Dim reader41f As MySqlDataReader
+            reader41f = cmd41f.ExecuteReader
+
+            If reader41f.HasRows Then
+                While reader41f.Read
+                    all_list.Add(reader41f(0).ToString)
+                End While
+            End If
+
+            reader41f.Close()
+
+
+            '--spare bom
+
+            Dim cmd41r As New MySqlCommand
+            cmd41r.Parameters.Clear()
+            cmd41r.Parameters.AddWithValue("@BOM_Type", "Spare_Parts")
+            cmd41r.Parameters.AddWithValue("@job", job)
+            cmd41r.CommandText = "SELECT mr_name from Material_Request.mr where job = @job and BOM_type = @BOM_Type order by release_date desc limit 1"
+            cmd41r.Connection = Login.Connection
+            Dim reader41r As MySqlDataReader
+            reader41r = cmd41r.ExecuteReader
+
+            If reader41r.HasRows Then
+                While reader41r.Read
+                    all_list.Add(reader41r(0).ToString)
+                End While
+            End If
+
+            reader41r.Close()
+
+            '------------------------------------------------
+
+            'all_list.Add(job & "_Field")
+            '  all_list.Add(job & "_Spare_Parts")
 
 
             For i = 0 To all_list.Count - 1

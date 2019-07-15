@@ -218,8 +218,8 @@ Public Class Login
 
         'IP Address my laptop 192.168.68.112 of my computer or 192.168.68.34 engraving room, APL server 10.21.2.8, user:root pass:aapl_1369  (old: AAPL server 192.168.69.138 pass 113133)
         Try
-            ' Connection = New MySqlConnection("datasource=10.21.2.8;port=3306;username=root;password=aapl_1369;database=parts;Allow User Variables=True")
-            Connection = New MySqlConnection("datasource=localhost ;port=3306;username=root;password=atronixatl;database=parts;Allow User Variables=True")
+            Connection = New MySqlConnection("datasource=10.21.2.8;port=3306;username=root;password=aapl_1369;database=parts;Allow User Variables=True")
+            '  Connection = New MySqlConnection("datasource=localhost ;port=3306;username=root;password=atronixatl;database=parts;Allow User Variables=True")
             Connection.Open()
         Catch ex As Exception
             MessageBox.Show("Can't connect!!!")
@@ -332,7 +332,7 @@ Public Class Login
 
             '===========================Start filling DEVICE TABLE with devices =============================
             Dim table_dev As New DataTable
-            Dim adapter_dev As New MySqlDataAdapter("SELECT Legacy_ADA_Number as ADA_Number, Description, Bulk_Cost, Labor_Cost from devices order by Legacy_ADA_Number", Connection)
+            Dim adapter_dev As New MySqlDataAdapter("SELECT Legacy_ADA_Number as ADA_Number, Description, Bulk_Cost, Labor_Cost, material_cost, total_cost from devices order by Legacy_ADA_Number", Connection)
 
             adapter_dev.Fill(table_dev)     'Device fill
             Form1.Device_Table.DataSource = table_dev
@@ -341,9 +341,12 @@ Public Class Login
             'Setting Columns size for devices Datagrid
             For i = 0 To Form1.Device_Table.ColumnCount - 1
                 With Form1.Device_Table.Columns(i)
-                    .Width = 530
+                    .Width = 330
                 End With
             Next i
+
+            Form1.Device_Table.Columns(4).Visible = False
+            Form1.Device_Table.Columns(5).Visible = False
 
 
             '===================================== Start filling ADA TABLE ===============================
@@ -382,7 +385,7 @@ Public Class Login
 
             '----------  CHECK VERSION CONTROL ----------
             Try
-                version_c = "APL v0.99ca"
+                version_c = "APL v0.99cj"
                 Dim cmd_ver As New MySqlCommand
                 cmd_ver.CommandText = "SELECT version from version_control"
 

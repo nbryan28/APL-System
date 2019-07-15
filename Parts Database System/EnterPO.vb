@@ -733,4 +733,8 @@ Public Class EnterPO
     Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
         Connections_win.Visible = True
     End Sub
+
+    Private Sub Label3_Click(sender As Object, e As EventArgs) Handles Label3.Click
+
+    End Sub
 End Class

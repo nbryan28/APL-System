@@ -156,6 +156,7 @@ Partial Class Form1
         Me.PrintDocument1 = New System.Drawing.Printing.PrintDocument()
         Me.BackgroundWorker1 = New System.ComponentModel.BackgroundWorker()
         Me.Label7 = New System.Windows.Forms.Label()
+        Me.CheckBox2 = New System.Windows.Forms.CheckBox()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
         Me.Panel3.SuspendLayout()
@@ -1106,6 +1107,7 @@ Partial Class Form1
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Panel11.BackColor = System.Drawing.Color.DimGray
         Me.Panel11.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Panel11.Controls.Add(Me.CheckBox2)
         Me.Panel11.Controls.Add(Me.Button4)
         Me.Panel11.Controls.Add(Me.Label21)
         Me.Panel11.Controls.Add(Me.Button15)
@@ -1128,7 +1130,7 @@ Partial Class Form1
         Me.Button4.BackColor = System.Drawing.Color.Silver
         Me.Button4.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.Button4.ForeColor = System.Drawing.Color.Black
-        Me.Button4.Location = New System.Drawing.Point(710, 120)
+        Me.Button4.Location = New System.Drawing.Point(695, 119)
         Me.Button4.Name = "Button4"
         Me.Button4.Size = New System.Drawing.Size(142, 37)
         Me.Button4.TabIndex = 14
@@ -1139,7 +1141,7 @@ Partial Class Form1
         '
         Me.Label21.Anchor = System.Windows.Forms.AnchorStyles.Top
         Me.Label21.AutoSize = True
-        Me.Label21.Location = New System.Drawing.Point(30, 64)
+        Me.Label21.Location = New System.Drawing.Point(30, 47)
         Me.Label21.Name = "Label21"
         Me.Label21.Size = New System.Drawing.Size(199, 25)
         Me.Label21.TabIndex = 10
@@ -1152,7 +1154,7 @@ Partial Class Form1
         Me.Button15.BackColor = System.Drawing.Color.Silver
         Me.Button15.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.Button15.ForeColor = System.Drawing.Color.Black
-        Me.Button15.Location = New System.Drawing.Point(710, 58)
+        Me.Button15.Location = New System.Drawing.Point(695, 47)
         Me.Button15.Name = "Button15"
         Me.Button15.Size = New System.Drawing.Size(142, 37)
         Me.Button15.TabIndex = 11
@@ -1165,7 +1167,7 @@ Partial Class Form1
         Me.device_box_t.BackColor = System.Drawing.Color.DimGray
         Me.device_box_t.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.device_box_t.ForeColor = System.Drawing.Color.WhiteSmoke
-        Me.device_box_t.Location = New System.Drawing.Point(258, 61)
+        Me.device_box_t.Location = New System.Drawing.Point(247, 47)
         Me.device_box_t.Name = "device_box_t"
         Me.device_box_t.Size = New System.Drawing.Size(397, 34)
         Me.device_box_t.TabIndex = 5
@@ -1187,7 +1189,7 @@ Partial Class Form1
         Me.d_partial.Anchor = System.Windows.Forms.AnchorStyles.Top
         Me.d_partial.AutoSize = True
         Me.d_partial.Checked = True
-        Me.d_partial.Location = New System.Drawing.Point(191, 120)
+        Me.d_partial.Location = New System.Drawing.Point(35, 120)
         Me.d_partial.Name = "d_partial"
         Me.d_partial.Size = New System.Drawing.Size(124, 29)
         Me.d_partial.TabIndex = 6
@@ -1199,7 +1201,7 @@ Partial Class Form1
         '
         Me.d_match.Anchor = System.Windows.Forms.AnchorStyles.Top
         Me.d_match.AutoSize = True
-        Me.d_match.Location = New System.Drawing.Point(376, 120)
+        Me.d_match.Location = New System.Drawing.Point(197, 120)
         Me.d_match.Name = "d_match"
         Me.d_match.Size = New System.Drawing.Size(124, 29)
         Me.d_match.TabIndex = 7
@@ -1214,7 +1216,7 @@ Partial Class Form1
         Me.Button14.BackColor = System.Drawing.Color.CadetBlue
         Me.Button14.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.Button14.ForeColor = System.Drawing.Color.Black
-        Me.Button14.Location = New System.Drawing.Point(971, 99)
+        Me.Button14.Location = New System.Drawing.Point(964, 109)
         Me.Button14.Name = "Button14"
         Me.Button14.Size = New System.Drawing.Size(196, 57)
         Me.Button14.TabIndex = 11
@@ -1626,6 +1628,17 @@ Partial Class Form1
         Me.Label7.TabIndex = 7
         Me.Label7.Text = "Reconnect"
         '
+        'CheckBox2
+        '
+        Me.CheckBox2.Anchor = System.Windows.Forms.AnchorStyles.Top
+        Me.CheckBox2.AutoSize = True
+        Me.CheckBox2.Location = New System.Drawing.Point(392, 124)
+        Me.CheckBox2.Name = "CheckBox2"
+        Me.CheckBox2.Size = New System.Drawing.Size(252, 29)
+        Me.CheckBox2.TabIndex = 26
+        Me.CheckBox2.Text = "Show Material and Total $"
+        Me.CheckBox2.UseVisualStyleBackColor = True
+        '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(120.0!, 120.0!)
@@ -1793,4 +1806,5 @@ Partial Class Form1
     Friend WithEvents DataGridViewComboBoxColumn5 As DataGridViewTextBoxColumn
     Friend WithEvents DataGridViewTextBoxColumn2 As DataGridViewTextBoxColumn
     Friend WithEvents Column6 As DataGridViewTextBoxColumn
+    Friend WithEvents CheckBox2 As CheckBox
 End Class

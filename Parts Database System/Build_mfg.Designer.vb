@@ -43,11 +43,6 @@ Partial Class Build_mfg
         Me.Label3 = New System.Windows.Forms.Label()
         Me.Button2 = New System.Windows.Forms.Button()
         Me.PR_grid = New System.Windows.Forms.DataGridView()
-        Me.Column10 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Description = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.ADA_number = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column1 = New System.Windows.Forms.DataGridViewCheckBoxColumn()
         Me.menu_BOM = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.ToolStripMenuItem2 = New System.Windows.Forms.ToolStripMenuItem()
         Me.TabPage2 = New System.Windows.Forms.TabPage()
@@ -84,6 +79,12 @@ Partial Class Build_mfg
         Me.Label2 = New System.Windows.Forms.Label()
         Me.FolderBrowserDialog1 = New System.Windows.Forms.FolderBrowserDialog()
         Me.ComboBox1 = New System.Windows.Forms.ComboBox()
+        Me.Column10 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Description = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ADA_number = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Column2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Column1 = New System.Windows.Forms.DataGridViewCheckBoxColumn()
+        Me.Column5 = New System.Windows.Forms.DataGridViewCheckBoxColumn()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
         CType(Me.PR_grid, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -189,7 +190,7 @@ Partial Class Build_mfg
         Me.PR_grid.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle2
         Me.PR_grid.ColumnHeadersHeight = 48
         Me.PR_grid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing
-        Me.PR_grid.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Column10, Me.Description, Me.ADA_number, Me.Column2, Me.Column1})
+        Me.PR_grid.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Column10, Me.Description, Me.ADA_number, Me.Column2, Me.Column1, Me.Column5})
         Me.PR_grid.ContextMenuStrip = Me.menu_BOM
         DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
         DataGridViewCellStyle3.BackColor = System.Drawing.Color.WhiteSmoke
@@ -219,42 +220,6 @@ Partial Class Build_mfg
         Me.PR_grid.RowTemplate.Height = 54
         Me.PR_grid.Size = New System.Drawing.Size(1787, 620)
         Me.PR_grid.TabIndex = 15
-        '
-        'Column10
-        '
-        Me.Column10.HeaderText = "Panel/Assembly Name"
-        Me.Column10.Name = "Column10"
-        Me.Column10.ReadOnly = True
-        Me.Column10.Width = 380
-        '
-        'Description
-        '
-        Me.Description.HeaderText = "Description"
-        Me.Description.Name = "Description"
-        Me.Description.ReadOnly = True
-        Me.Description.Width = 510
-        '
-        'ADA_number
-        '
-        Me.ADA_number.HeaderText = "Qty"
-        Me.ADA_number.Name = "ADA_number"
-        Me.ADA_number.ReadOnly = True
-        Me.ADA_number.Width = 170
-        '
-        'Column2
-        '
-        Me.Column2.HeaderText = "Need By Date"
-        Me.Column2.Name = "Column2"
-        Me.Column2.ReadOnly = True
-        Me.Column2.Width = 400
-        '
-        'Column1
-        '
-        Me.Column1.HeaderText = "Panel Ready to be tested"
-        Me.Column1.Name = "Column1"
-        Me.Column1.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.Column1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
-        Me.Column1.Width = 300
         '
         'menu_BOM
         '
@@ -659,6 +624,50 @@ Partial Class Build_mfg
         Me.ComboBox1.Size = New System.Drawing.Size(363, 31)
         Me.ComboBox1.TabIndex = 52
         '
+        'Column10
+        '
+        Me.Column10.HeaderText = "Panel/Assembly Name"
+        Me.Column10.Name = "Column10"
+        Me.Column10.ReadOnly = True
+        Me.Column10.Width = 380
+        '
+        'Description
+        '
+        Me.Description.HeaderText = "Description"
+        Me.Description.Name = "Description"
+        Me.Description.ReadOnly = True
+        Me.Description.Width = 510
+        '
+        'ADA_number
+        '
+        Me.ADA_number.HeaderText = "Qty"
+        Me.ADA_number.Name = "ADA_number"
+        Me.ADA_number.ReadOnly = True
+        Me.ADA_number.Width = 170
+        '
+        'Column2
+        '
+        Me.Column2.HeaderText = "Need By Date"
+        Me.Column2.Name = "Column2"
+        Me.Column2.ReadOnly = True
+        Me.Column2.Width = 400
+        '
+        'Column1
+        '
+        Me.Column1.HeaderText = "Panel Ready to be tested"
+        Me.Column1.Name = "Column1"
+        Me.Column1.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.Column1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
+        Me.Column1.Width = 300
+        '
+        'Column5
+        '
+        Me.Column5.HeaderText = "Ready to be shipped"
+        Me.Column5.Name = "Column5"
+        Me.Column5.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.Column5.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
+        Me.Column5.Width = 300
+        '
         'Build_mfg
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
@@ -713,11 +722,6 @@ Partial Class Build_mfg
     Friend WithEvents Column4 As DataGridViewTextBoxColumn
     Friend WithEvents Button5 As Button
     Friend WithEvents Button1 As Button
-    Friend WithEvents Column10 As DataGridViewTextBoxColumn
-    Friend WithEvents Description As DataGridViewTextBoxColumn
-    Friend WithEvents ADA_number As DataGridViewTextBoxColumn
-    Friend WithEvents Column2 As DataGridViewTextBoxColumn
-    Friend WithEvents Column1 As DataGridViewCheckBoxColumn
     Friend WithEvents TabPage3 As TabPage
     Friend WithEvents n_panels As Label
     Friend WithEvents panel_n As Label
@@ -736,4 +740,10 @@ Partial Class Build_mfg
     Friend WithEvents Column11 As DataGridViewTextBoxColumn
     Friend WithEvents Label4 As Label
     Friend WithEvents Label3 As Label
+    Friend WithEvents Column10 As DataGridViewTextBoxColumn
+    Friend WithEvents Description As DataGridViewTextBoxColumn
+    Friend WithEvents ADA_number As DataGridViewTextBoxColumn
+    Friend WithEvents Column2 As DataGridViewTextBoxColumn
+    Friend WithEvents Column1 As DataGridViewCheckBoxColumn
+    Friend WithEvents Column5 As DataGridViewCheckBoxColumn
 End Class
