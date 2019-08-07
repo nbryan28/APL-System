@@ -1,0 +1,122 @@
+============ EXTRA QUERIES =======================================
+
+INDEX per row
+Dim ad As New MySqlDataAdapter("SELECT @row:=@row+1 as Alternate, ADA_id as id, ADA_Part_Name, SUM(Unit_Cost) as Total_Cost from ada_parts, (SELECT @row := 0) m where ADA_Part_Name = '" & ADA_pName & "' group by ADA_id", c)
+
+
+========== MY_Active_quotes ================
+
+CREATE TABLE my_active_quote_table(quote_name VARCHAR(200) NOT NULL PRIMARY KEY, job VARCHAR(100), created_by VARCHAR(200), Date_Created date);
+
+Create table g_setup(quote_name VARCHAR(200), job VARCHAR(100),  v_480 double(10,2), v_575 double(10,2),v_230 double(10,2), PF525_c double(10,2),DE1_c double(10,2),  spare_io double(10,2), spare_panel_space double(10,2),  spare_cable double(10,2), labor_Cost double(10,2))
+
+create table my_inputs(quote_name VARCHAR(200), job VARCHAR(100), set_name VARCHAR(200), feature_desc VARCHAR(200), qty double(10,2), type_p VARCHAR(200))
+
+create table my_solutions(quote_name VARCHAR(200), job VARCHAR(100), feature_code VARCHAR(200), description VARCHAR(200), solution VARCHAR(200), solution_description VARCHAR(200))
+
+=========== USER TABLE CREATION ============================
+
+CREATE TABLE Users (id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY, username VARCHAR(80) NOT NULL, password VARCHAR(30) NOT NULL, Role VARCHAR(40), email VARCHAR(50), Reg_date TIMESTAMP)
+
+=========== PARTS TABLE CREATION ==============================
+
+CREATE TABLE Parts_Table (Part_Name VARCHAR(150) NOT NULL PRIMARY KEY, Manufacturer VARCHAR(100), Part_Description VARCHAR(200), Notes VARCHAR(150),Part_Status VARCHAR(30) NOT NULL, Part_Type VARCHAR(100) NOT NULL, Units VARCHAR(50), Min_Order_Qty INT(6) DEFAULT 1, Legacy_ADA_Number VARCHAR(100), Primary_Vendor VARCHAR(90));
+
+
+
+=========== INSERT DATA =========================
+
+INSERT INTO Parts_Table VALUES (value1, value2, value3, ...);
+
+INSERT INTO Parts_Table VALUES ('CRB-21PA', 'Memcom','Preferred','Cable Gland','P21 hole plug Grey plastic', 200, 'Turck', 'ADA-CK282');
+
+
+=========== CREATE ATTRIBUTES =========================
+
+CREATE TABLE Attributes(Part_Name VARCHAR(130), Voltage Decimal(5,2), HP Decimal(5,2), FLA Decimal(5,2), Temperature_Min Decimal(5,2), Temperature_Max Decimal(5,2), Heat_Watts Decimal(5,2), Frame_Size varchar(10), Width Decimal(5,2), Depth Decimal(5,2), Height Decimal(5,2), Voltage_Max_VAC Decimal(5,2), Voltage_Max_VDC Decimal(5,2), Amperage_Max Decimal(5,2), Voltage_Input varchar(10), Voltage_Output varchar(10), Amperage_Input Decimal(5,2), Amperage_Output Decimal(5,2), Coil_Voltage varchar(10), Coil_Amperage Decimal(5,2), Contact_Voltage varchar(10), Contact_Amperage Decimal(5,2)); 
+
+INSERT INTO Attributes VALUES ('4MB-12Z-4P2-2', 68,76,65,56,78,43,'C',55,4,3,4,6,54,'40','10',5,6,'56',4,'45',45);
+
+========= CREATE VENDORS TABLE ====================
+
+CREATE TABLE vendors_table( Part_Name VARCHAR(130) NOT NULL, Vendor_Name VARCHAR(130), Vendor_Number VARCHAR(130), Cost decimal(15,2), Purchase_date date);
+
+=========== INSERT VENDORS ========================
+
+
+INSERT INTO vendors_table VALUES ('Bryan', 'Turck', 'BEL-9182', 143.49, '2017-07-88');
+
+
+=========== PART TYPE TABLE ===================
+
+CREATE TABLE Parts_Type_table( Part_Type VARCHAR(150) NOT NULL PRIMARY KEY);
+
+=========== INSERT TYPE =============
+
+INSERT INTO Parts_Type_table VALUES('Universal Mounting Plates');
+
+
+=========== ACN TABLE CREATION ==============================
+
+CREATE TABLE ACN (Part_Name VARCHAR(150) NOT NULL PRIMARY KEY, ACN_Number VARCHAR(100), Description VARCHAR(200), Legacy_ADA VARCHAR(100));
+
+
+=========== AKN TABLE CREATION ===============================
+
+CREATE TABLE AKN (Part_Name VARCHAR(150) NOT NULL, AKN_Number VARCHAR(100) NOT NULL, Qty int(10), Legacy_ADA VARCHAR(100));
+
+=========== KIT TABLE ========================================
+
+CREATE TABLE KITS (KIT_Name VARCHAR(150) NOT NULL PRIMARY KEY, AKN_Number VARCHAR(100) NOT NULL, Description VARCHAR(200), Legacy_ADA_Number Varchar(200));
+
+
+=========== ADV TABLE CREATION ===============================
+
+CREATE TABLE ADV (Part_Name VARCHAR(150) NOT NULL, ADV_Number VARCHAR(100) NOT NULL, Qty int(10), Legacy_ADA VARCHAR(100));
+
+=========== DEVICES TABLE ========================================
+
+CREATE TABLE DEVICES (DEVICE_Name VARCHAR(150) NOT NULL PRIMARY KEY, ADV_Number VARCHAR(100) NOT NULL, Description VARCHAR(200), Material_Cost decimal(15,2), Labor_Cost decimal(15,2), Legacy_ADA_Number Varchar(200));
+
+=========== SSLAw_parts ========
+
+CREATE TABLE SSLAW_parts (part_name varchar(200) NOT NULL PRIMARY KEY, labor_cost decimal (15,2), material_cost decimal (15,2))
+
+==========RMA_components ========
+
+CREATE TABLE RMA_comp (RMA_id varchar(200) NOT NULL, part_name varchar(200) NOT NULL, qty decimal(15,2) NOT NULL, labor_cost decimal(15,2), material_cost decimal (15,2), total decimal(15,2))
+
+
+========= Email ==========
+
+CREATE TABLE Dropbox (Sender VARCHAR(200) NOT NULL, role_s VARCHAR(200), Receiver VARCHAR(200), role_r VARCHAR(200), priority varchar(100), date_s date, read varchar(100), Mail VARCHAR(255));
+
+======= call_feature ====
+CREATE TABLE call_feature(feature_code VARCHAR(200) NOT NULL, description VARCHAR(200), solution VARCHAR(200), formula VARCHAR(200));
+
+==== special orders ====
+CREATE TABLE my_spec_orders(quote_n Varchar(200) not null, special_order varchar(200) not null, manufacturer varchar(200), vendor varchar(200), qty double(10,2), cost decimal(15,2));
+
+
+=============== SSLAW ============
+CREATE TABLE SSLAW_RMA (RMA_id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY, RMA_creation_date TIMESTAMP, building_name VARCHAR(200), Part_Name VARCHAR(200) NOT NULL, UPS_RMA VARCHAR(200), Atronix_RMA VARCHAR(200), Serial_Number_IN VARCHAR(200), Serial_Number_Out varchar(200),Date_Received date, Date_Shipped date, Repaired_date date, Tracking varchar(200), UPS_PO varchar(100), ATC_Case varchar(200), 
+Repair_Cost decimal(15,2), Invoice_number varchar(200),Invoice_Date date,Paid_Date date)
+
+=============== inventory_qty and inventory_qty_ex ==========
+
+CREATE TABLE inventory_qty_ex(part_name varchar(200) not null PRIMARY KEY, description varchar(200), manufacturer varchar(200), MFG_type varchar(200), units varchar(200), min_qty int(11), max_qty int(11), location varchar(200), current_qty int(11), Qty_in_order double(10,2), es_date_of_arrival varchar(200));
+
+============ solutions ========
+
+CREATE TABLE feature_solutions(solution_name varchar(200) not null primary key, sol_description varchar(200));
+
+'=========== installation =========
+CREATE TABLE install_table(quote_name VARCHAR(200) NOT NULL, description varchar(200), qty varchar(200), u_time varchar(200), t_time varchar(200), rate varchar(200), rate_t varchar(200), rate_l varchar(200), rate_tl varchar(200), mat_u varchar(200), mat_t varchar(200), exp_c varchar(200), exp_t varchar(200), total_t varchar(200) );
+
+============total quote ========
+
+CREATE TABLE total_q_table(quote_name VARCHAR(200) NOT NULL, blank varchar(200), description varchar(200), qty varchar(200), risk varchar(200), qty_w varchar(200), unit_c varchar(200), total_c varchar(200), markup varchar(200), u_price varchar(200), f_price varchar(200), margin varchar(200), type_p varchar(200), id integer );
+
+========= Packing list ==========
+
+CREATE TABLE packing_l (job varchar(200), mpl_name varchar(200), qty varchar(200), part_name varchar(200), part_desc varchar(200), need_date varchar(200), n_r int);
