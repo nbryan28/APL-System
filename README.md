@@ -1,2 +1,0 @@
-# APL-System
-APL
