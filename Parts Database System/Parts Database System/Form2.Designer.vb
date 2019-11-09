@@ -31,9 +31,10 @@ Partial Class Login
         'TextBox1
         '
         Me.TextBox1.BackColor = System.Drawing.Color.White
-        Me.TextBox1.Location = New System.Drawing.Point(89, 147)
+        Me.TextBox1.Location = New System.Drawing.Point(67, 119)
+        Me.TextBox1.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.TextBox1.Name = "TextBox1"
-        Me.TextBox1.Size = New System.Drawing.Size(312, 22)
+        Me.TextBox1.Size = New System.Drawing.Size(235, 20)
         Me.TextBox1.TabIndex = 0
         Me.TextBox1.UseSystemPasswordChar = True
         '
@@ -42,9 +43,10 @@ Partial Class Login
         Me.Label1.BackColor = System.Drawing.Color.Transparent
         Me.Label1.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label1.ForeColor = System.Drawing.Color.White
-        Me.Label1.Location = New System.Drawing.Point(125, 91)
+        Me.Label1.Location = New System.Drawing.Point(94, 74)
+        Me.Label1.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(239, 36)
+        Me.Label1.Size = New System.Drawing.Size(179, 29)
         Me.Label1.TabIndex = 1
         Me.Label1.Text = "Please Enter Password"
         Me.Label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -52,9 +54,10 @@ Partial Class Login
         'Button1
         '
         Me.Button1.Font = New System.Drawing.Font("Segoe UI", 10.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button1.Location = New System.Drawing.Point(188, 208)
+        Me.Button1.Location = New System.Drawing.Point(141, 169)
+        Me.Button1.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(113, 49)
+        Me.Button1.Size = New System.Drawing.Size(85, 40)
         Me.Button1.TabIndex = 2
         Me.Button1.Text = "OK"
         Me.Button1.UseVisualStyleBackColor = True
@@ -62,19 +65,20 @@ Partial Class Login
         'Login
         '
         Me.AcceptButton = Me.Button1
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(61, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(78, Byte), Integer))
-        Me.ClientSize = New System.Drawing.Size(500, 332)
+        Me.ClientSize = New System.Drawing.Size(376, 277)
         Me.Controls.Add(Me.Button1)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.TextBox1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
+        Me.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.MaximizeBox = False
-        Me.MaximumSize = New System.Drawing.Size(518, 379)
+        Me.MaximumSize = New System.Drawing.Size(392, 315)
         Me.MinimizeBox = False
-        Me.MinimumSize = New System.Drawing.Size(518, 379)
+        Me.MinimumSize = New System.Drawing.Size(392, 315)
         Me.Name = "Login"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Database Access"

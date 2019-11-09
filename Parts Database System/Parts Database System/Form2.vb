@@ -219,7 +219,7 @@ Public Class Login
         'IP Address my laptop 192.168.68.112 of my computer or 192.168.68.34 engraving room, APL server 10.21.2.8, user:root pass:aapl_1369  (old: AAPL server 192.168.69.138 pass 113133)
         Try
             ' Connection = New MySqlConnection("datasource=10.21.2.8;port=3306;username=root;password=aapl_1369;database=parts;Allow User Variables=True")
-            Connection = New MySqlConnection("datasource=localhost ;port=3306;username=root;password=atronixatl;database=parts;Allow User Variables=True")
+            Connection = New MySqlConnection("datasource=localhost ;port=3306;username=root;password=dahlqvist345_;database=parts;Allow User Variables=True")
             Connection.Open()
         Catch ex As Exception
             MessageBox.Show("Can't connect!!!")
